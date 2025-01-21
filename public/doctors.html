@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Our Doctors - Presibo</title>
+  <meta content="Find and connect with qualified doctors on Presibo" name="description">
+  <meta content="doctors, healthcare, nigeria, telemedicine" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/presibo.ico" rel="icon">
+  <link href="assets/img/presibo.ico" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1>Presibo</h1>
+      </a>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="dropdown"><a href="#" class="active"><span>Health</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="https://app.presibo.online/store">Consult</a></li>
+              <li><a href="#">Donate Blood</a></li>
+              <li><a href="#">Find Ambulance</a></li>
+              <li><a href="#" class="active">Get Doctor</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Community</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="#">Support Groups</a></li>
+              <li><a href="#">Health Club</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Store</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="https://app.presibo.online/store.html">Devices</a></li>
+              <li><a href="https://app.presibo.online/bills.html">Medical Bills</a></li>
+              <li><a href="https://app.presibo.online/store.html">Kits</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a class="get-a-quote" href="register.html">Sign Up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+        <div class="container position-relative">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+              <h2>Our Doctors</h2>
+              <p>Connect with qualified healthcare professionals</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Doctors</li>
+          </ol>
+        </div>
+      </nav>
+    </div>
+
+    <!-- ======= Doctors Section ======= -->
+    <section id="doctors" class="doctors">
+      <div class="container" data-aos="fade-up">
+        
+        <div class="section-header">
+          <span>Available Doctors</span>
+          <h2>Available Doctors</h2>
+          <p>Find and connect with experienced healthcare professionals</p>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="row mb-5">
+          <div class="col-md-6 col-lg-4 mb-3">
+            <input type="text" id="searchDoctor" class="form-control" placeholder="Search by name or specialization">
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <select id="locationFilter" class="form-select">
+              <option value="">All Locations</option>
+            </select>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <select id="specializationFilter" class="form-select">
+              <option value="">All Specializations</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Doctors List Container -->
+        <div class="row" id="doctorsList">
+          <!-- Doctors will be loaded here dynamically -->
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="text-center py-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>Presibo</span>
+          </a>
+          <p>Presibo is a digital medical service that is helping patients get affordable and quality medical care by leveraging on Artificial Intelligence.</p>
+          <div class="social-links d-flex mt-4">
+            <a href="https://twitter.com/presibolife" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="https://facebook.com/presibolife" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://instagram.com/presibolife" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="/about">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Hospital Management Technology</a></li>
+            <li><a href="#">Continous Care Management Service</a></li>
+            <li><a href="#">Emergency Ambulance Service</a></li>
+            <li><a href="#">Medical Cloud Services</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <p>
+            1b Racheal Nwangwu Close, <br>
+            Lekki Phase 1, Lagos<br>
+            Nigeria <br><br>
+            <strong>Phone:</strong> +234 7032 810 862<br>
+            <strong>Email:</strong> info@presibo.online<br>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; 2025 Copyright <strong><span>Presibo</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Doctor List Loading Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const doctorsList = document.getElementById('doctorsList');
+      const loadingSpinner = document.getElementById('loadingSpinner');
+      const searchInput = document.getElementById('searchDoctor');
+      const locationFilter = document.getElementById('locationFilter');
+      const specializationFilter = document.getElementById('specializationFilter');
+      
+      let allDoctors = [];
+      let locations = new Set();
+      let specializations = new Set();
+
+      // Function to filter doctors
+      function filterDoctors() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedLocation = locationFilter.value;
+        const selectedSpecialization = specializationFilter.value;
+
+        return allDoctors.filter(doctor => {
+          const nameMatch = `${doctor.firstname} ${doctor.midname} ${doctor.lastname}`
+            .toLowerCase()
+            .includes(searchTerm);
+          const specializationMatch = doctor.specialization.toLowerCase().includes(searchTerm);
+          const locationFilterMatch = !selectedLocation || doctor.location === selectedLocation;
+          const specializationFilterMatch = !selectedSpecialization || doctor.specialization === selectedSpecialization;
+
+          return (nameMatch || specializationMatch) && locationFilterMatch && specializationFilterMatch;
+        });
+      }
+
+      // Function to render doctors
+      function renderDoctors(doctors) {
+        doctorsList.innerHTML = '';
+        
+        if (doctors.length === 0) {
+          doctorsList.innerHTML = '<div class="col-12 text-center"><p>No doctors found matching your criteria.</p></div>';
+          return;
+        }
+
+        doctors.forEach(doctor => {
+          const doctorCard = document.createElement('div');
+          doctorCard.className = 'col-lg-4 col-md-6 d-flex';
+          doctorCard.setAttribute('data-aos', 'fade-up');
+          doctorCard.setAttribute('data-aos-delay', '100');
+          
+          doctorCard.innerHTML = `
+            <div class="card w-100">
+              <div class="card-img">
+                <img src="https://app.presibo.online/photos/${doctor.thumbnail}" 
+                     class="img-fluid" 
+                     alt="Dr. ${doctor.firstname} ${doctor.lastname}"
+                     onerror="this.src='assets/img/doctors/${doctor.sex.toLowerCase()}-doctor.jpg'">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Dr. ${doctor.firstname} ${doctor.midname} ${doctor.lastname}</h3>
+                <p class="card-text">
+                  <strong>Specialization:</strong> ${doctor.specialization}<br>
+                  <strong>Location:</strong> ${doctor.location}, ${doctor.country}<br>
+                  <strong>Experience:</strong> ${doctor.years} years
+                </p>
+                <button class="btn btn-primary mt-3" onclick="bookAppointment('${doctor.firstname} ${doctor.lastname}')">
+                  Book Appointment
+                </button>
+              </div>
+            </div>
+          `;
+          
+          doctorsList.appendChild(doctorCard);
+        });
+      }
+
+      // Function to populate filter dropdowns
+      function populateFilters() {
+        locations.forEach(location => {
+          const option = new Option(location, location);
+          locationFilter.appendChild(option);
+        });
+
+        specializations.forEach(specialization => {
+          const option = new Option(specialization, specialization);
+          specializationFilter.appendChild(option);
+        });
+      }
+
+      // Event listeners for filters
+      searchInput.addEventListener('input', () => {
+        renderDoctors(filterDoctors());
+      });
+
+      locationFilter.addEventListener('change', () => {
+        renderDoctors(filterDoctors());
+      });
+
+      specializationFilter.addEventListener('change', () => {
+        renderDoctors(filterDoctors());
+      });
+
+      // Fetch and initialize doctors data
+      fetch('https://app.presibo.online/doctors.json')
+        .then(response => response.json())
+        .then(doctors => {
+          loadingSpinner.style.display = 'none';
+          allDoctors = doctors;
+
+          // Collect unique locations and specializations
+          doctors.forEach(doctor => {
+            locations.add(doctor.location);
+            specializations.add(doctor.specialization);
+          });
+
+          populateFilters();
+          renderDoctors(doctors);
+        })
+        .catch(error => {
+          console.error('Error loading doctors:', error);
+          loadingSpinner.style.display = 'none';
+          doctorsList.innerHTML = `
+            <div class="col-12 text-center">
+              <p class="text-danger">Error loading doctors. Please try again later.</p></antArtifact>
+<button class="btn btn-primary mt-3" onclick="window.location.reload()">
+                Retry Loading
+              </button>
+            </div>
+          `;
+        });
+    });
+
+    // Booking function
+    function bookAppointment(doctorName) {
+      // You can customize this function to handle appointment booking
+      alert(`Initiating booking process with ${doctorName}. You will be redirected to the booking page.`);
+      // Add your booking logic here
+      window.location.href = `https://app.presibo.online/book-appointment?doctor=${encodeURIComponent(doctorName)}`;
+    }
+
+    // Add smooth scrolling for filter jumps
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Handle preloader
+    window.addEventListener('load', () => {
+      const preloader = document.querySelector('#preloader');
+      if (preloader) {
+        preloader.remove();
+      }
+    });
+  </script>
+
+  <!-- Custom styles for doctor cards -->
+  <style>
+    .card {
+      transition: transform 0.3s ease-in-out;
+      margin-bottom: 30px;
+      border: none;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-img {
+      position: relative;
+      overflow: hidden;
+      padding-top: 66.67%; /* 3:2 aspect ratio */
+    }
+
+    .card-img img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      color: #001973;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .btn-primary {
+      background-color: #001973;
+      border-color: #001973;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    .search-filters {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .card-title {
+        font-size: 1rem;
+      }
+      
+      .card-text {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+
+</body>
+</html>
