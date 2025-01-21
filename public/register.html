@@ -1,36 +1,4 @@
-<?php 
-include("testserver.php");
 
-if (isset ($_POST['register'])) {
-        $firstname = ($_POST['firstname']);
-        $lastname = ($_POST['lastname']);    
-        $username = ($_POST['username']);
-        $birth = ($_POST['birth']);
-        $sex = ($_POST['sex']);
-        $phone = ($_POST ['phone']);
-        $addr = ($_POST ['addr']);
-        $bus = ($_POST['bus']);
-        $city = ($_POST['city']);
-        $country = ($_POST['country']);
-        $sub = ($_POST ['sub']);
-        $email = ($_POST['email']);
-        $password_1 = ($_POST['password_1']);
-        $password_2 =($_POST['password_2']);
-
-
-$query = "INSERT INTO users (firstname, lastname, username, birth, sex, phone, addr, bus, city, country, sub, email, password) 
-          VALUES ('$firstname', '$lastname', '$username', '$birth', '$sex', '$phone', '$addr', '$bus', '$city', '$country', '$sub', '$email', '$password')";	
-
-// Assuming $db is your database connection
-$result = mysqli_query($db, $query); 
-
-
-$_SESSION['username'] = $username;
-            $_SESSION['success'] = "Login Successful";
-            header ('location: dashboard.php'); 
-    
-}
-?>
 
 <!DOCTYPE php>
 <html lang="en">
@@ -138,7 +106,8 @@ $_SESSION['username'] = $username;
           <div class="row d-flex justify-content-center">
             <div class="col-lg-6 text-center">
               <h2>Sign Up</h2>
-              <p>Join Presibo to connect with the worlds largest community of health experts, researchers and medical resourses.</p>
+              <p>Join Presibo to connect with a growing community of health experts, access cutting-edge AI-powered remote monitoring services, diagnostics, and explore a wide range of medical services powered by technology tailored to your healthcare needs.
+</p>
             </div>
           </div>
         </div>
@@ -336,10 +305,11 @@ $_SESSION['username'] = $username;
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-info">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span>Presibo</span>
+            <span>About Us</span>
           </a>
-          <p>Presibo is a digital medical service that is helping patients get affordable and quality medical care by leveraging on Artificial Intelligence.</p>
-          <div class="social-links d-flex mt-4">
+          <p>Presibo uses advanced technology to make healthcare simple, affordable, and accessible for everyone. With AI-powered tools and remote monitoring, we provide quality medical care that’s easy to access, especially for people in underserved communities. Our goal is to ensure you get the care you need, when you need it.
+
+</p>          <div class="social-links d-flex mt-4">
             <a href="https://twitter.com/presibolife" class="twitter"><i class="bi bi-twitter"></i></a>
             <a href="https://facebook.com/presibolife" class="facebook"><i class="bi bi-facebook"></i></a>
             <a href="https://instagram.com/presibolife" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -348,7 +318,7 @@ $_SESSION['username'] = $username;
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
+          <h4></h4>
           <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">About us</a></li>
