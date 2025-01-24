@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  DEPLOY_PATH: /var/www/SITE_APP
+  DEPLOY_PATH: /var/www/presibo.com
 
 jobs:
   deploy:
