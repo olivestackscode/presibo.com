@@ -7,22 +7,8 @@
   <meta charset="UTF-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="title" content="Start Your Healthcare Journey - Sign Up with Presibo Health">
-    <link rel="icon" href="photos/logo.png" type="image/x-icon"> 
-    <meta name="description" content="Join Presibo Health today and experience all round remote monitoring, AI-powered health solutions and affordable healthcare services tailored for you. Sign up now to prioritize your health.">
-    <meta name="keywords" content="healthcare sign up, Presibo Health, AI healthcare, affordable healthcare solutions, remote health monitoring, healthcare in Nigeria, AI healthcare solutions, doctors, telehealth, app registration, personalized healthcare, health innovation">
-    <meta name="author" content="Presibo">
-    <meta name="robots" content="index, follow">
-    <meta name="og:title" content="Start Your Healthcare Journey - Sign Up with Presibo Health">
-    <meta name="og:description" content="Experience healthcare solutions powered by AI, all round remote monitoring and affordable healthcare services. Sign up now">
-    <meta name="og:image" content="https://app.presibo.com/photos/hero-image.jpg">
-    <meta name="og:url" content="https://app.presibo.online/join">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Start Your Healthcare Journey - Sign Up with Presibo Health">
-    <meta name="twitter:description" content="Join Presibo Health today and enjoy AI-powered health diagnostics and affordable solutions. Sign up now!">
-    <meta name="twitter:image" content="https://app.presibo.com/photos/hero-image.jpg">
 
-  <title>Registration Form</title>
+  <title>Registration Form with Payment Popup</title>
 
   <style>
 
@@ -204,7 +190,12 @@
 
 <h2>Presibo Health</h2>
 
-<h3>Registration Form </h3>
+<h3>Join Our Waiting List </h3>
+
+
+
+<small><i id="countdown"></i></small>
+
 
 
 <!-- First Section: Registration Form -->
@@ -265,7 +256,7 @@
   <h3>Processing your registration...</h3>
   <h3>Check your email </h3>
     <h3>for account activation...</h3>
-  <button class="form-button" onclick = (window.location.href="login.html")>Login</button>
+  <button class="form-button" onclick = (window.location.href="https://app.presibo.com/login.html")>Login</button>
 
   <div class="rotating-bubble"></div>
 
@@ -337,7 +328,7 @@
 
     // Send data to API
 
-    fetch('https://api.presibo.com/users/add', {
+    fetch('https://api.presibo.online/users/add', {
 
         method: 'POST',
 
@@ -374,7 +365,7 @@
                document.getElementById("processingPopup").style.display = 'block';
                setTimeout(function() {
                document.getElementById("processingPopup").style.display = 'none';
-                window.location.href = 'login.html';}, 15000);
+                window.location.href = 'https://app.presibo.com/login.html';}, 15000);
                 
 
 
