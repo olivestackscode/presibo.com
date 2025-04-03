@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Register Health Record | Presibo</title>
+  <link rel="stylesheet" href="path_to_your_stylesheet.css"> <!-- Include your CSS here -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ======= Header Section ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="index.html">Presibo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="health-records.html">Health Records</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="diagnostics.html">Diagnostics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header><!-- End Header Section -->
+
+  <!-- ======= Register Health Record Section ======= -->
+  <section id="register-health-record" class="register-health-record">
+    <div class="container" data-aos="fade-up">
+      <div class="row gy-4">
+
+        <div class="col-lg-6 content">
+          <h2>Register Your Health Record</h2>
+          <p>To help us create your personalized health record, please provide the following information. This will allow us to store, manage, and retrieve your health data easily and securely.</p>
+
+          <!-- Registration Form -->
+          <form action="submit-health-record.php" method="POST">
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="fullName" name="fullName" required>
+            </div>
+            <div class="mb-3">
+              <label for="dob" class="form-label">Date of Birth</label>
+              <input type="date" class="form-control" id="dob" name="dob" required>
+            </div>
+            <div class="mb-3">
+              <label for="gender" class="form-label">Gender</label>
+              <select class="form-select" id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="contactNumber" class="form-label">Contact Number</label>
+              <input type="tel" class="form-control" id="contactNumber" name="contactNumber" required>
+            </div>
+            <div class="mb-3">
+              <label for="emergencyContact" class="form-label">Emergency Contact</label>
+              <input type="tel" class="form-control" id="emergencyContact" name="emergencyContact" required>
+            </div>
+            <div class="mb-3">
+              <label for="medicalHistory" class="form-label">Medical History (Optional)</label>
+              <textarea class="form-control" id="medicalHistory" name="medicalHistory" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+        </div>
+
+        <div class="col-lg-6 image">
+          <img src="/img/register-health-record.jpg" class="img-fluid" alt="Health Record Registration">
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Register Health Record Section -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p>&copy; 2025 Presibo Health | All Rights Reserved</p>
+        </div>
+        <div class="col-md-6 text-end">
+          <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
