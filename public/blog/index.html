@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Presibo Blog | Health Tips & Stories</title>
+  <style>
+    :root {
+      --primary: #6495ED;
+      --dark: #1e1e1e;
+      --light: #f8f9fa;
+      --gray: #555;
+      --white: #fff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+    }
+
+    header {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: var(--white);
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      background-color: var(--white);
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .hero img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 10px;
+    }
+
+    .hero-text {
+      max-width: 500px;
+      margin-right: 2rem;
+    }
+
+    .hero-text h2 {
+      color: var(--primary);
+      font-size: 2rem;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      color: var(--gray);
+    }
+
+    .hero-text a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.2rem;
+      background-color: var(--primary);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .blog-list {
+      max-width: 1000px;
+      margin: 2rem auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 0 1rem;
+    }
+
+    .post {
+      background-color: var(--white);
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+
+    .post:hover {
+      transform: translateY(-5px);
+    }
+
+    .post h3 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    .post p {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    .post a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Presibo Blog</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="#">Blog</a>
+      <a href="#">About</a>
+      <a href="https://bit.ly/presiboPL" target="_blank">Join Waitlist</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h2>What Nigerians Need to Know About High Blood Pressure</h2>
+      <p>A must-read on the silent killer affecting millions. Learn the symptoms, causes, and how Presibo helps manage it smartly.</p>
+      <a href="high-blood-pressure.html">Read More</a>
+    </div>
+    <img src="images/blood-pressure-check.jpg" alt="Doctor checking blood pressure">
+  </section>
+
+  <section class="blog-list">
+    <div class="post">
+      <h3>Understanding Diabetes in Africa</h3>
+      <p>Diabetes is rising across the continent. Here's what you should know, and how Presibo supports diabetic patients.</p>
+      <a href="#">Read More</a>
+    </div>
+
+    <div class="post">
+      <h3>Remote Monitoring: The Future of Health</h3>
+      <p>Presibo is pioneering accessible healthcare using AI and remote tools to connect patients and doctors.</p>
+      <a href="#">Read More</a>
+    </div>
+
+    <div class="post">
+      <h3>How to Eat for a Healthier Heart</h3>
+      <p>Food can heal or harm. Discover simple diet tips that help manage blood pressure and cholesterol.</p>
+      <a href="#">Read More</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Presibo Health. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
