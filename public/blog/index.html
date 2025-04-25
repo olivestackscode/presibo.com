@@ -133,6 +133,33 @@
       color: var(--gray);
       margin-top: 4rem;
     }
+    
+    .post-thumbnail {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 1rem;
+  float: left;
+}
+
+.post {
+  background-color: var(--white);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+  clear: both;
+}
+
+.post:hover {
+  transform: translateY(-5px);
+}
+
+.post h3 {
+  margin-top: 0;
+  color: var(--primary);
+}
   </style>
 </head>
 <body>
@@ -142,8 +169,7 @@
     <nav>
       <a href="/">Home</a>
       <a href="#">Blog</a>
-      <a href="#">About</a>
-      <a href="https://bit.ly/presiboPL" target="_blank">Join Waitlist</a>
+      
     </nav>
   </header>
 
@@ -156,25 +182,35 @@
     <img src="img/blood-pressure.png" alt="Doctor checking blood pressure">
   </section>
 
-  <section class="blog-list">
-    <div class="post">
-      <h3>Understanding Diabetes in Africa</h3>
-      <p>Diabetes is rising across the continent. Here's what you should know, and how Presibo supports diabetic patients.</p>
-      <a href="#">Read More</a>
-    </div>
+<section class="blog-list">
+  <div class="post">
+    <img src="img/ai-healthcare-thumbnail.jpg" alt="AI Healthcare" class="post-thumbnail">
+    <h3>How AI & Remote Monitoring Are Changing Healthcare in Nigeria</h3>
+    <p>Explore how Presibo’s technology is revolutionizing diagnostics, chronic care, and remote monitoring for underserved communities.</p>
+    <a href="ai-remote-healthcare-nigeria.html">Read More</a>
+  </div>
 
-    <div class="post">
-      <h3>Remote Monitoring: The Future of Health</h3>
-      <p>Presibo is pioneering accessible healthcare using AI and remote tools to connect patients and doctors.</p>
-      <a href="#">Read More</a>
-    </div>
+  <div class="post">
+    <img src="img/diabetes-thumbnail.jpg" alt="Understanding Diabetes" class="post-thumbnail">
+    <h3>Understanding Diabetes in Africa</h3>
+    <p>Diabetes is rising across the continent. Here's what you should know, and how Presibo supports diabetic patients.</p>
+    <a href="#">Read More</a>
+  </div>
 
-    <div class="post">
-      <h3>How to Eat for a Healthier Heart</h3>
-      <p>Food can heal or harm. Discover simple diet tips that help manage blood pressure and cholesterol.</p>
-      <a href="#">Read More</a>
-    </div>
-  </section>
+  <div class="post">
+    <img src="img/remote-monitoring-thumbnail.jpg" alt="Remote Monitoring" class="post-thumbnail">
+    <h3>Remote Monitoring: The Future of Health</h3>
+    <p>Presibo is pioneering accessible healthcare using AI and remote tools to connect patients and doctors.</p>
+    <a href="#">Read More</a>
+  </div>
+
+  <div class="post">
+    <img src="img/healthier-heart-thumbnail.jpg" alt="Healthier Heart" class="post-thumbnail">
+    <h3>How to Eat for a Healthier Heart</h3>
+    <p>Food can heal or harm. Discover simple diet tips that help manage blood pressure and cholesterol.</p>
+    <a href="#">Read More</a>
+  </div>
+</section>
 
   <footer>
     <p>&copy; 2025 Presibo Health. All rights reserved.</p>
