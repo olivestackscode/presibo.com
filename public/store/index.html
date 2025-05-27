@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    	<meta name="author" content="Presibo Health">
+<meta name="description" content="Presibo Store - Shop for smart health devices including blood pressure monitors, glucometers, heart trackers, and more to enhance your health monitoring experience.">
+<meta name="keywords" content="Presibo, health devices, smart health, blood pressure monitor, glucometer, heart tracker, weight monitor, digital ECG, eye monitor, fitness tracker">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Presibo Store - Smart Health Devices">
+<meta property="og:description" content="Find the best smart health devices to monitor and improve your health. Explore our range of blood pressure monitors, heart trackers, and more.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://app.presibo.com">
+<meta property="og:image" content="https://app.presibo.com/photos/store-banner.jpg">
+<meta property="og:site_name" content="Presibo Store">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Presibo Store - Smart Health Devices">
+<meta name="twitter:description" content="Shop smart health devices for convenient and accurate health monitoring.">
+<meta name="twitter:image" content="https://app.presibo.com/photos/store-banner.jpg">
+<meta name="theme-color" content="#2563eb">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presibo Store</title>
+    <style>
+    	
+    :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --success: #22c55e;
+            --warning: #eab308;
+            --danger: #ef4444;
+            --background: #f8fafc;
+            --card: #ffffff;
+        }
+        /* General styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1{
+        	color: #2563eb;
+        }
+        
+        header {
+            background-color: #2563eb; /* Presibo blue */
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        input{
+        	padding: 10px;
+        border: 1px sold cornflower;
+        }
+        
+        .amount-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 500px;
+            margin: 15% auto;
+        }
+        
+        
+        
+
+        #store-container {
+            display: flex;
+            flex-direction: column; /* Vertically stack product divs */
+            align-items: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        
+                .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .product {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px 0; /* Spacing between products */
+            width: 100%;
+            max-width: 400px; /* Limit max width for larger screens */
+            text-align: center;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product h3 {
+            color: #2563eb; /* Presibo blue */
+            margin: 10px 0;
+        }
+        
+        .cart-link{
+        	text-decoration: none;
+        }
+        
+        .more-link{
+        	text-decoration: none;
+        	color: #2563eb; /* Presibo blue */
+        }
+
+        .product p {
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .product button {
+            background-color: #2563eb; /* Presibo blue */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .product button:hover {
+            background-color: #2763ec; /* Darker Presibo blue */
+        }
+
+        @media (max-width: 768px) {
+            /* Adjust layout for mobile screens */
+            #store-container {
+                padding: 10px;
+            }
+
+            .product {
+                margin: 15px 0; /* Add extra spacing for mobile */
+            }
+        }
+        
+        
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+            margin-right: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            color: #4b5563;
+            text-decoration: none;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+        }
+
+        .nav-icon:hover {
+            background-color: #eff6ff;
+            color: #2563eb;
+        }
+
+        .nav-icon img {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.5rem;
+        }
+
+        .nav-icon span {
+            display: none;
+        }
+
+        .nav-button {
+            display: none;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-icon span {
+                display: inline;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-button {
+                display: block;
+            }
+        }
+        
+        
+        .nav-item {
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .nav-item.active {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <nav>
+            <a href="/" class="nav-brand">Presibo</a>
+<a class="nav-icon" href="dashboard.html">
+                    <img width="25" height="25" src="https://presibo-wl.vercel.app/photos/dashboard.svg" alt="dashboard">
+                    <span>Dashboard</span>
+                </a>
+                <a class="nav-icon" href="profile.html">
+                    <img width="25" height="25" src="https://presibo-wl.vercel.app/photos/profile.svg" alt="profile">
+                    <span>Profile</span>
+                </a>
+            
+            <button class="nav-button" onclick="toggleNav()">
+                <img width="25" height="25" src="https://presibo-wl.vercel.app/photos/icons8-menu.svg" alt="menu">
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a class="nav-icon" href="dashboard.html">
+                    My Dashboard 
+                    <span>Dashboard</span>
+                </a>
+
+                <a class="nav-icon" href="profile.html">
+                    My Profile 
+                    <span>Profile</span>
+                </a>
+
+                <a class="nav-icon" href="wallet.html">
+                    My Wallet 
+                    <span>Subscriptions</span>
+                </a>
+
+                <a class="nav-icon" href="messages.html">
+                    My Messages 
+                    <span>Messages</span>
+                </a>
+            </div>
+        </nav>
+    </div>    
+    
+        
+
+    <!-- Store Container -->
+    <div id="store-container">
+        <!-- Product 1 -->
+        	
+        <!-- Product 2 -->
+        	<div class="product-card">
+        	<h1>Our Store</h1>
+        <div class="product">
+        	<a class = "cart-link" href = "product-01.html">
+            <img src="https://app.presibo.com/photos/blood-pressure.jpg" alt="Blood Pressure Monitor">
+            <h3>Smart Blood Pressure Monitor</h3>
+            </a>
+            <p><strong>₦56,000</strong></p>
+            <p>Track your blood pressure easily at home. <a class = "more-link" href = "product-01.html"> View more details</a></p>
+            <button onclick="openCart('Smart BP Monitor', '56000')">Pre-order </button>
+        </div>
+        </div>
+        
+        <div class="product-card">
+        	
+        <div class="product">
+        	<a class = "cart-link" href = "product-02.html">
+            <img src="https://app.presibo.com/photos/glucometer.jpg" alt="Digital Glucometer">
+            <h3>Digital Glucometer</h3>
+            <p><strong>₦65,000</strong></p>
+            </a>
+            <p>Monitor your blood glucose levels with precision<a class = "more-link" href = "product-02.html"> View more details</a></p>
+            <button onclick="openCart('Digital Glucometer', '65000')">Pre-order </button>
+        </div>
+        </div>
+        
+        
+        <!-- Product 6 -->
+        	<div class="product-card">
+        <div class="product">
+        	<a class = "cart-link" href = "product-03.html">
+            <img src="https://app.presibo.com/photos/heart-monitor.jpg" alt="Smart Exercise Tracker Arm Band">
+            <h3>Smart Heart Tracker </h3>
+            </a>
+            <p><strong>₦42,500</strong></p>
+            <p>Track your heartrate, exercise, workouts and stay fit daily<a class = "more-link" href = "product-03.html"> View more details</a></p>
+            <button onclick="openCart('Smart Heart Tracker', '42500')">Pre-order </button>
+        </div>
+        </div>
+        
+        
+        
+        
+        <!-- Product 3 -->
+        	<div class="product-card">
+        <div class="product">
+        	<a class = "cart-link" href = "product-04.html">
+            <img src="https://app.presibo.com/photos/weight-monitor.jpg" alt="Heart Monitor">
+            <h3>Smart Weight Monitor</h3>
+            </a>
+            <p><strong>₦86,000</strong></p>
+            <p>Advanced digital weight monitoring device<a class = "more-link" href = "product-04.html"> View more details</a></p>
+            <button onclick="openCart('Smart Weight Monitor', '86000')">Pre-order </button>
+        </div>
+        </div>
+        
+        <!-- Product 4 -->
+        	<div class="product-card">
+        <div class="product">
+        	<a class = "cart-link" href = "product-05.html">
+            <img src="https://app.presibo.com/photos/eye-monitor.jpg" alt="Eye Monitor">
+            <h3>Digital Eye Monitor</h3>
+            </a>
+            <p><strong>₦69,900</strong></p>
+            <p>Keep track of your eye health regularly<a class = "more-link" href = "product-05.html"> View more details</a></p>
+            <button onclick="openCart('Digital Eye Monitor', '69900')">Pre-order </button>
+        </div>
+        </div>
+        
+        <!-- Product 5 -->
+        	<div class="product-card">
+        <div class="product">
+        	<a class = "cart-link" href = "product-06.html">
+            <img src="https://app.presibo.com/photos/ecg.jpg" alt="Digital ECG">
+            <h3>Digital ECG</h3>
+            </a>
+            <p><strong>₦73,880</strong></p>
+            <p>Portable and accurate smart electrocardiogram device<a class = "more-link" href = "product-06.html"> View more details</a></p>
+            <button onclick="openCart('Digital ECG', '73880')">Pre-order </button>
+        </div>
+        </div>
+        
+        
+    </div>
+    
+        <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Confirm Order</h2>
+            <p id="cartItem"></p>
+            <p id="cartAmount"></p>
+                                    <input type="text" class="amount-input" placeholder="Enter Buyer Name" id="cartName">
+            	<input type="email" class="amount-input" placeholder="Enter Buyer Email" id="cartEmail">
+            	
+            <input type="text" class="amount-input" placeholder="Enter Buyer Address" id="cartAddress">
+            	<input type="number" class="amount-input" placeholder="Enter Buyer Phone Number" id="cartPhone">
+            <button class="btn" onclick="confirmPayment({id="cartAmount"})" style="margin-top: 1rem;">Procced to Payment</button>
+        </div>
+    </div>
+    
+    
+    
+    </body>
+
+
+        <script>
+        	
+        function openCart(item, amount) {
+        	const newAmount = parseFloat(amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        	document.getElementById('cartModal').style.display = "block";
+        	
+            document.getElementById('cartItem').innerHTML = `<p><strong>Product: </strong> ${item} </p><p><strong>Price: </strong>₦${newAmount}</p>`;
+            
+            
+         
+        
+	}
+	
+	function closeModal() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+        
+        
+        
+        function toggleNav() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+        
+        
+        function confirmPayment(amount) {
+            var handler = PaystackPop.setup({
+                key: 'pk_live_89293b84ee4f8cd54bba09619030c2d470a6efa4', // Your public key
+                email: userEmail,
+                amount: amount, // Amount in kobo
+                onSuccess: function(transaction) {
+                    console.log("Transaction Successful", transaction);
+                    alert("Payment Successful!");
+                    closeModal();
+                },
+                onCancel: function() {
+                    console.log("Payment Cancelled");
+                    alert("Payment Cancelled!");
+                },
+                onError: function(error) {
+                    console.log("Error: ", error.message);
+                    alert("An error occurred: " + error.message);
+                }
+            });
+            handler.openIframe();
+        }
+        
+	
+	</script>
+</html>
