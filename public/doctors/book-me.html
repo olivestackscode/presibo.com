@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Dr. </title>
+    <!--  Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" id="metaTitle" content="Book Dr. ">
+    <meta name="description" id="metaDescription" content="">
+    <meta name="keywords" content="doctor appointment, medical consultation, healthcare booking, Presibo">
+    <meta name="author" content="Presibo">
+    <meta name="robots" content="index, follow">
 
-  <title>Our Doctors - Presibo</title>
-  <meta content="Find and connect with qualified doctors on Presibo" name="description">
-  <meta content="doctors, healthcare, nigeria, telemedicine" name="keywords">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://app.presibo.com">
+    <meta property="og:title" id="ogTitle" content="Book Dr. ">
+    <meta property="og:description" id="ogDescription" content="">
+    <meta property="og:image" content="https://app.presibo.com/photos/doctor-login.png">
 
-  <!-- Favicons -->
-  <link href="/assets/img/presibo.ico" rel="icon">
-  <link href="/assets/img/presibo.ico" rel="apple-touch-icon">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://app.presibo.com">
+    <meta property="twitter:title" id="twitterTitle" content="Book Dr. ">
+    <meta property="twitter:description" id="twitterDescription" content="">
+    <meta property="twitter:image" content="https://app.presibo.com/photos/doctor-login.png">
+
+ <!-- Favicons -->
+  <link href="assets/img/presibo.ico" rel="icon">
+  <link href="assets/img/presibo.ico" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,17 +37,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="/assets/css/main.css" rel="stylesheet">
-  <style>
-    	* {
+  <link href="assets/css/main.css" rel="stylesheet">
+    <style>
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -50,122 +68,62 @@
             background: var(--background);
         }
 
-        .dashboard {
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            min-height: 100vh;
-            
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
 
-        .sidebar {
-            background: var(--card);
-            padding: 1.5rem;
-            border-right: 1px solid #e2e8f0;
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        
-
-        
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
 
         .main-content {
+            max-width: 800px;
+            margin: 80px auto 2rem;
             padding: 2rem;
-            overflow-y: auto;
         }
 
-        
-        
-
-        .filter-section {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-
-        .filter-tag {
-            padding: 0.5rem 1rem;
-            background: #eff6ff;
-            color: var(--primary);
-            border-radius: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-tag:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .filter-tag.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .doctors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .doctor-card {
+        .doctor-profile {
             background: var(--card);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
+            border-radius: 1rem;
+            padding: 2rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            margin-bottom: 2rem;
         }
 
-        .doctor-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .doctor-header {
+        .profile-header {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .doctor-info {
-            flex-grow: 1;
-        }
-        
-        .doctor-link{
-        	text-decoration: none;
-        color: black;
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 1rem;
+            object-fit: cover;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-            margin: 1rem 0;
-            text-align: center;
-        }
-
-        .stat-item {
-            background: #f8fafc;
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #1d4ed8;
+        .profile-info h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
 
         .badge {
@@ -174,6 +132,7 @@
             border-radius: 1rem;
             font-size: 0.875rem;
             margin-right: 0.5rem;
+            margin-top: 1rem;
         }
 
         .badge-success {
@@ -186,100 +145,63 @@
             color: var(--warning);
         }
 
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 2rem;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
-        .page-item {
-            padding: 0.5rem 1rem;
+        .stat-card {
+            background: #f8fafc;
+            padding: 1rem;
             border-radius: 0.5rem;
-            cursor: pointer;
-            background: var(--card);
+            text-align: center;
         }
 
-        .page-item.active {
+        .booking-section {
+            background: var(--card);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
             background: var(--primary);
             color: white;
         }
 
-        @media (max-width: 768px) {
-            .dashboard {
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        @media (max-width: 640px) {
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
-            .sidebar {
-                display: none;
-            }
         }
-        /* Previous styles remain unchanged */
-        
-        /* Additional styles for modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.75rem;
-            max-width: 500px;
-            width: 90%;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .close-button {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .message-icon {
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            transition: transform 0.3s ease;
-        }
-
-        .message-icon:hover {
-            transform: scale(1.1);
-        }
-
-        .doctor-not-found {
-            text-align: center;
-            padding: 2rem;
-            color: var(--secondary);
-            background: var(--card);
-            border-radius: 0.75rem;
-            margin: 2rem 0;
-        }
-    
-
-
-
     </style>
 </head>
-
 <body>
-
-  <!-- ======= Header ======= -->
+ <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
@@ -293,7 +215,7 @@
           <li><a href="about.html">About</a></li>
           <li class="dropdown"><a href="#" class="active"><span>Health</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="https://app.presibo.online/store">Consult</a></li>
+              <li><a href="https://app.presibo.com/store">Consult</a></li>
               <li><a href="#">Donate Blood</a></li>
               <li><a href="#">Find Ambulance</a></li>
               <li><a href="#" class="active">Get Doctor</a></li>
@@ -307,47 +229,20 @@
           </li>
           <li class="dropdown"><a href="#"><span>Store</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="https://app.presibo.online/store.html">Devices</a></li>
-              <li><a href="https://app.presibo.online/bills.html">Medical Bills</a></li>
-              <li><a href="https://app.presibo.online/store.html">Kits</a></li>
+              <li><a href="https://app.presibo.com/store.html">Devices</a></li>
+              <li><a href="https://app.presibo.com/bills.html">Medical Bills</a></li>
+              <li><a href="https://app.presibo.com/store.html">Kits</a></li>
             </ul>
           </li>
           <li><a href="#">Contact</a></li>
           <li><a href="login.html">Login</a></li>
-          <li><a class="get-a-quote" href="register.html">Sign Up</a></li>
+          <li><a class="get-a-quote" href="app.presibo.com/join">Sign Up</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="main">
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs">
-    	
-      <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
-        <div class="container position-relative">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h2>Our Doctors</h2>
-              <p>Connect with qualified healthcare professionals</p>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-      
-      <nav>
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="doctors.html">Doctors</a></li>
-          </ol>
-        </div>
-      </nav>
-    </div>
-
-    
-        <div class="main-content">
+    <div class="main-content">
         <div class="doctor-profile">
             <div class="profile-header">
                 <img id="doctorImage" class="profile-image" src="" alt="Doctor's profile picture">
@@ -451,5 +346,81 @@
         // Load doctor data when page loads
         window.onload = fetchDoctorData;
     </script>
+    
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>About Us</span>
+          </a>
+          <p>Presibo uses advanced technology to make healthcare simple, affordable, and accessible for everyone. With AI-powered tools and remote monitoring, we provide quality medical care that’s easy to access, especially for people in underserved communities. Our goal is to ensure you get the care you need, when you need it.
+
+</p>
+          <div class="social-links d-flex mt-4">
+            <a href="https://twitter.com/presibolife" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="https://facebook.com/presibolife" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://instagram.com/presibolife" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4></h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="/about">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Hospital Management Technology</a></li>
+            <li><a href="#">Continous Care Management Service</a></li>
+            <li><a href="#">Emergency Ambulance Service</a></li>
+            <li><a href="#">Medical Cloud Services</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <p>
+            1b Racheal Nwangwu Close, <br>
+            Lekki Phase 1, Lagos<br>
+            Nigeria <br><br>
+            <strong>Phone:</strong> +234 7032 810 862<br>
+            <strong>Email:</strong> info@presibo.com<br>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; 2025 Copyright <strong><span>Presibo</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assets/js/main.js"></script>
+
 </body>
 </html>
