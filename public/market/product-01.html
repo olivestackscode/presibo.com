@@ -341,39 +341,21 @@
     </style>
 </head>
 <body>
-<div class="nav-bar">
-        <nav>
-            <a href="index.html" class="nav-brand">Presibo HealthCarte</a>
-            <a class="nav-icon" href="/">
-                                        <span>Home</span>
-                </a>
-                
-<a class="nav-icon" href="index.html">
-                    <span>Products</span>
-                </a>
-                
-            
-            <button class="nav-button" onclick="toggleNav()">
-                <img width="25" height="25" src="https://presibo-wl.vercel.app/photos/icons8-menu.svg" alt="menu">
-            </button>
-
-            <div class="nav-links" id="navLinks">
-                <a class="nav-icon" href="/about.html">
-                     
-                    <span>About</span>
-                </a>
-
-                <a class="nav-icon" href="#">
-                     
-                    <span>Contact</span>
-                </a>
-
-               
+ <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Presibo HealthCarte</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Products</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
             </div>
-        </nav>
-    </div>    
-
-
+        </div>
+    </nav>
     <div class="product-container">
         <div class="slider-container">
             <div class="slider">
