@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital ECG Monitor - Presibo Store</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --background: #f8fafc;
+            --card: #ffffff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background);
+            padding-top: 60px;
+        }
+
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .slider-container {
+            background: var(--card);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--secondary);
+            cursor: pointer;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+        }
+
+        .product-details {
+            background: var(--card);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-title {
+            color: var(--primary);
+            margin: 0 0 1rem 0;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .product-description {
+            color: var(--secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            margin: 1.5rem 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: var(--background);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .metric-card h4 {
+            color: var(--primary);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .metric-card p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .buy-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .buy-button:hover {
+            background: #1d4ed8;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 500px;
+            margin: 15% auto;
+        }
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        input{
+        	padding: 10px;
+        border: 1px sold cornflower;
+        }
+        
+        .amount-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+            }
+
+            .slider {
+                height: 300px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+                .nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+            margin-right: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            color: #4b5563;
+            text-decoration: none;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+        }
+
+        .nav-icon:hover {
+            background-color: #eff6ff;
+            color: #2563eb;
+        }
+
+        .nav-icon img {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.5rem;
+        }
+
+        .nav-icon span {
+            display: none;
+        }
+
+        .nav-button {
+            display: none;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-icon span {
+                display: inline;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-button {
+                display: block;
+            }
+        }
+        
+        
+        .nav-item {
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .nav-item.active {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <nav>
+            <a href="/" class="nav-brand">Presibo</a>
+            <a class="nav-icon" href="profile.html">
+                    <img width="25" height="25" src="https://presibo-wl.vercel.app/photos/dashboard.svg" alt="profile">
+                    <span>Dashboard</span>
+                </a>
+                
+<a class="nav-icon" href="store.html">
+                    <img width="25" height="25" src="https://presibo-wl.vercel.app/photos/store.png" alt="store">
+                    <span>Store</span>
+                </a>
+                
+            
+            <button class="nav-button" onclick="toggleNav()">
+                <img width="25" height="25" src="https://presibo-wl.vercel.app/photos/icons8-menu.svg" alt="menu">
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a class="nav-icon" href="dashboard.html">
+                    My Dashboard 
+                    <span>Dashboard</span>
+                </a>
+
+                <a class="nav-icon" href="profile.html">
+                    My Profile 
+                    <span>Profile</span>
+                </a>
+
+                <a class="nav-icon" href="wallet.html">
+                    My Wallet 
+                    <span>Subscriptions</span>
+                </a>
+
+                <a class="nav-icon" href="messages.html">
+                    My Messages 
+                    <span>Messages</span>
+                </a>
+            </div>
+        </nav>
+    </div>    
+
+    <div class="product-container">
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide active">
+                    <img src=" https://app.presibo.com/photos/ecg.jpg" alt="Digital ECG Monitor - Device">
+                </div>
+                <div class="slide">
+                    <img src=" https://app.presibo.com/photos/ecg.jpg" alt="Digital ECG Monitor - App Interface">
+                </div>
+                <div class="slide">
+                    <img src=" https://app.presibo.com/photos/ecg.jpg" alt="Digital ECG Monitor - Real-time Readings">
+                </div>
+                <div class="slide">
+                    <img src=" https://app.presibo.com/photos/ecg.jpg" alt="Digital ECG Monitor - Compact Design">
+                </div>
+            </div>
+            <div class="slider-nav">
+                <div class="slider-dot active"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+            </div>
+        </div>
+
+        <div class="product-details">
+            <h1 class="product-title">Digital ECG Monitor</h1>
+            <p class="product-price">₦73,800</p>
+            
+            <div class="product-description">
+                <p>The Presibo Digital ECG Monitor is a compact and user-friendly device designed to provide accurate real-time heart monitoring. It features advanced algorithms to detect arrhythmias, heart rate variability, and more, all accessible via a mobile app.</p>
+                
+                <h3>Measured Metrics:</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h4>Heart Rate</h4>
+                        <p>BPM Monitoring</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>ECG Recording</h4>
+                        <p>Real-time Analysis</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Arrhythmia Detection</h4>
+                        <p>Advanced Alerts</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Heart Rate Variability</h4>
+                        <p>Stress Analysis</p>
+                    </div>
+                </div>
+
+                <h3>Key Features:</h3>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>Portable and Lightweight</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>Real-time ECG Monitoring</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>Bluetooth App Sync</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>Rechargeable Battery (8 hours)</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>Water-resistant Design</span>
+                    </li>
+                </ul>
+
+                <h3>Technical Specifications:</h3>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Lead: Single-lead ECG</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Storage: Up to 50 recordings</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Charging: USB-C</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Connectivity: Bluetooth 5.0</span>
+                    </li>
+                </ul>
+
+                <h3>Package Includes:</h3>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Digital ECG Monitor</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>USB-C Cable</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>User Manual</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Quick Start Guide</span>
+                    </li>
+                </ul>
+            </div>
+
+            <button class="buy-button" onclick="openCart('Digital ECG Monitor', '73800')">Pre-order Now</button>
+        </div>
+    </div>
+    
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Confirm Order</h2>
+            <p id="cartItem"></p>
+            <p id="cartAmount"></p>
+                        <input type="text" class="amount-input" placeholder="Enter Buyer Name" id="cartName">
+            	<input type="email" class="amount-input" placeholder="Enter Buyer Email" id="cartEmail">
+            	
+            <input type="text" class="amount-input" placeholder="Enter Buyer Address" id="cartAddress">
+            	<input type="number" class="amount-input" placeholder="Enter Buyer Phone Number" id="cartPhone">
+            <button class="btn" onclick="confirmPayment({id="cartAmount"})" style="margin-top: 1rem;">Procced to Payment</button>
+        </div>
+    </div>
+
+    <script>
+        // Image slider functionality
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[n].classList.add('active');
+            dots[n].classList.add('active');
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+        // Auto-advance slides every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 5000);
+
+        function openCart(item, amount) {
+            const newAmount = parseFloat(amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        	document.getElementById('cartModal').style.display = "block";
+        	
+            document.getElementById('cartItem').innerHTML = `<p><strong>Product: </strong> ${item} </p><p><strong>Price: </strong>₦${newAmount}</p>`;
+
+        }
+        
+        function closeModal() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
