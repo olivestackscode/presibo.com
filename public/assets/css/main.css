@@ -20,7 +20,8 @@
 :root {
   --color-default: #0a0d13;
   --color-primary: #0d42ff;
-  --color-secondary: #0e1d34;
+  --color-secondary: linear-gradient(135deg, rgb(102, 126, 234) 0%, rgb(118, 75, 162) 100%);
+;
 }
 
 /* Smooth scroll behavior */
