@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Pulse Oximeter - Presibo Store</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --background: #f8fafc;
+            --card: #ffffff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background);
+            padding-top: 60px;
+        }
+
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .slider-container {
+            background: var(--card);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--secondary);
+            cursor: pointer;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+        }
+
+        .product-details {
+            background: var(--card);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-title {
+            color: var(--primary);
+            margin: 0 0 1rem 0;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .product-description {
+            color: var(--secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            margin: 1.5rem 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: var(--background);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .metric-card h4 {
+            color: var(--primary);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .metric-card p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .buy-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .buy-button:hover {
+            background: #1d4ed8;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 500px;
+            margin: 15% auto;
+        }
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        input{
+        	padding: 10px;
+        border: 1px sold cornflower;
+        }
+        
+        .amount-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+            }
+
+            .slider {
+                height: 300px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+                .nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+            margin-right: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            color: #4b5563;
+            text-decoration: none;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+        }
+
+        .nav-icon:hover {
+            background-color: #eff6ff;
+            color: #2563eb;
+        }
+
+        .nav-icon img {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.5rem;
+        }
+
+        .nav-icon span {
+            display: none;
+        }
+
+        .nav-button {
+            display: none;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-icon span {
+                display: inline;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-button {
+                display: block;
+            }
+        }
+        
+        
+        .nav-item {
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .nav-item.active {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <nav>
+            <a href="/" class="nav-brand">Presibo</a>
+            <a class="nav-icon" href="profile.html">
+                    <img width="25" height="25" src="https://presibo-wl.vercel.app/photos/dashboard.svg" alt="profile">
+                    <span>Dashboard</span>
+                </a>
+                
+<a class="nav-icon" href="store.html">
+                    <img width="25" height="25" src="https://presibo-wl.vercel.app/photos/store.png" alt="store">
+                    <span>Store</span>
+                </a>
+                
+            
+            <button class="nav-button" onclick="toggleNav()">
+                <img width="25" height="25" src="https://presibo-wl.vercel.app/photos/icons8-menu.svg" alt="menu">
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a class="nav-icon" href="dashboard.html">
+                    My Dashboard 
+                    <span>Dashboard</span>
+                </a>
+
+                <a class="nav-icon" href="profile.html">
+                    My Profile 
+                    <span>Profile</span>
+                </a>
+
+                <a class="nav-icon" href="wallet.html">
+                    My Wallet 
+                    <span>Subscriptions</span>
+                </a>
+
+                <a class="nav-icon" href="messages.html">
+                    My Messages 
+                    <span>Messages</span>
+                </a>
+            </div>
+        </nav>
+    </div>    
+
+    <div class="product-container">
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide active">
+                    <img src="https://app.presibo.com/photos/oximeter.jpg" alt="Digital Pulse Oximeter - Device">
+                </div>
+                <div class="slide">
+                    <img src="https://app.presibo.com/photos/oximeter2.jpg" alt="Digital Pulse Oximeter - Display">
+                </div>
+                <div class="slide">
+                    <img src="https://app.presibo.com/photos/oximeter3.jpg" alt="Digital Pulse Oximeter - In Use">
+                </div>
+                <div class="slide">
+                    <img src="https://app.presibo.com/photos/oximeter4.jpg" alt="Digital Pulse Oximeter - Compact Design">
+                </div>
+            </div>
+            <div class="slider-nav">
+                <div class="slider-dot active"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+            </div>
+        </div>
+
+        <div class="product-details">
+            <h1 class="product-title">Digital Pulse Oximeter</h1>
+            <p class="product-price">₦35,000</p>
+            
+            <div class="product-description">
+                <p>The Presibo Digital Pulse Oximeter is a professional-grade medical device that accurately measures blood oxygen saturation (SpO2) and pulse rate. Designed for healthcare professionals, patients, and home monitoring, this compact device provides reliable readings in seconds.</p>
+                
+                <h3>Measured Metrics:</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h4>SpO2 Range</h4>
+                        <p>70% - 100%</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Pulse Rate</h4>
+                        <p>30 - 250 BPM</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Response Time</h4>
+                        <p>< 8 Seconds</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Accuracy</h4>
+                        <p>±2% SpO2, ±2 BPM</p>
+                    </div>
+                </div>
+
+                <h3>Key Features:</h3>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>Advanced Photoelectric Technology</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>Dual-Color OLED Display</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>SpO2 & Pulse Rate Monitoring</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>Real-time Pulse Waveform</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>Low Perfusion Performance</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>6 Display Modes & 10 Brightness Levels</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>✓</span>
+                        <span>Auto Power-Off Function</span>
+                    </li>
+                </ul>
+
+                <h3>Technical Specifications:</h3>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Display: Dual-Color OLED</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Finger Size: 8-25mm (Pediatric to Adult)</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Power: 2x AAA Alkaline Batteries</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Battery Life: 30+ Hours Continuous Use</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Operating Temperature: 5°C - 40°C</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Storage Temperature: -20°C - 60°C</span>
+                    </li>
+                </ul>
+
+                <h3>Safety Features:</h3>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>FDA Approved & CE Certified</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Motion Artifact Resistance</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Low Perfusion Detection</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Automatic Finger Detection</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Data Alarm for Abnormal Readings</span>
+                    </li>
+                </ul>
+
+                <h3>Package Includes:</h3>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Digital Pulse Oximeter</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>2x AAA Alkaline Batteries</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Protective Silicone Cover</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Lanyard for Portability</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>User Manual & Quick Start Guide</span>
+                    </li>
+                </ul>
+
+                <h3>Ideal For:</h3>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Healthcare Professionals</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Patients with Respiratory Conditions</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Athletes & Fitness Enthusiasts</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Home Health Monitoring</span>
+                    </li>
+                    <li class="feature-item">
+                        <span>•</span>
+                        <span>Elderly Care & Monitoring</span>
+                    </li>
+                </ul>
+            </div>
+
+            <button class="buy-button" onclick="openCart('Digital Pulse Oximeter', '35000')">Order Now</button>
+        </div>
+    </div>
+    
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Confirm Order</h2>
+            <p id="cartItem"></p>
+            <p id="cartAmount"></p>
+            <input type="text" class="amount-input" placeholder="Enter Buyer Name" id="cartName">
+            <input type="email" class="amount-input" placeholder="Enter Buyer Email" id="cartEmail">
+            <input type="text" class="amount-input" placeholder="Enter Buyer Address" id="cartAddress">
+            <input type="number" class="amount-input" placeholder="Enter Buyer Phone Number" id="cartPhone">
+            <button class="btn" onclick="confirmPayment()" style="margin-top: 1rem;">Proceed to Payment</button>
+        </div>
+    </div>
+
+    <script>
+        // Image slider functionality
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[n].classList.add('active');
+            dots[n].classList.add('active');
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+        // Auto-advance slides every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 5000);
+
+        function openCart(item, amount) {
+            const newAmount = parseFloat(amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        	document.getElementById('cartModal').style.display = "block";
+        	
+            document.getElementById('cartItem').innerHTML = `<p><strong>Product: </strong> ${item} </p><p><strong>Price: </strong>₦${newAmount}</p>`;
+        }
+        
+        function closeModal() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function confirmPayment() {
+            const name = document.getElementById('cartName').value;
+            const email = document.getElementById('cartEmail').value;
+            const address = document.getElementById('cartAddress').value;
+            const phone = document.getElementById('cartPhone').value;
+            
+            if (!name || !email || !address || !phone) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Here you would typically integrate with a payment processor
+            alert('Order confirmed! You will be redirected to payment gateway.');
+            closeModal();
+        }
+
+        function toggleNav() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
