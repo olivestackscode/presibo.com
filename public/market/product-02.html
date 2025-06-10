@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Glucometer - Presibo Store</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
     <style>
         :root {
             --primary: #2563eb;
@@ -524,7 +526,7 @@
             	
             <input type="text" class="amount-input" placeholder="Enter Buyer Address" id="cartAddress">
             	<input type="number" class="amount-input" placeholder="Enter Buyer Phone Number" id="cartPhone">
-            <button class="btn" onclick="confirmPayment({id="cartAmount"})" style="margin-top: 1rem;">Procced to Payment</button>
+            <button class="btn" onclick="confirmPayment()" style="margin-top: 1rem;">Procced to Payment</button>
         </div>
     <script>
         // Image slider functionality
@@ -562,6 +564,44 @@
             document.getElementById('cartItem').innerHTML = `<p><strong>Product: </strong> ${item} </p><p><strong>Price: </strong>₦${newAmount}</p>`;
 
         }
+
+let payAmount;
+
+        function openCart(item, amount) {
+        	 payAmount = amount * 100;
+        
+     
+            const newAmount = parseFloat(amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        	document.getElementById('cartModal').style.display = "block";
+        	
+            document.getElementById('cartItem').innerHTML = `<p><strong>Product: </strong> ${item} </p><p><strong>Price: </strong>₦${newAmount}</p>`;
+
+        }
+        
+        function confirmPayment() {
+        	//let payAmount = document.getElementById("cartAmount").value * 100; // Convert to kobo
+        let payEmail = document.getElementById("cartEmail").value; // Convert to kobo
+            var handler = PaystackPop.setup({
+                key: 'pk_live_89293b84ee4f8cd54bba09619030c2d470a6efa4', // Your public key
+                email: payEmail,
+                amount: payAmount, // Amount in kobo
+                onSuccess: function(transaction) {
+                    console.log("Transaction Successful", transaction);
+                    alert("Payment Successful!");
+                    closeModal();
+                },
+                onCancel: function() {
+                    console.log("Payment Cancelled");
+                    alert("Payment Cancelled!");
+                },
+                onError: function(error) {
+                    console.log("Error: ", error.message);
+                    alert("An error occurred: " + error.message);
+                }
+            });
+            handler.openIframe();
+        }
+
         
         function closeModal() {
             document.getElementById('cartModal').style.display = 'none';
