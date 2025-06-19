@@ -344,7 +344,7 @@
                 </div>
                 <div class="stat-card">
                     <div style="font-weight: bold; font-size: 1.2rem;" id="patients"></div>
-                    <small>Patients</small>
+                    <small>Clients trained</small>
                 </div>
             </div>
         </div>
@@ -397,7 +397,7 @@
                 document.getElementById('doctorImage').src = `https://presibo-wl.vercel.app/photos/${doctor.thumbnail || 'default-thumbnail'}.jpg`;
                 document.getElementById('experience').textContent = `${doctor.years || '5'}+ yrs`;
                 document.getElementById('rating').textContent = `${doctor.rating || '4.5'}★`;
-                document.getElementById('patients').textContent = doctor.patients || '250+';
+                document.getElementById('patients').textContent = doctor.patients || '5+';
 
             } catch (error) {
                 console.error('Error:', error);
