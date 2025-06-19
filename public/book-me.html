@@ -317,7 +317,7 @@
                 document.title = `Book Dr. ${doctor.firstname} ${doctor.lastname} - Presibo`;
                 document.getElementById('doctorName').textContent = `Dr. ${doctor.firstname} ${doctor.middlename || ''} ${doctor.lastname}`;
                 document.getElementById('doctorSpecialization').textContent = doctor.specialization;
-                document.getElementById('doctorLocation').textContent = `${doctor.location}, ${doctor.country}`;
+                document.getElementById('doctorLocation').textContent = `📍${doctor.location}, ${doctor.country}`;
                 document.getElementById('doctorImage').src = `https://presibo-wl.vercel.app/photos/${doctor.thumbnail || 'default-thumbnail'}.jpg`;
                 document.getElementById('experience').textContent = `${doctor.years || '5'}+ yrs`;
                 document.getElementById('rating').textContent = `${doctor.rating || '4.5'}★`;
