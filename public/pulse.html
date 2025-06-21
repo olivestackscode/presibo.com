@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Basic Meta -->
+<title>Presibo Pulse – Quick Health Reels by Experts | Presibo</title>
+<meta name="description" content="Explore Presibo Pulse – an endless scroll of short health videos by Nigerian doctors, fitness trainers, and nutritionists. Your daily dose of wellness in 60 seconds.">
+<meta name="keywords" content="Presibo Pulse, health reels, Nigerian doctors, fitness tips, nutrition videos, wellness short videos, healthcare Nigeria, medical reels, fitness Nigeria, health tech Africa">
+<meta name="author" content="Presibo">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Presibo Pulse – Quick health reels in 60 Seconds">
+<meta property="og:description" content="Short videos by health experts. Fitness workouts to doctor tips. Discover Nigeria’s first health & wellness short video stream.">
+<meta property="og:image" content="https://app presibo.com/photos/pulse.png">
+<meta property="og:url" content="https://presibo.com/pulse">
+<meta property="og:site_name" content="Presibo Pulse">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Presibo Pulse – Quick Health Reels by Experts">
+<meta name="twitter:description" content="An endless feed of expert health videos. 60 seconds to a better you – from trusted Nigerian doctors, nutritionists & trainers.">
+<meta name="twitter:image" content="https://app presibo.com/photos/pulse.png">
+<meta name="twitter:creator" content="@PresiboLife">
+
+<!-- Mobile/App Specific -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#3366cc"> <!-- Cornflower blue -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #000;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .timeline-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .post {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: start;
+            background: #000;
+        }
+
+        .post-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                transparent 0%, 
+                transparent 60%, 
+                rgba(0,0,0,0.3) 80%, 
+                rgba(0,0,0,0.7) 100%
+            );
+            pointer-events: none;
+        }
+
+        .post-content {
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            right: 80px;
+            color: white;
+            z-index: 10;
+        }
+
+        .trainer-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .trainer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-right: 12px;
+            object-fit: cover;
+        }
+
+        .trainer-details h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .trainer-details p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .post-description {
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .post-hashtags {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .post-hashtags span {
+            color: #25d366;
+            margin-right: 8px;
+        }
+
+        .post-actions {
+            position: absolute;
+            right: 15px;
+            bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            z-index: 10;
+        }
+
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .action-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 5px;
+            backdrop-filter: blur(10px);
+        }
+
+        .action-count {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .liked .action-icon {
+            background: rgba(255,75,75,0.8);
+            color: white;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(rgba(0,0,0,0.5), transparent);
+        }
+
+        .nav-back {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-title {
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .nav-menu {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .play-pause-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 5;
+        }
+
+        .post:hover .play-pause-btn {
+            opacity: 1;
+        }
+
+        .progress-indicator {
+            position: fixed;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: white;
+            width: 12px;
+            height: 12px;
+        }
+
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 5;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .post-time {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 12px;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 10px;
+            border-radius: 15px;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .post-content {
+                bottom: 60px;
+                right: 70px;
+            }
+
+            .post-actions {
+                bottom: 80px;
+                right: 10px;
+                gap: 20px;
+            }
+
+            .action-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 18px;
+            }
+        }
+
+        /* Smooth transitions for media loading */
+        .post-media {
+            transition: opacity 0.3s ease;
+        }
+
+        .post-media.loading {
+            opacity: 0.7;
+        }
+        
+        a {
+        	color: white;
+        	text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <button class="nav-back" onclick="goBack()">←</button>
+        <div class="nav-title">Presibo</div>
+        <button class="nav-menu" onclick="showMenu()">⋮</button>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator" id="progressIndicator">
+        <!-- Progress dots will be added by JavaScript -->
+    </div>
+
+    <!-- Timeline Container -->
+    <div class="timeline-container" id="timelineContainer">
+        <!-- Posts will be populated by JavaScript -->
+    </div>
+
+    <script>
+        // Extended sample data with more fitness content
+        const timelinePosts = [
+            {
+                id: 1,
+                type: 'video',
+                url: 'https://app.presibo.com/photos/100/4.mp4',
+                thumbnail: 'https://app.presibo.com/photos/100/2.jpg',
+                title: 'Perfect Push-Up Form',
+                description: 'Master the perfect push-up with these key technique tips! 💪 Keep your core tight, maintain a straight line from head to heels.',
+                hashtags: ['#PushUpForm', '#FitnessForm', '#StrengthTraining', '#WorkoutTips'],
+                time: '2 hours ago',
+                likes: 1247,
+                comments: 89,
+                shares: 34,
+                trainer: {
+                	id : "100",
+                    name: 'Precious Edwin',
+                    username: '@PreciousEdwin',
+                    avatar: 'https://app.presibo.com/photos/100/avatar.jpg'
+                }
+            },
+            {
+                id: 2,
+                type: 'image',
+                url: 'https://app.presibo.com/photos/100/1.jpg',
+                title: 'Pre-Workout Nutrition',
+                description: 'Fuel your workout right! 🍌 Here\'s what I eat 30 minutes before training. Banana + almond butter = perfect energy combo!',
+                hashtags: ['#PreWorkout', '#Nutrition', '#HealthyEating', '#FuelYourBody'],
+                time: '5 hours ago',
+                likes: 892,
+                comments: 156,
+                shares: 67,
+                trainer: {
+                	id : "100",
+                    name: 'Precious Edwin',
+                    username: '@PreciousEdwin',
+                    avatar: 'https://app.presibo.com/photos/100/avatar.jpg'
+                }
+            },
+            {
+                id: 3,
+                type: 'video',
+                url: 'https://app.presibo.com/photos/100/3.mp4',
+                thumbnail: 'https://app.presibo.com/photos/100/1.jpg',
+                title: 'HIIT Cardio Blast',
+                description: 'Get your heart pumping with this 10-minute HIIT routine! 🔥 No equipment needed - just bring the energy!',
+                hashtags: ['#HIIT', '#Cardio', '#NoEquipment', '#HomeWorkout'],
+                time: '1 day ago',
+                likes: 2156,
+                comments: 234,
+                shares: 145,
+                trainer: {
+                	id : "100",
+                    name: 'Precious Edwin',
+                    username: '@PreciousEdwin',
+                    avatar: 'https://app.presibo.com/photos/100/avatar.jpg'
+                }
+            },
+            {
+                id: 4,
+                
+                type: 'image',
+                url: 'https://images.unsplash.com/photo-1549476464-37392f717541?w=800&h=1200&fit=crop',
+                title: 'Recovery Day Essentials',
+                description: 'Recovery is just as important as the workout! 🧘‍♀️ Stretching, hydration, and proper sleep = gains!',
+                hashtags: ['#Recovery', '#SelfCare', '#Stretching', '#RestDay'],
+                time: '2 days ago',
+                likes: 756,
+                comments: 98,
+                shares: 43,
+                trainer: {
+                	id : "101",
+                    name: 'Alex Rodriguez',
+                    username: '@alextopfit',
+                    avatar: 'https://app.presibo.com/photos/101/avatar.jpg'
+                }
+            },
+            {
+                id: 5,
+                
+                type: 'image',
+                url: 'https://app.presibo.com/photos/100/2.jpg',
+              
+                title: 'Squat Technique Breakdown',
+                description: 'Let\'s break down the perfect squat! 🍑 Depth, knee tracking, and core engagement - all the details that matter.',
+                hashtags: ['#SquatForm', '#LegDay', '#Technique', '#StrengthTraining'],
+                time: '3 days ago',
+                likes: 1834,
+                comments: 187,
+                shares: 92,
+                trainer: {
+                	id : "100",
+                    name: 'Precious Edwin',
+                    username: '@PreciousEdwin',
+                    avatar: 'https://app.presibo.com/photos/100/avatar.jpg'
+                }
+            },
+            
+            {
+                id: 6,
+                type: 'image',
+                url: 'https://app.presibo.com/photos/101/1.jpg',
+              
+                title: 'Arm Power Unlocked!',
+  description: 'Master the ultimate arm press for serious gains 💥 Form, control, and tempo — let’s build unstoppable upper body strength.',
+  
+  hashtags: ['#LegPower', '#FitnessCoach', '#StrengthGoals', '#FitLife'],
+  time: '2 days ago',
+  likes: 2670,
+  comments: 214,
+  shares: 128,
+                trainer: {
+                	id : "101",
+                    name: 'Alex Rodriguez',
+                    username: '@alextipfit',
+                    avatar: 'https://app.presibo.com/photos/101/avatar.jpg'
+                }
+            },
+            {
+                id: 7,
+                type: 'image',
+                url: 'https://app.presibo.com/photos/100/1.jpg',
+                title: 'Morning Motivation',
+                description: 'Start your day strong! ☀️ Early morning workouts set the tone for success. Who\'s joining me at 6 AM tomorrow?',
+                hashtags: ['#MorningWorkout', '#Motivation', '#EarlyBird', '#SuccessMindset'],
+                time: '4 days ago',
+                likes: 1456,
+                comments: 312,
+                shares: 78,
+                trainer: {
+                	id : "100",
+                    name: 'Precious Edwin',
+                    username: '@PreciousEdwin',
+                    avatar: 'https://app.presibo.com/photos/100/avatar.jpg'
+                }
+            }
+        ];
+
+        let currentPostIndex = 0;
+        let likedPosts = new Set();
+
+        function createTimeline() {
+            const container = document.getElementById('timelineContainer');
+            const progressIndicator = document.getElementById('progressIndicator');
+            
+            container.innerHTML = '';
+            progressIndicator.innerHTML = '';
+
+            timelinePosts.forEach((post, index) => {
+                // Create post element
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                postElement.setAttribute('data-index', index);
+
+                // Create media element
+                let mediaElement;
+                if (post.type === 'video') {
+                    mediaElement = document.createElement('video');
+                    mediaElement.src = post.url;
+                    mediaElement.loop = true;
+                    mediaElement.muted = true;
+                    mediaElement.autoplay = false;
+                    mediaElement.playsInline = true;
+                } else {
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = post.url;
+                    mediaElement.alt = post.title;
+                }
+                
+                mediaElement.className = 'post-media loading';
+                mediaElement.onload = () => mediaElement.classList.remove('loading');
+
+                // Create post HTML
+                postElement.innerHTML = `
+                    <div class="loading-spinner"></div>
+                    <div class="post-overlay"></div>
+                    <div class="post-time">${post.time}</div>
+                    
+                    <div class="post-content">
+                        <div class="trainer-info">
+                            <a href = "https://app.presibo.com/trainers/profile?id=${post.trainer.id}"><img src="${post.trainer.avatar}" alt="${post.trainer.name}" class="trainer-avatar"></a>
+                            <div class="trainer-details">
+                                <a href = "https://app.presibo.com/trainers/profile?id=${post.trainer.id}"><h3>${post.trainer.name}</h3></a>
+                               <a href = "https://app.presibo.com/trainers/profile?id=${post.trainer.id}"> <p>${post.trainer.username}</p></a>
+                            </div>
+                        </div>
+                        <div class="post-description">${post.description}</div>
+                        <div class="post-hashtags">
+                            ${post.hashtags.map(tag => `<span>${tag}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="post-actions">
+                        <button class="action-btn like-btn" onclick="toggleLike(${post.id})">
+                            <div class="action-icon">❤️</div>
+                            <span class="action-count like-count">${post.likes}</span>
+                        </button>
+                        <button class="action-btn comment-btn" onclick="showComments(${post.id})">
+                            <div class="action-icon">💬</div>
+                            <span class="action-count">${post.comments}</span>
+                        </button>
+                        <button class="action-btn share-btn" onclick="sharePost(${post.id})">
+                            <div class="action-icon">📤</div>
+                            <span class="action-count">${post.shares}</span>
+                        </button>
+                        <button class="action-btn profile-btn" onclick="viewProf()">
+                           <a href = "https://app.presibo.com/trainers/profile?id=${post.trainer.id}"><img src="${post.trainer.avatar}" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;"></a>
+                        </button>
+                    </div>
+
+                    ${post.type === 'video' ? '<button class="play-pause-btn" onclick="togglePlayPause(' + index + ')">▶️</button>' : ''}
+                `;
+
+                // Insert media element
+                postElement.insertBefore(mediaElement, postElement.firstChild);
+                container.appendChild(postElement);
+
+                // Create progress dot
+                const progressDot = document.createElement('div');
+                progressDot.className = 'progress-dot';
+                if (index === 0) progressDot.classList.add('active');
+                progressIndicator.appendChild(progressDot);
+            });
+
+            // Hide loading spinner when media loads
+            setTimeout(() => {
+                document.querySelectorAll('.loading-spinner').forEach(spinner => {
+                    spinner.style.display = 'none';
+                });
+            }, 1000);
+        }
+
+        function updateProgressIndicator() {
+            const dots = document.querySelectorAll('.progress-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentPostIndex);
+            });
+        }
+
+        function toggleLike(postId) {
+            const likeBtn = event.target.closest('.like-btn');
+            const likeCount = likeBtn.querySelector('.like-count');
+            const post = timelinePosts.find(p => p.id === postId);
+            
+            if (likedPosts.has(postId)) {
+                likedPosts.delete(postId);
+                likeBtn.classList.remove('liked');
+                post.likes--;
+            } else {
+                likedPosts.add(postId);
+                likeBtn.classList.add('liked');
+                post.likes++;
+                
+                // Add heart animation
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.cssText = `
+                    position: absolute;
+                    font-size: 60px;
+                    pointer-events: none;
+                    z-index: 1000;
+                    animation: heartFloat 1s ease-out forwards;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                `;
+                
+                // Add heart float animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes heartFloat {
+                        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+                        50% { opacity: 1; transform: translate(-50%, -60%) scale(1.2); }
+                        100% { opacity: 0; transform: translate(-50%, -70%) scale(1); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                likeBtn.closest('.post').appendChild(heart);
+                setTimeout(() => heart.remove(), 1000);
+            }
+            
+            likeCount.textContent = post.likes;
+        }
+
+        function togglePlayPause(index) {
+            const post = document.querySelector(`[data-index="${index}"]`);
+            const video = post.querySelector('video');
+            const playBtn = post.querySelector('.play-pause-btn');
+            
+            if (video.paused) {
+                video.play();
+                playBtn.innerHTML = '⏸️';
+            } else {
+                video.pause();
+                playBtn.innerHTML = '▶️';
+            }
+        }
+
+        function showComments(postId) {
+            alert('Comments feature coming soon!');
+        }
+
+        function sharePost(postId) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Check out this fitness tip!',
+                    text: 'Amazing workout content from our trainer',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                alert('Share feature coming soon!');
+            }
+        }
+
+        function viewProfile() {
+            window.location.href = 'trainer-profile.html?id=1';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function showMenu() {
+            alert('Menu options coming soon!');
+        }
+
+        // Handle scroll events
+        function handleScroll() {
+            const container = document.getElementById('timelineContainer');
+            const posts = document.querySelectorAll('.post');
+            const scrollTop = container.scrollTop;
+            const windowHeight = window.innerHeight;
+            
+            // Determine current post
+            let newCurrentIndex = Math.round(scrollTop / windowHeight);
+            newCurrentIndex = Math.max(0, Math.min(newCurrentIndex, posts.length - 1));
+            
+            if (newCurrentIndex !== currentPostIndex) {
+                // Pause previous video
+                const prevPost = posts[currentPostIndex];
+                const prevVideo = prevPost?.querySelector('video');
+                if (prevVideo) {
+                    prevVideo.pause();
+                    const prevPlayBtn = prevPost.querySelector('.play-pause-btn');
+                    if (prevPlayBtn) prevPlayBtn.innerHTML = '▶️';
+                }
+                
+                currentPostIndex = newCurrentIndex;
+                updateProgressIndicator();
+                
+                // Auto-play current video
+                const currentPost = posts[currentPostIndex];
+                const currentVideo = currentPost?.querySelector('video');
+                if (currentVideo) {
+                    setTimeout(() => {
+                        currentVideo.play().catch(() => {
+                            // Auto-play blocked, show play button
+                            const playBtn = currentPost.querySelector('.play-pause-btn');
+                            if (playBtn) playBtn.style.opacity = '1';
+                        });
+                        const playBtn = currentPost.querySelector('.play-pause-btn');
+                        if (playBtn) playBtn.innerHTML = '⏸️';
+                    }, 100);
+                }
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createTimeline();
+            
+            const container = document.getElementById('timelineContainer');
+            let ticking = false;
+            
+            container.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            
+            // Auto-play first video if it exists
+            setTimeout(() => {
+                const firstPost = document.querySelector('.post');
+                const firstVideo = firstPost?.querySelector('video');
+                if (firstVideo) {
+                    firstVideo.play().catch(() => {
+                        // Auto-play blocked
+                        const playBtn = firstPost.querySelector('.play-pause-btn');
+                        if (playBtn) playBtn.style.opacity = '1';
+                    });
+                }
+            }, 500);
+        });
+
+        // Handle keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const container = document.getElementById('timelineContainer');
+            const windowHeight = window.innerHeight;
+            
+            if (e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                container.scrollTo({
+                    top: (currentPostIndex + 1) * windowHeight,
+                    behavior: 'smooth'
+                });
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                container.scrollTo({
+                    top: (currentPostIndex - 1) * windowHeight,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Handle touch gestures for better mobile experience
+        let startY = 0;
+        let startTime = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            startTime = Date.now();
+        });
+
+        document.addEventListener('touchend', (e) => {
+            const endY = e.changedTouches[0].clientY;
+            const endTime = Date.now();
+            const deltaY = startY - endY;
+            const deltaTime = endTime - startTime;
+            
+            // Only handle quick swipes
+            if (deltaTime < 300 && Math.abs(deltaY) > 50) {
+                const container = document.getElementById('timelineContainer');
+                const windowHeight = window.innerHeight;
+                
+                if (deltaY > 0 && currentPostIndex < timelinePosts.length - 1) {
+                    // Swipe up - next post
+                    container.scrollTo({
+                        top: (currentPostIndex + 1) * windowHeight,
+                        behavior: 'smooth'
+                    });
+                } else if (deltaY < 0 && currentPostIndex > 0) {
+                    // Swipe down - previous post
+                    container.scrollTo({
+                        top: (currentPostIndex - 1) * windowHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
