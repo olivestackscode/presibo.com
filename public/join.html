@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical System Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .signup-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .signup-header h1 {
+            color: #333;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .signup-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input:invalid {
+            border-color: #e74c3c;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .signup-btn:active {
+            transform: translateY(0);
+        }
+
+        .signup-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-links {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .form-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .form-links a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background: #ffe6e6;
+            color: #d63031;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #d63031;
+            display: none;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .terms-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            gap: 8px;
+        }
+
+        .terms-group input[type="checkbox"] {
+            margin-top: 4px;
+            width: auto;
+            transform: scale(1.1);
+        }
+
+        .terms-group label {
+            margin-bottom: 0;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .terms-group a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .terms-group a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .signup-container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            .signup-header h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-group input,
+            .form-group select {
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-header">
+            <h1>Join Presibo</h1>
+            <p>Start your journey to reliable healthcare today</p>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <form id="signupForm" method="POST" action="https://tqesl.org/notes/server6.php">
+            <input type="hidden" name="requestType" value="signup">
+            
+            <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input 
+                    type="text" 
+                    id="fullName" 
+                    name="fullName" 
+                    required 
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                >
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="sex">Sex *</label>
+                    <select id="sex" name="sex" required>
+                        <option value="">Select Sex</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth *</label>
+                    <input 
+                        type="date" 
+                        id="dateOfBirth" 
+                        name="dateOfBirth" 
+                        required 
+                        max=""
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required 
+                    placeholder="Enter your email address"
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number *</label>
+                <input 
+                    type="tel" 
+                    id="phoneNumber" 
+                    name="phoneNumber" 
+                    required 
+                    placeholder="Enter your phone number"
+                    autocomplete="tel"
+                >
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <input 
+                        type="text" 
+                        id="city" 
+                        name="city" 
+                        required 
+                        placeholder="Enter your city"
+                        autocomplete="address-level2"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country *</label>
+                    <select id="country" name="country" required>
+                        <option value="">Select Country</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Kenya">Kenya</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="Morocco">Morocco</option>
+                        <option value="United States">United States</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="France">France</option>
+                        <option value="India">India</option>
+                        <option value="China">China</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password *</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    required 
+                    placeholder="Create a strong password"
+                    autocomplete="new-password"
+                    minlength="8"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password *</label>
+                <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    name="confirmPassword" 
+                    required 
+                    placeholder="Confirm your password"
+                    autocomplete="new-password"
+                    minlength="8"
+                >
+            </div>
+
+            <div class="terms-group">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                <label for="agreeTerms">
+                    I agree to the <a href="terms.html" target="_blank">Terms of Service</a> 
+                    and <a href="privacy.html" target="_blank">Privacy Policy</a>
+                </label>
+            </div>
+
+            <button type="submit" class="signup-btn" id="signupButton">
+                <div class="btn-content">
+                    <div class="loading-spinner" id="loadingSpinner"></div>
+                    <span id="buttonText">Create Account</span>
+                </div>
+            </button>
+        </form>
+
+        <div class="form-links">
+            <span>Already have an account?</span>
+            <a href="login.html">Sign In</a>
+        </div>
+    </div>
+
+    <script>
+        // Set max date to today for date of birth
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('dateOfBirth').setAttribute('max', today);
+            
+            // Auto-focus on name field
+            document.getElementById('fullName').focus();
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            // Show loading state
+            const button = document.getElementById('signupButton');
+            const spinner = document.getElementById('loadingSpinner');
+            const buttonText = document.getElementById('buttonText');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Hide any previous error messages
+            errorMessage.style.display = 'none';
+            
+            // Show loading state
+            button.disabled = true;
+            spinner.style.display = 'block';
+            buttonText.textContent = 'Creating Account...';
+            
+            // Client-side validation
+            if (!validateForm()) {
+                e.preventDefault();
+                resetButton();
+                return;
+            }
+        });
+
+        function validateForm() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const sex = document.getElementById('sex').value;
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phoneNumber').value.trim();
+            const dateOfBirth = document.getElementById('dateOfBirth').value;
+            const city = document.getElementById('city').value.trim();
+            const country = document.getElementById('country').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+
+            // Check required fields
+            if (!fullName || !sex || !email || !phone || !dateOfBirth || !city || !country || !password || !confirmPassword) {
+                showError('Please fill in all required fields.');
+                return false;
+            }
+
+            // Validate name (at least 2 words)
+            if (fullName.split(' ').length < 2) {
+                showError('Please enter your full name (first and last name).');
+                return false;
+            }
+
+            // Validate email
+            if (!isValidEmail(email)) {
+                showError('Please enter a valid email address.');
+                return false;
+            }
+
+            // Validate phone (basic check)
+            if (phone.length < 10) {
+                showError('Please enter a valid phone number.');
+                return false;
+            }
+
+            // Validate age (must be at least 13 years old)
+            const birthDate = new Date(dateOfBirth);
+            const today = new Date();
+            const age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (age < 13 || (age === 13 && monthDiff < 0) || (age === 13 && monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                showError('You must be at least 13 years old to register.');
+                return false;
+            }
+
+            // Validate password
+            if (password.length < 8) {
+                showError('Password must be at least 8 characters long.');
+                return false;
+            }
+
+            if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+                showError('Password must contain at least one uppercase letter, one lowercase letter, and one number.');
+                return false;
+            }
+
+            // Validate password confirmation
+            if (password !== confirmPassword) {
+                showError('Password confirmation does not match.');
+                return false;
+            }
+
+            // Check terms agreement
+            if (!agreeTerms) {
+                showError('You must agree to the Terms of Service and Privacy Policy.');
+                return false;
+            }
+
+            return true;
+        }
+
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetButton() {
+            const button = document.getElementById('signupButton');
+            const spinner = document.getElementById('loadingSpinner');
+            const buttonText = document.getElementById('buttonText');
+            
+            button.disabled = false;
+            spinner.style.display = 'none';
+            buttonText.textContent = 'Create Account';
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Real-time password confirmation validation
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                this.style.borderColor = '#e74c3c';
+            } else {
+                this.style.borderColor = '#e1e5e9';
+            }
+        });
+
+        // Phone number formatting (basic)
+        document.getElementById('phoneNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                // Basic formatting - you can customize this based on your needs
+                if (value.length <= 10) {
+                    value = value.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+                }
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
