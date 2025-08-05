@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescriptions Form - Presibo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h3 {
+            color: purple;
+            text-align: center;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"], 
+        input[type="email"], 
+        input[type="date"], 
+        input[type="tel"], 
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid purple;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 70px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: purple;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: magenta;
+        }
+    </style>
+</head>
+<body>
+    <h3>Presibo Prescription Form</h3>
+    <form class="control" method="POST" action="https://tqesl.org/notes/server6.php">
+        <input type="hidden" name="requestType" value="test_submission">
+        
+        <label for="docName">Doctor's Name</label>
+        <input id="docName" name="docName" type="text" placeholder="Enter doctor's name" required />
+        
+        <label for="doctorEmail">Doctor's Email</label>
+        <input id="doctorEmail" name="doctorEmail" type="email" placeholder="Enter doctor's email" required />
+
+        <label for="patientName">Patient Name</label>
+        <input id="patientName" name="patientName" type="text" placeholder="Enter patient name" required />
+
+        <label for="patientID">Patient ID</label>
+        <input id="patientID" name="patientID" type="text" placeholder="Enter patient ID" required />
+
+        <label for="testDate">Date</label>
+        <input id="testDate" name="testDate" type="date" required />
+
+        <label for="medication">Medication</label>
+        <textarea id="medication" name="medication" placeholder="Enter medication details (i.e., drug name, dosage, duration)" required></textarea>
+
+        <label for="instructions">Additional Instructions</label>
+        <textarea id="instructions" name="instructions" placeholder="Enter specific instructions for the patient (i.e., take after meals)" required></textarea>
+
+        <button type="submit">Send Prescription</button>
+    </form>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            // Basic validation
+            const docName = document.getElementById("docName").value.trim();
+            const doctorEmail = document.getElementById("doctorEmail").value.trim();
+            const patientName = document.getElementById("patientName").value.trim();
+            const patientID = document.getElementById("patientID").value.trim();
+            const testDate = document.getElementById("testDate").value;
+            const medication = document.getElementById("medication").value.trim();
+            const instructions = document.getElementById("instructions").value.trim();
+
+            if (!docName || !doctorEmail || !patientName || !patientID || !testDate || !medication || !instructions) {
+                e.preventDefault();
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(doctorEmail)) {
+                e.preventDefault();
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            // Show loading state
+            const button = document.querySelector('button');
+            button.disabled = true;
+            button.textContent = 'Sending Prescription...';
+            button.style.backgroundColor = '#666';
+        });
+    </script>
+</body>
+  </html>
+  
