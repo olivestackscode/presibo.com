@@ -6,216 +6,650 @@
   <title>Presibo Blog | Health Tips & Stories</title>
   <style>
     :root {
-      --primary: #6495ED;
-      --dark: #1e1e1e;
-      --light: #f8f9fa;
-      --gray: #555;
-      --white: #fff;
+      --primary: #2563eb;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --dark: #1f2937;
+      --light: #f9fafb;
+      --gray: #6b7280;
+      --white: #ffffff;
+      --gradient: linear-gradient(135deg, #2563eb, #10b981);
+      --shadow: 0 10px 25px rgba(0,0,0,0.1);
+      --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--light);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
       color: var(--dark);
+      line-height: 1.6;
     }
 
+    /* Header Styles */
     header {
-      background-color: var(--primary);
+      background: var(--gradient);
       color: var(--white);
-      padding: 1.2rem 2rem;
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     header h1 {
-      margin: 0;
-      font-size: 1.8rem;
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ffffff, #e0f2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
     }
 
     nav a {
       color: var(--white);
-      margin-left: 1.5rem;
       text-decoration: none;
       font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
     }
 
-    .hero {
-      background-color: var(--white);
-      padding: 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    .hero img {
-      width: 100%;
-      max-width: 450px;
-      border-radius: 10px;
-    }
-
-    .hero-text {
-      max-width: 500px;
-      margin-right: 2rem;
-    }
-
-    .hero-text h2 {
-      color: var(--primary);
-      font-size: 2rem;
-    }
-
-    .hero-text p {
-      font-size: 1rem;
-      color: var(--gray);
-    }
-
-    .hero-text a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.7rem 1.2rem;
-      background-color: var(--primary);
-      color: var(--white);
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-
-    .blog-list {
-      max-width: 1000px;
-      margin: 2rem auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+    /* Featured Stories Carousel */
+    .featured-section {
+      max-width: 1200px;
+      margin: 3rem auto;
       padding: 0 1rem;
     }
 
-    .post {
-      background-color: var(--white);
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-      transition: transform 0.2s;
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
     }
 
-    .post:hover {
-      transform: translateY(-5px);
+    .section-title h2 {
+      font-size: 2.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
     }
 
-    .post h3 {
-      margin-top: 0;
+    .section-title p {
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      position: relative;
+      height: 400px;
+      display: flex;
+      align-items: center;
+    }
+
+    .slide-image {
+      width: 50%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-content {
+      width: 50%;
+      padding: 3rem;
+      background: linear-gradient(135deg, var(--white), #f8fafc);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide-content h3 {
+      font-size: 1.8rem;
       color: var(--primary);
+      margin-bottom: 1rem;
+      line-height: 1.2;
     }
 
-    .post p {
+    .slide-content p {
+      color: var(--gray);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-content .cta-button {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: var(--gradient);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: fit-content;
+    }
+
+    .slide-content .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Carousel Navigation */
+    .carousel-nav {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--white);
+      transform: scale(1.2);
+    }
+
+    /* Blog Grid */
+    .blog-section {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 1rem;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .blog-post {
+      background: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .blog-post:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .post-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .post-content {
+      padding: 1.5rem;
+    }
+
+    .post-category {
+      display: inline-block;
+      background: var(--secondary);
+      color: var(--white);
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .post-content h3 {
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .post-content p {
       color: var(--gray);
       font-size: 0.95rem;
+      margin-bottom: 1rem;
     }
 
-    .post a {
-      display: inline-block;
-      margin-top: 0.5rem;
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    .read-more {
       color: var(--primary);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
 
-    footer {
+    .read-more:hover {
+      color: var(--secondary);
+    }
+
+    /* Newsletter Section */
+    .newsletter {
+      background: var(--gradient);
+      color: var(--white);
+      padding: 4rem 1rem;
       text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: var(--gray);
+      margin: 4rem 0;
+    }
+
+    .newsletter h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-form {
+      max-width: 400px;
+      margin: 2rem auto;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+    }
+
+    .newsletter-form button {
+      padding: 0.8rem 1.5rem;
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: var(--white);
+      text-align: center;
+      padding: 2rem;
       margin-top: 4rem;
     }
-    
-    .post-thumbnail {
-  width: 100%;
-  max-width: 120px;
-  height: auto;
-  border-radius: 8px;
-  margin-right: 1rem;
-  float: left;
-}
 
-.post {
-  background-color: var(--white);
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s;
-  clear: both;
-}
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .carousel-slide {
+        flex-direction: column;
+        height: auto;
+      }
 
-.post:hover {
-  transform: translateY(-5px);
-}
+      .slide-image, .slide-content {
+        width: 100%;
+      }
 
-.post h3 {
-  margin-top: 0;
-  color: var(--primary);
-}
+      .slide-content {
+        padding: 2rem;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Presibo Blog</h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="#">Blog</a>
-      
-    </nav>
+    <div class="header-content">
+      <h1>Presibo Health</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="#blog">Blog</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-text">
-      <h2>What Nigerians Need to Know About High Blood Pressure</h2>
-      <p>A must-read on the silent killer affecting millions. Learn the symptoms, causes, and how Presibo helps manage it smartly.</p>
-      <a href="/blog/about-high-blood-pressure.html">Read More</a>
+  <!-- Featured Stories Carousel -->
+  <section class="featured-section">
+    <div class="section-title">
+      <h2>Featured Stories</h2>
+      <p>Latest insights and breakthroughs in healthcare technology</p>
     </div>
-    <img src="img/blood-pressure.png" alt="Doctor checking blood pressure">
+    
+    <div class="carousel-container">
+      <div class="carousel-track" id="carouselTrack">
+        
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop" alt="High Blood Pressure" class="slide-image">
+          <div class="slide-content">
+            <h3>What Nigerians Need to Know About High Blood Pressure</h3>
+            <p>A comprehensive guide on the silent killer affecting millions. Learn the symptoms, causes, and how Presibo helps manage it with AI-powered monitoring.</p>
+            <a href="#" class="cta-button">Read Full Story</a>
+          </div>
+        </div>
+
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop" alt="AI Healthcare Revolution" class="slide-image">
+          <div class="slide-content">
+            <h3>Presibo Wins $2M Grant for AI Healthcare Innovation</h3>
+            <p>Our groundbreaking work in democratizing healthcare access across Africa has been recognized with a major international grant from the Gates Foundation.</p>
+            <a href="#" class="cta-button">Learn More</a>
+          </div>
+        </div>
+
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&h=400&fit=crop" alt="Remote Monitoring" class="slide-image">
+          <div class="slide-content">
+            <h3>Remote Monitoring Saves 10,000 Lives in First Year</h3>
+            <p>How Presibo's innovative remote patient monitoring system has transformed healthcare delivery in underserved communities across Nigeria.</p>
+            <a href="#" class="cta-button">Read Impact Story</a>
+          </div>
+        </div>
+
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&h=400&fit=crop" alt="Diabetes Management" class="slide-image">
+          <div class="slide-content">
+            <h3>Breaking: Presibo's Diabetes AI Achieves 94% Accuracy</h3>
+            <p>Our latest AI model for diabetes prediction and management has achieved breakthrough accuracy rates, setting new standards in preventive healthcare.</p>
+            <a href="#" class="cta-button">View Research</a>
+          </div>
+        </div>
+
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1582560469781-1965b9af903d?w=600&h=400&fit=crop" alt="Team Achievement" class="slide-image">
+          <div class="slide-content">
+            <h3>CEO Jerry Nwobodo Named Forbes 30 Under 30</h3>
+            <p>Presibo's founder recognized for revolutionary work in making healthcare accessible through artificial intelligence and innovative technology solutions.</p>
+            <a href="#" class="cta-button">Read Profile</a>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="carousel-nav">
+        <div class="carousel-dot active" data-slide="0"></div>
+        <div class="carousel-dot" data-slide="1"></div>
+        <div class="carousel-dot" data-slide="2"></div>
+        <div class="carousel-dot" data-slide="3"></div>
+        <div class="carousel-dot" data-slide="4"></div>
+      </div>
+    </div>
   </section>
 
-<section class="blog-list">
-  <div class="post">
-    <img src="img/jerry_nwobodo.jpg" alt="AI Healthcare" class="post-thumbnail">
-    <h3>Inside Presibo: How AI Startup is Changing Healthcare in Nigeria</h3>
-    <p>Explore how Presibo’s technology is revolutionizing diagnostics, chronic care, and remote monitoring for underserved communities.</p>
-    <a href="/blog/presibo-healthcare-ai-revolution-africa.html">Read More</a>
-  </div>
+  <!-- Main Blog Section -->
+  <section class="blog-section" id="blog">
+    <div class="section-title">
+      <h2>Health Insights & Stories</h2>
+      <p>Expert advice, patient stories, and the latest in healthcare innovation</p>
+    </div>
 
-  <div class="post">
-    <img src="img/diabetes-thumbnail.jpg" alt="Understanding Diabetes" class="post-thumbnail">
-    <h3>Understanding Diabetes in Africa</h3>
-    <p>Diabetes is rising across the continent. Here's what you should know, and how Presibo supports diabetic patients.</p>
-    <a href="#">Read More</a>
-  </div>
+    <div class="blog-grid">
+      
+      <article class="blog-post">
+        <img src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=400&h=200&fit=crop" alt="Heart Health" class="post-image">
+        <div class="post-content">
+          <span class="post-category">Nutrition</span>
+          <h3>10 African Superfoods for Heart Health</h3>
+          <div class="post-meta">
+            <span>Dr. Amara Okafor</span>
+            <span>5 min read</span>
+          </div>
+          <p>Discover traditional African foods that naturally support cardiovascular health and how to incorporate them into modern diets.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
 
-  <div class="post">
-    <img src="img/remote-monitoring-thumbnail.jpg" alt="Remote Monitoring" class="post-thumbnail">
-    <h3>Remote Monitoring: The Future of Health</h3>
-    <p>Presibo is pioneering accessible healthcare using AI and remote tools to connect patients and doctors.</p>
-    <a href="#">Read More</a>
-  </div>
+      <article class="blog-post">
+        <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=200&fit=crop" alt="Mental Health" class="post-image">
+        <div class="post-content">
+          <span class="post-category">Mental Health</span>
+          <h3>Breaking Mental Health Stigma in Nigerian Communities</h3>
+          <div class="post-meta">
+            <span>Dr. Kemi Adebayo</span>
+            <span>7 min read</span>
+          </div>
+          <p>How Presibo's mental health initiatives are changing conversations and providing support in culturally sensitive ways.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
 
-  <div class="post">
-    <img src="img/healthier-heart-thumbnail.jpg" alt="Healthier Heart" class="post-thumbnail">
-    <h3>How to Eat for a Healthier Heart</h3>
-    <p>Food can heal or harm. Discover simple diet tips that help manage blood pressure and cholesterol.</p>
-    <a href="#">Read More</a>
-  </div>
-</section>
+      <article class="blog-post">
+        <img src="https://images.unsplash.com/photo-1576671081837-49000212a370?w=400&h=200&fit=crop" alt="Maternal Health" class="post-image">
+        <div class="post-content">
+          <span class="post-category">Maternal Care</span>
+          <h3>Presibo's Maternal Health Program Reduces Mortality by 40%</h3>
+          <div class="post-meta">
+            <span>Research Team</span>
+            <span>6 min read</span>
+          </div>
+          <p>Our AI-powered prenatal monitoring system has achieved remarkable results in protecting mothers and babies across rural Nigeria.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=200&fit=crop" alt="Diabetes Prevention" class="post-image">
+        <div class="post-content">
+          <span class="post-category">Prevention</span>
+          <h3>Early Detection: How AI Spots Diabetes Risk 5 Years Earlier</h3>
+          <div class="post-meta">
+            <span>Dr. Chidi Okonkwo</span>
+            <span>8 min read</span>
+          </div>
+          <p>Revolutionary machine learning algorithms are identifying pre-diabetic conditions years before traditional methods.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <img src="https://images.unsplash.com/photo-1582560469781-1965b9af903d?w=400&h=200&fit=crop" alt="Telemedicine Success" class="post-image">
+        <div class="post-content">
+          <span class="post-category">Innovation</span>
+          <h3>Telemedicine Reaches 50,000 Rural Patients in 6 Months</h3>
+          <div class="post-meta">
+            <span>Operations Team</span>
+            <span>4 min read</span>
+          </div>
+          <p>How Presibo's mobile health units and satellite connectivity are bringing world-class healthcare to remote communities.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccf?w=400&h=200&fit=crop" alt="Hypertension Management" class="post-image">
+        <div class="post-content">
+          <span class="post-category">Chronic Care</span>
+          <h3>Smart Blood Pressure Monitoring: Beyond the Numbers</h3>
+          <div class="post-meta">
+            <span>Dr. Funmi Adebayo</span>
+            <span>5 min read</span>
+          </div>
+          <p>How Presibo's smart devices provide personalized insights that help patients understand and manage their blood pressure.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop" alt="Healthcare Access" class="post-image">
+        <div class="post-content">
+          <span class="post-category">Access</span>
+          <h3>Partnership with WHO Expands Healthcare to 500,000</h3>
+          <div class="post-meta">
+            <span>Partnership Team</span>
+            <span>6 min read</span>
+          </div>
+          <p>Our collaboration with the World Health Organization brings AI-powered diagnostics to underserved populations across West Africa.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=200&fit=crop" alt="Pediatric Care" class="post-image">
+        <div class="post-content">
+          <span class="post-category">Pediatrics</span>
+          <h3>AI-Powered Child Growth Monitoring Prevents Malnutrition</h3>
+          <div class="post-meta">
+            <span>Dr. Ngozi Okafor</span>
+            <span>7 min read</span>
+          </div>
+          <p>Innovative computer vision technology tracks child development and nutritional status in real-time, enabling early intervention.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=200&fit=crop" alt="Medical Research" class="post-image">
+        <div class="post-content">
+          <span class="post-category">Research</span>
+          <h3>Presibo Research Published in Nature Medicine</h3>
+          <div class="post-meta">
+            <span>Research Team</span>
+            <span>5 min read</span>
+          </div>
+          <p>Our groundbreaking study on AI-assisted diagnosis in resource-limited settings has been published in the world's leading medical journal.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <img src="https://images.unsplash.com/photo-1582560469781-1965b9af903d?w=400&h=200&fit=crop" alt="Healthcare Innovation" class="post-image">
+        <div class="post-content">
+          <span class="post-category">Innovation</span>
+          <h3>Presibo Named Africa's Most Innovative Healthtech Startup</h3>
+          <div class="post-meta">
+            <span>Awards Team</span>
+            <span>4 min read</span>
+          </div>
+          <p>Recognition at the Africa Health Innovation Awards highlights our impact in transforming healthcare delivery across the continent.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter">
+    <h3>Stay Updated with Health Insights</h3>
+    <p>Get the latest health tips, research findings, and Presibo updates delivered to your inbox</p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Enter your email address" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
 
   <footer>
-    <p>&copy; 2025 Presibo Health. All rights reserved.</p>
+    <p>&copy; 2025 Presibo Health. Revolutionizing healthcare through AI and innovation.</p>
   </footer>
+
+  <script>
+    // Carousel functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const track = document.getElementById('carouselTrack');
+
+    function goToSlide(slideIndex) {
+      currentSlide = slideIndex;
+      track.style.transform = `translateX(-${slideIndex * 100}%)`;
+      
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === slideIndex);
+      });
+    }
+
+    // Auto-slide functionality
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      goToSlide(currentSlide);
+    }
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Auto-advance slides every 5 seconds
+    setInterval(nextSlide, 5000);
+
+    // Newsletter form
+    document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for subscribing to Presibo Health updates!');
+    });
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.getAttribute('href').startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
-
