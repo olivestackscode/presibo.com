@@ -1,0 +1,349 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vibe Doctor — Presibo</title>
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --muted:#9aa6b2;
+      --accent:#5bb6ff; /* cornflower-ish */
+      --glass: rgba(255,255,255,0.04);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071028 0%, #081526 60%);color:#e6eef6}
+    .app{
+      max-width:1100px;margin:28px auto;padding:20px;display:grid;grid-template-columns:360px 1fr;gap:20px;align-items:start
+    }/* LEFT: sidebar */
+.panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:18px;box-shadow:0 6px 24px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font-weight:700;background:linear-gradient(135deg,var(--accent),#7b5cff);color:#042033}
+.title{font-size:18px}
+.muted{color:var(--muted);font-size:13px}
+.section{margin-top:16px}
+
+/* personality builder */
+label{display:block;font-size:13px;margin-bottom:6px}
+select,input[type=range],input[type=text]{width:100%;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit}
+.row{display:flex;gap:8px}
+.avatar-preview{width:100%;height:120px;border-radius:12px;background:linear-gradient(135deg,#123 0%, #235 60%);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700}
+.btn{display:inline-block;padding:10px 12px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#8bd3ff);color:#042033;font-weight:600;border:none;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent)}
+
+/* chat area */
+.chat-wrap{display:flex;flex-direction:column;height:80vh}
+.chat-header{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02)}
+.chat-body{flex:1;overflow:auto;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border-radius:12px;margin-top:12px}
+.msg{max-width:76%;padding:12px;border-radius:12px;margin-bottom:12px;line-height:1.35}
+.msg.user{margin-left:auto;background:linear-gradient(180deg,#062b41,#063b53);border:1px solid rgba(91,182,255,0.12)}
+.msg.doctor{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+.meta{font-size:12px;color:var(--muted);margin-bottom:6px}
+
+/* composer */
+.composer{display:flex;gap:8px;margin-top:12px}
+.composer textarea{flex:1;min-height:56px;padding:12px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit;resize:none}
+.controls{display:flex;gap:8px;align-items:center}
+.small{font-size:12px;padding:6px 8px;border-radius:8px}
+
+footer.note{font-size:12px;color:var(--muted);margin-top:12px;text-align:center}
+
+/* responsive */
+@media (max-width:900px){.app{grid-template-columns:1fr;max-width:680px}.panel{order:2}}
+
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="panel">
+      <div class="brand">
+        <div class="logo">PD</div>
+        <div>
+          <div class="title">Vibe Doctor</div>
+          <div class="muted">Personalized AI doctor — Presibo</div>
+        </div>
+      </div><div class="section">
+    <div class="meta">Personality</div>
+    <label for="tone">Tone</label>
+    <select id="tone">
+      <option value="friendly">Friendly</option>
+      <option value="professional">Professional</option>
+      <option value="motivational">Motivational</option>
+      <option value="concise">Concise</option>
+    </select>
+
+    <label for="age">Age vibe: <span id="ageVal">35</span></label>
+    <input id="age" type="range" min="25" max="65" value="35" />
+
+    <label for="gender">Gender voice</label>
+    <select id="gender">
+      <option value="female">Female</option>
+      <option value="male">Male</option>
+      <option value="neutral">Neutral</option>
+    </select>
+
+    <div style="margin-top:12px">
+      <div class="meta">Avatar</div>
+      <div id="avatar" class="avatar-preview">VD</div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button id="randomAvatar" class="btn ghost small">Randomize</button>
+        <button id="uploadAvatar" class="btn small">Upload</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <div class="meta">Voice</div>
+    <label for="voiceMode">Output</label>
+    <select id="voiceMode">
+      <option value="tts">Text to Speech (browser)</option>
+      <option value="none">Silent</option>
+    </select>
+    <div style="margin-top:8px;display:flex;gap:8px">
+      <button id="savePrefs" class="btn">Save Preferences</button>
+      <button id="resetPrefs" class="btn ghost">Reset</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="meta">About</div>
+    <div class="muted">This demo page is a front-end prototype. Replace the mockSend() call in the JS with your backend endpoint to connect to your LLM and medical checks.</div>
+  </div>
+
+</aside>
+
+<main>
+  <div class="panel chat-wrap">
+    <div class="chat-header">
+      <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7b5cff);display:grid;place-items:center;font-weight:700">VD</div>
+      <div>
+        <div style="font-weight:700">Dr. Vibe</div>
+        <div class="muted">Your personalised AI clinician</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+        <button id="voiceBtn" class="btn small">Start Voice</button>
+        <div class="muted">Status: <span id="status">idle</span></div>
+      </div>
+    </div>
+
+    <div id="chatBody" class="chat-body" aria-live="polite"></div>
+
+    <div class="composer">
+      <textarea id="input" placeholder="Describe your symptoms or ask a health question..."></textarea>
+      <div style="display:flex;flex-direction:column;align-items:stretch">
+        <button id="send" class="btn small">Send</button>
+        <button id="clear" class="btn ghost small" style="margin-top:8px">Clear</button>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+      <div class="muted">Memory: <span id="memoryCount">0</span> items</div>
+      
+    </div>
+
+  </div>
+</main>
+
+  </div>  <script>
+    // --- Helpers & state
+    const state = {
+      tone: 'friendly',
+      age: 35,
+      gender: 'female',
+      voiceMode: 'tts',
+      memory: []
+    }
+
+    // DOM
+    const toneEl = document.getElementById('tone')
+    const ageEl = document.getElementById('age')
+    const ageVal = document.getElementById('ageVal')
+    const genderEl = document.getElementById('gender')
+    const avatarEl = document.getElementById('avatar')
+    const randomAvatarBtn = document.getElementById('randomAvatar')
+    const saveBtn = document.getElementById('savePrefs')
+    const resetBtn = document.getElementById('resetPrefs')
+    const voiceModeEl = document.getElementById('voiceMode')
+    const chatBody = document.getElementById('chatBody')
+    const inputEl = document.getElementById('input')
+    const sendBtn = document.getElementById('send')
+    const clearBtn = document.getElementById('clear')
+    const statusEl = document.getElementById('status')
+    const memoryCountEl = document.getElementById('memoryCount')
+    const voiceBtn = document.getElementById('voiceBtn')
+
+    // init
+    function loadPrefs(){
+      const saved = JSON.parse(localStorage.getItem('vibe-doctor-prefs') || '{}')
+      if(saved.tone) state.tone = saved.tone
+      if(saved.age) state.age = saved.age
+      if(saved.gender) state.gender = saved.gender
+      if(saved.voiceMode) state.voiceMode = saved.voiceMode
+      if(saved.avatar) state.avatar = saved.avatar
+      const mem = JSON.parse(localStorage.getItem('vibe-doctor-memory') || '[]')
+      state.memory = mem
+      // apply
+      toneEl.value = state.tone
+      ageEl.value = state.age
+      ageVal.textContent = state.age
+      genderEl.value = state.gender
+      voiceModeEl.value = state.voiceMode
+      if(state.avatar){ avatarEl.style.backgroundImage = `url(${state.avatar})`; avatarEl.textContent = '' }
+      memoryCountEl.textContent = state.memory.length
+    }
+
+    loadPrefs()
+
+    // personality interactions
+    ageEl.addEventListener('input', e=>{ ageVal.textContent = e.target.value; state.age = +e.target.value })
+    toneEl.addEventListener('change', e=> state.tone = e.target.value)
+    genderEl.addEventListener('change', e=> state.gender = e.target.value)
+    voiceModeEl.addEventListener('change', e=> state.voiceMode = e.target.value)
+
+    randomAvatarBtn.addEventListener('click', ()=>{
+      // simple generated gradient avatar with initials
+      const initials = 'VD'
+      const hue1 = Math.floor(Math.random()*360)
+      const hue2 = (hue1+40)%360
+      const bg = `linear-gradient(135deg,hsl(${hue1} 90% 60%), hsl(${hue2} 80% 50%))`
+      avatarEl.style.backgroundImage = 'none'
+      avatarEl.style.background = bg
+      avatarEl.textContent = initials
+      state.avatar = null
+    })
+
+    saveBtn.addEventListener('click', ()=>{
+      const prefs = {tone:state.tone, age:state.age, gender:state.gender, voiceMode:state.voiceMode, avatar:state.avatar}
+      localStorage.setItem('vibe-doctor-prefs', JSON.stringify(prefs))
+      alert('Preferences saved locally.')
+    })
+    resetBtn.addEventListener('click', ()=>{
+      localStorage.removeItem('vibe-doctor-prefs')
+      localStorage.removeItem('vibe-doctor-memory')
+      state.memory = []
+      memoryCountEl.textContent = 0
+      loadPrefs()
+      alert('Reset to defaults')
+    })
+
+    // Chat UI
+    function addMessage(who, text){
+      const el = document.createElement('div')
+      el.className = 'msg '+(who==='user'?'user':'doctor')
+      const meta = document.createElement('div')
+      meta.className = 'meta'
+      meta.textContent = who==='user' ? 'You' : `Dr. Vibe • ${state.tone}`
+      const body = document.createElement('div')
+      body.textContent = text
+      el.appendChild(meta)
+      el.appendChild(body)
+      chatBody.appendChild(el)
+      chatBody.scrollTop = chatBody.scrollHeight
+    }
+
+    // Mock LLM call — replace this with your server API call to your LLM & medical checks
+    async function mockSend(question){
+      statusEl.textContent = 'thinking...'
+      await new Promise(r=>setTimeout(r, 800 + Math.random()*1200))
+      // create a reply influenced by tone
+      let reply = ''
+      if(state.tone === 'friendly') reply = `Hi — thanks for sharing. Based on what you said ("${question}"), it could be something common. I'd suggest resting, staying hydrated, and if symptoms worsen, seek care.`
+      if(state.tone === 'professional') reply = `Thank you for the information. The symptoms described ("${question}") may indicate a benign condition. Monitor for red flags: high fever, difficulty breathing, confusion. If present, seek immediate care.`
+      if(state.tone === 'motivational') reply = `You're doing great by asking — keep it up. From "${question}", a simple plan: rest, small steps, track changes. You got this — check with a clinician if it persists.`
+      if(state.tone === 'concise') reply = `Possibly viral or minor. Rest, fluids, OTC pain relief. See doctor if worse.`
+
+      // low-level triage: if question contains certain words, escalate
+      const qLower = question.toLowerCase()
+      if(/chest|breath|bleed|severe|unconscious/.test(qLower)){
+        reply = `Warning signs detected in your message. This may be a medical emergency. Please seek immediate medical attention or call emergency services.`
+      }
+
+      statusEl.textContent = 'idle'
+      return reply
+    }
+
+    // Speech: simple TTS and recognition fallback
+    function speak(text){
+      if(state.voiceMode !== 'tts') return
+      if('speechSynthesis' in window){
+        const ut = new SpeechSynthesisUtterance(text)
+        // choose voice roughly by gender preference
+        const voices = speechSynthesis.getVoices()
+        if(voices && voices.length){
+          const pref = state.gender
+          let chosen = voices.find(v=>v.name.toLowerCase().includes(pref)) || voices[0]
+          ut.voice = chosen
+        }
+        speechSynthesis.cancel(); speechSynthesis.speak(ut)
+      }
+    }
+
+    // send flow
+    sendBtn.addEventListener('click', async ()=>{
+      const text = inputEl.value.trim()
+      if(!text) return
+      addMessage('user', text)
+      inputEl.value = ''
+      // save to memory
+      state.memory.push({q:text, t:Date.now()})
+      localStorage.setItem('vibe-doctor-memory', JSON.stringify(state.memory))
+      memoryCountEl.textContent = state.memory.length
+
+      // call LLM (mock or real)
+      try{
+        const reply = await mockSend(text)
+        addMessage('doctor', reply)
+        speak(reply)
+      }catch(err){
+        addMessage('doctor','Oops, something went wrong — try again.')
+      }
+    })
+
+    clearBtn.addEventListener('click', ()=>{ inputEl.value = '' })
+
+    // Voice recognition toggle
+    let recognition = null
+    let listening = false
+    voiceBtn.addEventListener('click', ()=>{
+      if(listening){ stopListening(); return }
+      if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)){
+        alert('Speech recognition not supported in this browser')
+        return
+      }
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition
+      recognition = new SR()
+      recognition.lang = 'en-US'
+      recognition.interimResults = false
+      recognition.onstart = ()=>{ listening = true; voiceBtn.textContent = 'Listening... (click to stop)'; statusEl.textContent='listening' }
+      recognition.onresult = (e)=>{
+        const text = Array.from(e.results).map(r=>r[0].transcript).join('')
+        inputEl.value = text
+        stopListening()
+      }
+      recognition.onerror = (e)=>{ console.log(e); stopListening() }
+      recognition.onend = ()=> stopListening()
+      recognition.start()
+    })
+    function stopListening(){ if(recognition){ recognition.stop(); recognition = null } listening=false; voiceBtn.textContent='Start Voice'; statusEl.textContent='idle' }
+
+    // small accessibility: press Enter to send
+    inputEl.addEventListener('keydown', e=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendBtn.click() } })
+
+    // Hint: replace this function to call your backend safely
+    /*
+    async function sendToBackend(question){
+      // Example:
+      // const res = await fetch('/api/vibe-doctor', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({question, prefs:state})})
+      // const data = await res.json()
+      // return data.reply
+    }
+    */
+
+    // Final: small demo welcome
+    addMessage('doctor','Hello — I\'m Dr. Vibe. Tell me what\'s bothering you and I\'ll do my best to help. (This is a demo.)')
+  </script></body>
+      </html>
