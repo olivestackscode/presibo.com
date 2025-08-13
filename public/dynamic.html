@@ -868,7 +868,7 @@ if (actionbot = 'I need a doctor '){
       const q = encodeURIComponent(userText || currentQuery);
       // open a simple search path on presibo, change to your actual search or route
       const url = `https://app.presibo.com/${q}`;
-      window.location(url, "_blank");
+      window.open(url, "_blank");
     });
 
     // keyboard: Enter triggers button
