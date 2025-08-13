@@ -39,12 +39,87 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa’s
         opacity:0.3;
     }
 
-	
-.btn-blk{
-	color: red;
-	background: black;
-	
-}
+.form-search {
+            display: flex;
+            align-items: stretch;
+            margin-bottom: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-control1 {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #333;
+            border-radius: 8px 0 0 8px;
+            font-size: 16px;
+            outline: none;
+            background-color: white;
+            color: black; /* Black text */
+            font-weight: 500; /* Make text more visible */
+        }
+        
+        .form-control1::placeholder {
+            color: black; /* Black placeholder text */
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .btn-blk {
+            padding: 12px 24px;
+            background-color: black; /* Black background */
+            color: white; /* White text on black background */
+            border: 2px solid #333;
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold; /* Bold button text */
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+        
+        .btn-blk:hover {
+            background-color: #333;
+            transform: translateY(-1px);
+        }
+        
+        .btn-blk:active {
+            transform: translateY(0);
+        }
+        
+        /* Fade animation classes */
+        .fade {
+            transition: opacity 0.25s ease-in-out;
+        }
+        
+        .fade.out {
+            opacity: 0.3;
+        }
+        
+        /* Focus styles */
+        .form-control1:focus {
+            border-color: #000;
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .form-search {
+                flex-direction: column;
+            }
+            
+            .form-control1 {
+                border-radius: 8px 8px 0 0;
+                border-bottom: 1px solid #ccc;
+            }
+            
+            .btn-blk {
+                border-radius: 0 0 8px 8px;
+                border-top: none;
+                border-left: 2px solid #333;
+            }
+        }	
  
   </style>
 </head>
