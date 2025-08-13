@@ -38,7 +38,54 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa’s
     .preloader{
         opacity:0.3;
     }
-</style>
+
+	
+
+    :root{
+      --bg:#ffffff;
+      --accent:#6b21a8; /* presibo purple */
+      --accent-2:#ffd400; /* yellow */
+      --muted:#64748b;
+      --input-bg:#f7f7fb;
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;}
+    .wrap{
+      min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(180deg, #fffbe6 0%, #fff 100%);
+    }
+    .card{
+      width:100%;max-width:760px;background:var(--bg);border-radius:12px;padding:22px 22px;box-shadow:0 6px 24px rgba(99,102,241,0.06);border:1px solid rgba(107,33,168,0.06);
+    }
+    .title{font-size:20px;color:var(--accent);margin:0 0 12px 0;font-weight:600;}
+    .subtitle{margin:0 0 18px 0;color:var(--muted);}
+    .row{display:flex;gap:12px;align-items:center;}
+    .inputWrap{flex:1;display:flex;align-items:center;background:var(--input-bg);padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.04);}
+    input[type="text"]{
+      flex:1;border:0;background:transparent;outline:none;font-size:16px;padding:6px;color:#0f172a;
+    }
+    .icon{
+      width:36px;height:36px;flex:0 0 36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:white;margin-right:10px;font-weight:700;
+    }
+    button.cta{
+      background:var(--accent);color:white;border:0;padding:11px 16px;border-radius:10px;font-weight:600;cursor:pointer;font-size:15px;
+    }
+    button.cta.secondary{
+      background:transparent;border:2px dashed rgba(107,33,168,0.12);color:var(--accent);padding:9px 14px;
+    }
+    .hint{margin-top:12px;color:var(--muted);font-size:13px}
+    /* fade animation */
+    .fade {
+      transition: opacity 250ms ease, transform 250ms ease;
+      opacity:1; transform: translateY(0);
+    }
+    .fade.out {
+      opacity:0; transform: translateY(-6px);
+    }
+    @media (max-width:520px){
+      .card{padding:16px}
+      .title{font-size:18px}
+      button.cta{padding:10px 12px}
+    }
+  </style>
 </head>
 
 <body>
