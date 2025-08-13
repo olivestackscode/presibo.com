@@ -108,8 +108,8 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa’s
           <p data-aos="fade-up" data-aos-delay="100">Connecting everyone to healthcare through AI technology</p>
 
           <form action="doctors.html" method = "post" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
-            <input type="text" class="form-control" id = "searchquery" placeholder="I need a doctor">
-            <button onclick = "direction()" class="btn btn-primary">Enter</button>
+            <input type="text" class="form-control" id="smartInput" placeholder="I need a doctor">
+            <button id = "actionBtn" onclick = "direction()" class="btn btn-primary">Enter</button>
           </form>
 
           <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
@@ -656,7 +656,107 @@ if (actionbot = 'I need a doctor '){
                      } 
             }         
 	
- 
+
+
+
+
+	// list of prompts linked to Presibo product actions
+    const PROMPTS = [
+      { placeholder: "I need a doctor", label: "Find", query: "doctor" },
+      { placeholder: "Is my food healthy", label: "Check", query: "food-analysis" },
+      { placeholder: "What can I eat for breakfast", label: "Ask", query: "nutrition" },
+      { placeholder: "Check my symptoms", label: "Analyze", query: "symptom-checker" },
+      { placeholder: "Book a lab test", label: "Book", query: "lab-booking" },
+      { placeholder: "Order my prescription", label: "Order", query: "prescriptions" },
+      { placeholder: "Apply for meds credit", label: "Apply", query: "bnpl" },
+      { placeholder: "Track blood pressure", label: "Track", query: "bp-tracking" },
+      { placeholder: "Monitor my diabetes", label: "Monitor", query: "diabetes-tracking" },
+      { placeholder: "Connect with a fitness coach", label: "Connect", query: "fitness-trainer" },
+      { placeholder: "Show Presibo Pulse reels", label: "Watch", query: "presibo-pulse" },
+      { placeholder: "Elder care check for my parent", label: "Check", query: "elder-care" },
+      { placeholder: "Access my medical records", label: "Open", query: "emr" },
+      { placeholder: "Take health risk assessment", label: "Start", query: "risk-assessment" }
+    ];
+
+    const input = document.getElementById("smartInput");
+    const btn = document.getElementById("actionBtn");
+
+    let idx = 0;
+    let rotating = true;
+    let interval = null;
+
+    // helper to set placeholder and button label with fade
+    function setPrompt(i){
+      const p = PROMPTS[i];
+      // fade out then in
+      input.classList.add("fade","out");
+      btn.classList.add("fade","out");
+      window.setTimeout(() => {
+        input.placeholder = p.placeholder;
+        btn.textContent = p.label;
+        // also set accessible attributes
+        input.setAttribute("aria-placeholder", p.placeholder);
+        btn.setAttribute("data-query", p.query);
+        input.classList.remove("out");
+        btn.classList.remove("out");
+      }, 260);
+    }
+
+    function startRotation(){
+      if(interval) return;
+      interval = setInterval(()=>{
+        idx = (idx + 1) % PROMPTS.length;
+        setPrompt(idx);
+      }, 2000);
+      rotating = true;
+    }
+
+    function stopRotation(){
+      if(interval){
+        clearInterval(interval);
+        interval = null;
+      }
+      rotating = false;
+    }
+
+    // pause rotation while user focuses input
+    input.addEventListener("focus", () => stopRotation());
+    input.addEventListener("blur", () => startRotation());
+
+    // initial set
+    setPrompt(0);
+    startRotation();
+
+    // click action: open presibo.com search or deep link
+    btn.addEventListener("click", () => {
+      const currentQuery = btn.getAttribute("data-query") || PROMPTS[idx].query;
+      // if user typed something, prefer user's text
+      const userText = input.value.trim();
+      const q = encodeURIComponent(userText || currentQuery);
+      // open a simple search path on presibo, change to your actual search or route
+      const url = `https://presibo.com/search?q=${q}`;
+      window.open(url, "_blank");
+    });
+
+    // keyboard: Enter triggers button
+    input.addEventListener("keydown", (e) => {
+      if(e.key === "Enter"){
+        e.preventDefault();
+        btn.click();
+      }
+      // pause on typing
+      if(e.key.length === 1) stopRotation();
+    });
+
+    // when user clears input and blurs, resume rotation
+    input.addEventListener("input", () => {
+      if(!input.value.trim() && !document.activeElement.isSameNode(input)){
+        startRotation();
+      }
+    });
+
+    // accessibility: make sure initial data-query set
+    btn.setAttribute("data-query", PROMPTS[0].query);
 </script>
 
 
