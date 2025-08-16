@@ -860,7 +860,7 @@ section {
 }
 
 .call-to-action p {
-  color: #fff;
+  color: #001973;
 }
 
 .call-to-action .cta-btn {
@@ -875,6 +875,7 @@ section {
   margin: 10px;
   border: 2px solid #fff;
   color: #fff;
+  background:#001973;
 }
 
 .call-to-action .cta-btn:hover {
