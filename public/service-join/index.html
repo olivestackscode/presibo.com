@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="title" content="Start Your Healthcare Journey - Sign Up with Presibo Health">
+  <link rel="icon" href="photos/logo.png" type="image/x-icon"> 
+  <meta name="description" content="Join Presibo Health today and experience all round remote monitoring, AI-powered health solutions and affordable healthcare services tailored for you. Sign up now to prioritize your health.">
+  <meta name="keywords" content="healthcare sign up, Presibo Health, AI healthcare, affordable healthcare solutions, remote health monitoring, healthcare in Nigeria, AI healthcare solutions, doctors, telehealth, app registration, personalized healthcare, health innovation">
+  <meta name="author" content="Presibo">
+  <meta name="robots" content="index, follow">
+  <meta name="og:title" content="Start Your Healthcare Journey - Sign Up with Presibo Health">
+  <meta name="og:description" content="Experience healthcare solutions powered by AI, all round remote monitoring and affordable healthcare services. Sign up now">
+  <meta name="og:image" content="https://app.presibo.online/photos/hero-image.jpg">
+  <meta name="og:url" content="https://app.presibo.online/join">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Start Your Healthcare Journey - Sign Up with Presibo Health">
+  <meta name="twitter:description" content="Join Presibo Health today and enjoy AI-powered health diagnostics and affordable solutions. Sign up now!">
+  <meta name="twitter:image" content="https://app.presibo.online/photos/hero-image.jpg">
+  <title>Book A Doctor - Presibo Health</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    .main-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+      animation: slideIn 0.6s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1976D2, #42A5F5);
+      padding: 30px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .sub-title {
+      font-size: 1.2rem;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+
+    .form-container {
+      padding: 40px 30px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 2px solid #e1e8ed;
+      background-color: #f8fafc;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #1976D2;
+      background-color: #fff;
+      box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .form-input:hover {
+      border-color: #42A5F5;
+    }
+
+    .form-button {
+      width: 100%;
+      background: linear-gradient(135deg, #1976D2, #42A5F5);
+      color: white;
+      border: none;
+      padding: 18px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    .form-button:hover {
+      background: linear-gradient(135deg, #1565C0, #1976D2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(25, 118, 210, 0.3);
+    }
+
+    .form-button:active {
+      transform: translateY(0);
+    }
+
+    /* Popup Styles */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #paymentPopup {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 90%;
+      animation: popIn 0.3s ease-out;
+    }
+
+    #processingPopup {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      max-width: 350px;
+      width: 90%;
+      animation: popIn 0.3s ease-out;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .rotating-bubble {
+      border: 4px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 4px solid #1976D2;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .success-message {
+      color: #1976D2;
+      margin-bottom: 20px;
+    }
+
+    .success-message h3 {
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .main-container {
+        margin: 10px;
+        border-radius: 15px;
+      }
+      
+      .form-container {
+        padding: 30px 20px;
+      }
+      
+      .title {
+        font-size: 2rem;
+      }
+      
+      .header {
+        padding: 25px 20px;
+      }
+    }
+
+    /* Sex Input Dropdown Styling */
+    select.form-input {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><polyline points='6,9 12,15 18,9'></polyline></svg>");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 16px;
+      padding-right: 45px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="header">
+      <h1 class="title">Presibo</h1>
+      <h2 class="sub-title">Healthcare Provider Registration</h2>
+    </div>
+
+    <div class="form-container">
+      <form id="providerRegistrationForm" method="POST" action="https://tqesl.org/notes/server8.php">
+        
+        <!-- Provider Type Selection -->
+        <div class="form-group">
+          <label for="providerType" class="form-label">Service Provider Type *</label>
+          <select id="providerType" name="providerType" class="form-input" required>
+            <option value="">Select your service type</option>
+            <option value="Doctor">Doctor/General Physician</option>
+            <option value="Specialist">Medical Specialist</option>
+            <option value="Dentist">Dentist</option>
+            <option value="Dental Clinic">Dental Clinic</option>
+            <option value="Pharmacist">Pharmacist</option>
+            <option value="Pharmacy">Pharmacy</option>
+            <option value="Laboratory">Medical Laboratory</option>
+            <option value="Hospital">Hospital</option>
+            <option value="Clinic">Medical Clinic</option>
+            <option value="Nurse">Registered Nurse</option>
+            <option value="Physiotherapist">Physiotherapist</option>
+            <option value="Optometrist">Optometrist</option>
+            <option value="Radiologist">Radiologist</option>
+            <option value="Mental Health">Mental Health Counselor</option>
+            <option value="Nutritionist">Nutritionist/Dietitian</option>
+            <option value="Midwife">Midwife</option>
+            <option value="Emergency Service">Emergency Medical Service</option>
+            <option value="Home Care">Home Healthcare Service</option>
+            <option value="Ambulance">Ambulance Service</option>
+            <option value="Blood Bank">Blood Bank</option>
+            <option value="Diagnostic Center">Diagnostic Center</option>
+            <option value="Other">Other Medical Service</option>
+          </select>
+        </div>
+
+        <!-- Specialty Field (for Doctors and Specialists) -->
+        <div id="specialtyField" class="form-group" style="display: none;">
+          <label for="specialty" class="form-label">Medical Specialty/Specialization *</label>
+          <select id="specialty" name="specialty" class="form-input">
+            <option value="">Select your specialty</option>
+            <option value="General Medicine">General Medicine/Family Medicine</option>
+            <option value="Internal Medicine">Internal Medicine</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Oncology">Oncology</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <option value="Gynecology">Gynecology & Obstetrics</option>
+            <option value="Orthopedics">Orthopedics</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Psychiatry">Psychiatry</option>
+            <option value="Ophthalmology">Ophthalmology</option>
+            <option value="ENT">ENT (Ear, Nose, Throat)</option>
+            <option value="Urology">Urology</option>
+            <option value="Gastroenterology">Gastroenterology</option>
+            <option value="Endocrinology">Endocrinology</option>
+            <option value="Pulmonology">Pulmonology</option>
+            <option value="Nephrology">Nephrology</option>
+            <option value="Rheumatology">Rheumatology</option>
+            <option value="Anesthesiology">Anesthesiology</option>
+            <option value="Emergency Medicine">Emergency Medicine</option>
+            <option value="Pathology">Pathology</option>
+            <option value="Radiology">Radiology</option>
+            <option value="Surgery">General Surgery</option>
+            <option value="Neurosurgery">Neurosurgery</option>
+            <option value="Cardiac Surgery">Cardiac Surgery</option>
+            <option value="Plastic Surgery">Plastic Surgery</option>
+            <option value="Orthopedic Surgery">Orthopedic Surgery</option>
+            <option value="Pediatric Surgery">Pediatric Surgery</option>
+            <option value="Vascular Surgery">Vascular Surgery</option>
+            <option value="Thoracic Surgery">Thoracic Surgery</option>
+            <option value="Infectious Diseases">Infectious Diseases</option>
+            <option value="Hematology">Hematology</option>
+            <option value="Immunology">Immunology & Allergy</option>
+            <option value="Sports Medicine">Sports Medicine</option>
+            <option value="Occupational Medicine">Occupational Medicine</option>
+            <option value="Preventive Medicine">Preventive Medicine</option>
+            <option value="Geriatrics">Geriatrics</option>
+            <option value="Neonatology">Neonatology</option>
+            <option value="Critical Care">Critical Care/ICU</option>
+            <option value="Pain Management">Pain Management</option>
+            <option value="Palliative Care">Palliative Care</option>
+            <option value="Rehabilitation Medicine">Rehabilitation Medicine</option>
+            <option value="Medical Genetics">Medical Genetics</option>
+            <option value="Nuclear Medicine">Nuclear Medicine</option>
+            <option value="Other Specialty">Other Specialty</option>
+          </select>
+        </div>
+
+        <!-- Organization/Practice Name -->
+        <div class="form-group">
+          <label for="organizationName" class="form-label">Organization/Practice Name *</label>
+          <input id="organizationName" type="text" name="organizationName" class="form-input" placeholder="Enter organization or practice name" required>
+        </div>
+
+        <!-- Contact Person Name -->
+        <div class="form-group">
+          <label for="contactName" class="form-label">Contact Person Full Name *</label>
+          <input id="contactName" type="text" name="contactName" class="form-input" placeholder="Enter contact person's full name" required>
+        </div>
+
+        <!-- Professional License Number -->
+        <div class="form-group">
+          <label for="licenseNumber" class="form-label">Professional License Number *</label>
+          <input id="licenseNumber" type="text" name="licenseNumber" class="form-input" placeholder="Enter license/registration number" required>
+        </div>
+
+        <!-- Years of Experience -->
+        <div class="form-group">
+          <label for="experience" class="form-label">Years of Experience *</label>
+          <select id="experience" name="experience" class="form-input" required>
+            <option value="">Select experience range</option>
+            <option value="0-1">0-1 years</option>
+            <option value="2-5">2-5 years</option>
+            <option value="6-10">6-10 years</option>
+            <option value="11-15">11-15 years</option>
+            <option value="16-20">16-20 years</option>
+            <option value="20+">20+ years</option>
+          </select>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email" class="form-label">Professional Email Address *</label>
+          <input id="email" type="email" name="email" class="form-input" placeholder="professional.email@example.com" required>
+        </div>
+
+        <!-- Phone Numbers -->
+        <div class="form-group">
+          <label for="primaryPhone" class="form-label">Primary Phone Number *</label>
+          <input id="primaryPhone" type="tel" name="primaryPhone" class="form-input" placeholder="+234 xxx xxx xxxx" required>
+        </div>
+
+        <div class="form-group">
+          <label for="secondaryPhone" class="form-label">Secondary Phone Number</label>
+          <input id="secondaryPhone" type="tel" name="secondaryPhone" class="form-input" placeholder="+234 xxx xxx xxxx">
+        </div>
+
+        <!-- Address Information -->
+        <div class="form-group">
+          <label for="address" class="form-label">Practice/Facility Address *</label>
+          <input id="address" type="text" name="address" class="form-input" placeholder="Enter full address" required>
+        </div>
+
+        <div class="form-group">
+          <div class="form-row">
+            <div>
+              <label for="city" class="form-label">City *</label>
+              <input id="city" type="text" name="city" class="form-input" placeholder="City" required>
+            </div>
+            <div>
+              <label for="state" class="form-label">State *</label>
+              <select id="state" name="state" class="form-input" required>
+                <option value="">Select State</option>
+                <option value="Abia">Abia</option>
+                <option value="Adamawa">Adamawa</option>
+                <option value="Akwa Ibom">Akwa Ibom</option>
+                <option value="Anambra">Anambra</option>
+                <option value="Bauchi">Bauchi</option>
+                <option value="Bayelsa">Bayelsa</option>
+                <option value="Benue">Benue</option>
+                <option value="Borno">Borno</option>
+                <option value="Cross River">Cross River</option>
+                <option value="Delta">Delta</option>
+                <option value="Ebonyi">Ebonyi</option>
+                <option value="Edo">Edo</option>
+                <option value="Ekiti">Ekiti</option>
+                <option value="Enugu">Enugu</option>
+                <option value="FCT">Federal Capital Territory</option>
+                <option value="Gombe">Gombe</option>
+                <option value="Imo">Imo</option>
+                <option value="Jigawa">Jigawa</option>
+                <option value="Kaduna">Kaduna</option>
+                <option value="Kano">Kano</option>
+                <option value="Katsina">Katsina</option>
+                <option value="Kebbi">Kebbi</option>
+                <option value="Kogi">Kogi</option>
+                <option value="Kwara">Kwara</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Nasarawa">Nasarawa</option>
+                <option value="Niger">Niger</option>
+                <option value="Ogun">Ogun</option>
+                <option value="Ondo">Ondo</option>
+                <option value="Osun">Osun</option>
+                <option value="Oyo">Oyo</option>
+                <option value="Plateau">Plateau</option>
+                <option value="Rivers">Rivers</option>
+                <option value="Sokoto">Sokoto</option>
+                <option value="Taraba">Taraba</option>
+                <option value="Yobe">Yobe</option>
+                <option value="Zamfara">Zamfara</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services Offered -->
+        <div class="form-group">
+          <label for="services" class="form-label">Services Offered *</label>
+          <textarea id="services" name="services" class="form-input" rows="4" placeholder="Describe the medical services you provide..." required></textarea>
+        </div>
+
+        <!-- Operating Hours -->
+        <div class="form-group">
+          <label for="operatingHours" class="form-label">Operating Hours *</label>
+          <textarea id="operatingHours" name="operatingHours" class="form-input" rows="3" placeholder="e.g., Mon-Fri: 8:00 AM - 6:00 PM, Sat: 9:00 AM - 2:00 PM, Sun: Closed" required></textarea>
+        </div>
+
+        <!-- Emergency Services -->
+        <div class="form-group">
+          <label for="emergency" class="form-label">24/7 Emergency Services Available?</label>
+          <select id="emergency" name="emergency" class="form-input">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+            <option value="Limited">Limited Hours</option>
+          </select>
+        </div>
+
+        <!-- Insurance Accepted -->
+        <div class="form-group">
+          <label for="insurance" class="form-label">Insurance Plans Accepted</label>
+          <textarea id="insurance" name="insurance" class="form-input" rows="3" placeholder="List insurance providers/HMOs accepted (if any)"></textarea>
+        </div>
+
+        <!-- Consultation Fee Range -->
+        <div class="form-group">
+          <label for="consultationFee" class="form-label">Consultation Fee Range (₦)</label>
+          <select id="consultationFee" name="consultationFee" class="form-input">
+            <option value="">Select fee range</option>
+            <option value="Under 5000">Under ₦5,000</option>
+            <option value="5000-10000">₦5,000 - ₦10,000</option>
+            <option value="10000-20000">₦10,000 - ₦20,000</option>
+            <option value="20000-50000">₦20,000 - ₦50,000</option>
+            <option value="Above 50000">Above ₦50,000</option>
+            <option value="Varies">Varies by service</option>
+          </select>
+        </div>
+
+        <!-- Online Consultation -->
+        <div class="form-group">
+          <label for="onlineConsultation" class="form-label">Do you offer online consultations?</label>
+          <select id="onlineConsultation" name="onlineConsultation" class="form-input">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+            <option value="Planning to">Planning to offer soon</option>
+          </select>
+        </div>
+
+        <!-- Languages Spoken -->
+        <div class="form-group">
+          <label for="languages" class="form-label">Languages Spoken</label>
+          <input id="languages" type="text" name="languages" class="form-input" placeholder="e.g., English, Hausa, Yoruba, Igbo">
+        </div>
+
+        <!-- Website/Social Media -->
+        <div class="form-group">
+          <label for="website" class="form-label">Website/Social Media</label>
+          <input id="website" type="url" name="website" class="form-input" placeholder="https://yourwebsite.com">
+        </div>
+
+        <!-- Additional Notes -->
+        <div class="form-group">
+          <label for="additionalNotes" class="form-label">Additional Information</label>
+          <textarea id="additionalNotes" name="additionalNotes" class="form-input" rows="3" placeholder="Any additional information you'd like patients to know..."></textarea>
+        </div>
+
+        <button type="submit" class="form-button">Register as Healthcare Provider</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Processing Popup -->
+  <div class="popup-overlay" id="processingOverlay" style="display: none;">
+    <div id="processingPopup">
+      <div class="success-message">
+        <h3>Registration Submitted!</h3>
+        <h3>Check Your Email</h3>
+        <h3>For Verification</h3>
+      </div>
+      <div class="rotating-bubble"></div>
+      <button class="form-button" onclick="window.location.href='provider-dashboard.html'">Go to Dashboard</button>
+    </div>
+  </div>
+
+  <script>
+    // Show/hide specialty field based on provider type
+    document.getElementById('providerType').addEventListener('change', function() {
+      const specialtyField = document.getElementById('specialtyField');
+      if (this.value === 'Specialist' || this.value === 'Doctor') {
+        specialtyField.style.display = 'block';
+        document.getElementById('specialty').required = true;
+      } else {
+        specialtyField.style.display = 'none';
+        document.getElementById('specialty').required = false;
+      }
+    });
+
+    // Form submission handling
+    document.getElementById('providerRegistrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get all form data
+      const formData = {
+        providerType: document.getElementById('providerType').value,
+        specialty: document.getElementById('specialty').value,
+        organizationName: document.getElementById('organizationName').value,
+        contactName: document.getElementById('contactName').value,
+        licenseNumber: document.getElementById('licenseNumber').value,
+        experience: document.getElementById('experience').value,
+        email: document.getElementById('email').value,
+        primaryPhone: document.getElementById('primaryPhone').value,
+        secondaryPhone: document.getElementById('secondaryPhone').value,
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        services: document.getElementById('services').value,
+        operatingHours: document.getElementById('operatingHours').value,
+        emergency: document.getElementById('emergency').value,
+        insurance: document.getElementById('insurance').value,
+        consultationFee: document.getElementById('consultationFee').value,
+        onlineConsultation: document.getElementById('onlineConsultation').value,
+        languages: document.getElementById('languages').value,
+        website: document.getElementById('website').value,
+        additionalNotes: document.getElementById('additionalNotes').value,
+        registrationType: "HEALTHCARE_PROVIDER"
+      };
+
+      // Basic validation
+      const requiredFields = ['providerType', 'organizationName', 'contactName', 'licenseNumber', 'experience', 'email', 'primaryPhone', 'address', 'city', 'state', 'services', 'operatingHours'];
+      
+      for (let field of requiredFields) {
+        if (!formData[field]) {
+          alert(`Please fill in the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()} field.`);
+          return;
+        }
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      // Phone validation (basic Nigerian format)
+      const phoneRegex = /^\+?234[0-9]{10}$|^0[0-9]{10}$/;
+      if (!phoneRegex.test(formData.primaryPhone.replace(/\s/g, ''))) {
+        alert("Please enter a valid Nigerian phone number.");
+        return;
+      }
+
+      // Show loading state
+      const button = document.querySelector('button[type="submit"]');
+      button.disabled = true;
+      button.textContent = 'Submitting Registration...';
+      button.style.backgroundColor = '#666';
+
+      // Simulate form submission (replace with actual API call)
+      setTimeout(() => {
+        document.getElementById('processingOverlay').style.display = 'flex';
+      }, 2000);
+
+      // Here you would typically send the data to your server
+      console.log('Provider Registration Data:', formData);
+    });
+
+    // Close popup function
+    function closeProcessingPopup() {
+      document.getElementById('processingOverlay').style.display = 'none';
+    }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .main-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+      color: white;
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .sub-title {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .form-container {
+      padding: 40px 30px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    .form-input, textarea {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e1e5e9;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+      font-family: inherit;
+    }
+
+    .form-input:focus, textarea:focus {
+      outline: none;
+      border-color: #4CAF50;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .form-button {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .form-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+    }
+
+    .form-button:disabled {
+      background: #666;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #processingPopup {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .success-message h3 {
+      color: #4CAF50;
+      margin-bottom: 10px;
+    }
+
+    .rotating-bubble {
+      width: 50px;
+      height: 50px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #4CAF50;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .main-container {
+        margin: 10px;
+      }
+      
+      .form-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</body></html>
