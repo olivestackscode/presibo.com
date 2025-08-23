@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Funding</title>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .wallet-info {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        input[type="email"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .btn {
+            background: #0066cc;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #0052a3;
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .bills-btn {
+            background: #28a745;
+            margin-top: 10px;
+        }
+        
+        .bills-btn:hover {
+            background: #218838;
+        }
+        
+        .url-params {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Presibo Payment Gateway</h1>
+        
+        
+        
+        <div class="url-params" id="urlParams" style="display: none;">
+            <strong>Subsciber Details:</strong>
+            <div id="paramDisplay"></div>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" placeholder="Enter your email address" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="amount">Amount (₦):</label>
+            <input type="number" id="amount" placeholder="Enter amount in Naira" min="100" step="0.01" required>
+        </div>
+        
+        <button class="btn" onclick="subscribe()" id="payBtn">Pay</button>
+        
+        
+        <div id="status"></div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUserData = null;
+        
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
+        function displayUrlParams() {
+            const email = getQueryParam('email');
+            const amount = getQueryParam('amount');
+            
+            if (email || amount) {
+                const paramDisplay = document.getElementById('paramDisplay');
+                const urlParamsDiv = document.getElementById('urlParams');
+                
+                let paramText = '';
+                if (email) paramText += `Email: ${email}<br>`;
+                if (amount) paramText += `Amount: ₦${amount}`;
+                
+                paramDisplay.innerHTML = paramText;
+                urlParamsDiv.style.display = 'block';
+                
+                // Pre-fill form fields
+                if (email) document.getElementById('email').value = email;
+                if (amount) document.getElementById('amount').value = amount;
+            }
+        }
+        
+        function showStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="${type}">${message}</div>`;
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 5000);
+        }
+        
+        function subscribe() {
+            const emailInput = document.getElementById('email');
+            const amountInput = document.getElementById('amount');
+            const payBtn = document.getElementById('payBtn');
+            
+            const userEmail = emailInput.value.trim();
+            const amountValue = parseFloat(amountInput.value);
+            
+            // Validation
+            if (!userEmail) {
+                showStatus("Please enter your email address.", 'error');
+                emailInput.focus();
+                return;
+            }
+            
+            if (!userEmail.includes('@')) {
+                showStatus("Please enter a valid email address.", 'error');
+                emailInput.focus();
+                return;
+            }
+            
+            if (!amountValue || amountValue < 100) {
+                showStatus("Please enter a valid amount (minimum ₦100).", 'error');
+                amountInput.focus();
+                return;
+            }
+            
+            // Convert to kobo (Paystack uses kobo - 1 Naira = 100 kobo)
+            const amountInKobo = Math.round(amountValue * 100);
+            
+            // Disable button during payment
+            payBtn.disabled = true;
+            payBtn.textContent = 'Processing...';
+            
+            try {
+                var handler = PaystackPop.setup({
+                    key: 'pk_live_e4512c48de3fef4f92b4b278715d5decfa436d5b', // Replace with your actual public key
+                    email: userEmail,
+                    amount: amountInKobo,
+                    currency: 'NGN',
+                    callback: function(response) {
+                        console.log("Payment Successful", response);
+                        showStatus(`Payment Successful! Transaction Reference: ${response.reference}`, 'success');
+                        
+                        // Here you would typically send the transaction reference to your backend
+                        // for verification and wallet update
+                        updateWalletBalance(amountValue);
+                        
+                        // Reset form
+                        emailInput.value = '';
+                        amountInput.value = '';
+                    },
+                    onClose: function() {
+                        console.log("Payment modal closed");
+                        showStatus("Payment was cancelled or closed.", 'error');
+                    }
+                });
+                
+                handler.openIframe();
+                
+            } catch (error) {
+                console.error("Payment Error:", error);
+                showStatus("An error occurred while processing payment: " + error.message, 'error');
+            } finally {
+                // Re-enable button
+                payBtn.disabled = false;
+                payBtn.textContent = 'Confirm Payment';
+            }
+        }
+        
+        function updateWalletBalance(addedAmount) {
+            // Simulate wallet balance update
+            // In a real application, this would be handled by your backend after payment verification
+            const currentBalance = getCurrentBalance();
+            const newBalance = currentBalance + addedAmount;
+            
+            localStorage.setItem('walletBalance', newBalance.toString());
+            document.getElementById('userWallet').textContent = `Current Wallet Balance: ₦${newBalance.toLocaleString()}`;
+        }
+        
+        function getCurrentBalance() {
+            const balance = localStorage.getItem('walletBalance');
+            return balance ? parseFloat(balance) : 0;
+        }
+        
+        function fetchUserData() {
+            // Simulate fetching user data
+            // In a real application, this would be an API call to your backend
+            try {
+                const balance = getCurrentBalance();
+                document.getElementById('userWallet').textContent = `Current Wallet Balance: ₦${balance.toLocaleString()}`;
+                
+                currentUserData = {
+                    balance: balance,
+                    email: getQueryParam('email') || ''
+                };
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+                document.getElementById('userWallet').textContent = 'Error loading wallet balance';
+            }
+        }
+        
+        function payBills() {
+            // Check if bills.html exists or redirect to a bills page
+            // For demo purposes, we'll show an alert
+            const currentBalance = getCurrentBalance();
+            if (currentBalance > 0) {
+                alert(`Redirecting to bills payment page. Your current balance: ₦${currentBalance.toLocaleString()}`);
+                // window.open('bills.html', '_blank');
+            } else {
+                showStatus("Please fund your wallet first before paying bills.", 'error');
+            }
+        }
+        
+        // Event listeners
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                // Handle escape key if needed
+                console.log('Escape key pressed');
+            }
+        });
+        
+        // Initialize on page load
+        window.onload = function() {
+            displayUrlParams();
+            fetchUserData();
+            
+            // Auto-trigger payment if URL params are present
+            const urlEmail = getQueryParam('email');
+            const urlAmount = getQueryParam('amount');
+            
+            if (urlEmail && urlAmount) {
+                // Small delay to ensure UI is ready
+                setTimeout(() => {
+                   // if (confirm(`Auto-fund wallet with ₦${urlAmount} for ${urlEmail}?`)) {
+                        subscribe();
+                    //}
+                }, 0500);
+            }
+        };
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            // Handle responsive behavior if needed
+            console.log('Window resized');
+        });
+        
+        // Handle form submission with Enter key
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const focusedElement = document.activeElement;
+                if (focusedElement.id === 'email' || focusedElement.id === 'amount') {
+                    subscribe();
+                }
+            }
+        });
+    </script>
+</body>
+  </html>
