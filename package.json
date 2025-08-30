@@ -1,5 +1,5 @@
 {
-  "name": "presibo-healthcare-platform",
+  "name": "presibo.com",
   "version": "1.0.0",
   "description": "AI-powered healthcare platform for Nigerian healthcare access",
   "main": "server/app.js",
@@ -60,4 +60,5 @@
     "url": "https://github.com/presibo/healthcare-platform/issues"
   },
   "homepage": "https://presibo.com"
+
 }
