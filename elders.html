@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="preload" href="/img/icons/presibo-logo.jpg" as="image" importance="high">
+  <meta property="og:image" content="/img/presibo-logo.jpg" />
+
+  <title>Elder Care Services - Presibo</title>
+  <meta name="description" content="Comprehensive elder care services by Presibo. Specialized healthcare for seniors including remote monitoring, medication management, caregiver support, and 24/7 health assistance for elderly patients." />
+  <meta name="title" content="Elder Care Services - Presibo" />
+  <meta name="keywords" content="Elder Care, Senior Health, Elderly Care, Remote Monitoring, Caregiver Support, Senior Citizens, Geriatric Care, Health Monitoring, Presibo" />
+
+  <!-- Favicons -->
+  <link href="assets/img/presibo-logo.jpg" rel="icon">
+  <link href="assets/img/presibo-logo.jpg" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .hero-elder {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 120px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-elder::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-elder .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+
+    .benefit-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #e0e8ff;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .benefit-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .stats-elder {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .stat-item-elder {
+      margin-bottom: 30px;
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .care-plans {
+      background: #f8f9ff;
+      padding: 80px 0;
+    }
+
+    .plan-card-elder {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      position: relative;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .plan-card-elder:hover {
+      border-color: #667eea;
+      transform: translateY(-3px);
+    }
+
+    .plan-card-elder.featured {
+      border-color: #f5576c;
+      background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+    }
+
+    .plan-card-elder.featured::before {
+      content: "Most Popular";
+      position: absolute;
+      top: -12px;
+      right: 30px;
+      background: #f5576c;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .plan-price {
+      font-size: 36px;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .testimonial-elder {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .testimonial-elder::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 60px;
+      color: #667eea;
+      opacity: 0.3;
+    }
+
+    .cta-elder {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .btn-elder-primary {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-elder-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+
+    .btn-elder-secondary {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 15px;
+    }
+
+    .btn-elder-secondary:hover {
+      background: white;
+      color: #667eea;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==== header ==== -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1>Presibo</h1>
+      </a>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about">About</a></li>
+          <li class="dropdown"><a href="#"><span>Health</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="doctors">Consult</a></li>
+              <li><a href="#">Donate Blood</a></li>
+              <li><a href="#">Find Ambulance</a></li>
+              <li><a href="doctors">Get Doctor</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Community</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="#">Support Groups</a></li>
+              <li><a href="#">Health Club</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="market"><span>Market</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="market">Medical Devices</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="https://app.presibo.com">Login</a></li>
+          <li><a class="get-a-quote" href="https://app.presibo.com/join">Sign Up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==== Hero Section ==== -->
+  <section class="hero-elder">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-up">
+          <h1 class="display-4 mb-4">Compassionate Elder Care Services</h1>
+          <p class="lead mb-4">Specialized healthcare designed for seniors, providing peace of mind for families and comprehensive care for elderly loved ones.</p>
+          <div class="d-flex flex-wrap">
+            <a href="https://app.presibo.com/join" class="btn-elder-primary">Start Elder Care</a>
+            <a href="#benefits" class="btn-elder-secondary">Learn More</a>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <img src="assets/img/elder-care-hero.jpg" alt="Elder Care Services" class="img-fluid rounded-3" style="box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- ==== Benefits Section ==== -->
+    <section id="benefits" class="py-5">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">Why Choose Presibo Elder Care?</h2>
+          <p class="lead text-muted">Comprehensive healthcare solutions tailored specifically for seniors</p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="benefit-icon">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <h4>24/7 Health Monitoring</h4>
+            <p>Continuous monitoring of vital signs, medication adherence, and health metrics with instant alerts for caregivers and family members.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Heart rate monitoring</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Blood pressure tracking</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Fall detection alerts</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="benefit-icon">
+              <i class="fas fa-pills"></i>
+            </div>
+            <h4>Medication Management</h4>
+            <p>Smart medication reminders and tracking system to ensure proper medication adherence and prevent dangerous drug interactions.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Automated reminders</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Drug interaction alerts</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Prescription refill notifications</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="benefit-icon">
+              <i class="fas fa-user-nurse"></i>
+            </div>
+            <h4>Professional Caregiver Network</h4>
+            <p>Access to trained and certified caregivers who provide in-home assistance, companionship, and specialized elderly care services.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Certified caregivers</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Background-checked staff</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Flexible scheduling</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="benefit-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <h4>Emergency Response System</h4>
+            <p>Immediate response to medical emergencies with direct connection to emergency services and family notifications.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>One-touch emergency button</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>GPS location tracking</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Family instant alerts</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="benefit-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h4>Cognitive Health Support</h4>
+            <p>Specialized programs for dementia and Alzheimer's care, including cognitive exercises and memory support activities.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Memory games and exercises</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Cognitive assessment tools</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Behavioral tracking</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="600">
+            <div class="benefit-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h4>Family Connection Platform</h4>
+            <p>Keep families connected with regular updates, video calls, and shared health information for peace of mind.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Daily health reports</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Video communication</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Shared calendar system</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Care Plans Section ==== -->
+    <section class="care-plans">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">Elder Care Plans</h2>
+          <p class="lead text-muted">Choose the perfect care plan for your loved one</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="plan-card-elder" data-aos="fade-up">
+              <h3 class="text-center mb-3">Basic Care</h3>
+              <div class="plan-price text-center">₦15,000<span class="fs-6 text-muted">/month</span></div>
+              <p class="text-center text-muted mb-4">Essential monitoring and support</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle text-success me-2"></i>24/7 health monitoring</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Medication reminders</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Emergency response button</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Weekly health reports</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Basic health device kit</li>
+              </ul>
+              <div class="text-center mt-4">
+                <a href="https://app.presibo.com/subscribe/basic-elder" class="btn-elder-primary">Choose Plan</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="plan-card-elder featured" data-aos="fade-up" data-aos-delay="100">
+              <h3 class="text-center mb-3">Comprehensive Care</h3>
+              <div class="plan-price text-center">₦35,000<span class="fs-6 text-muted">/month</span></div>
+              <p class="text-center text-muted mb-4">Complete care with caregiver support</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle text-success me-2"></i>All Basic Care features</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Part-time caregiver visits</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Cognitive health assessments</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Daily health reports</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Video consultations</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Advanced monitoring devices</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Meal planning assistance</li>
+              </ul>
+              <div class="text-center mt-4">
+                <a href="https://app.presibo.com/subscribe/comprehensive-elder" class="btn-elder-primary">Choose Plan</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="plan-card-elder" data-aos="fade-up" data-aos-delay="200">
+              <h3 class="text-center mb-3">Premium Care</h3>
+              <div class="plan-price text-center">₦65,000<span class="fs-6 text-muted">/month</span></div>
+              <p class="text-center text-muted mb-4">Full-service care with live-in support</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle text-success me-2"></i>All Comprehensive features</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Full-time caregiver option</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Specialized dementia care</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Physical therapy sessions</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Nutritionist consultations</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Transportation services</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>24/7 nurse hotline</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Family counseling support</li>
+              </ul>
+              <div class="text-center mt-4">
+                <a href="https://app.presibo.com/subscribe/premium-elder" class="btn-elder-primary">Choose Plan</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Testimonials Section ==== -->
+    <section class="py-5">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">What Families Say</h2>
+          <p class="lead text-muted">Real stories from families who trust Presibo Elder Care</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-elder" data-aos="fade-up">
+              <p class="mb-4">Presibo's elder care service has been a blessing for our family. The 24/7 monitoring gives us peace of mind knowing that my mother is safe and well-cared for. The caregivers are professional and truly care about her wellbeing.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-1.jpg" alt="Adebayo Family" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Mrs. Adebayo</h6>
+                  <small class="text-muted">Daughter of Elder Care Client</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-elder" data-aos="fade-up" data-aos-delay="100">
+              <p class="mb-4">The medication management system is incredible. My father used to forget his medications frequently, but now the smart reminders ensure he never misses a dose. The emergency response feature saved his life during a fall.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-2.jpg" alt="Okafor Family" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Mr. Okafor</h6>
+                  <small class="text-muted">Son of Elder Care Client</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-elder" data-aos="fade-up" data-aos-delay="200">
+              <p class="mb-4">As a senior living alone, Presibo's elder care service makes me feel connected and secure. The daily check-ins from caregivers and the ability to video call my children anytime has improved my quality of life tremendously.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-3.jpg" alt="Mrs. Ibrahim" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Mrs. Ibrahim</h6>
+                  <small class="text-muted">Elder Care Client</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-elder" data-aos="fade-up" data-aos-delay="300">
+              <p class="mb-4">The cognitive health support has been invaluable for my mother who has early-stage dementia. The memory exercises and behavioral tracking help us monitor her condition and adjust care as needed.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-4.jpg" alt="Ahmed Family" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Dr. Ahmed</h6>
+                  <small class="text-muted">Son of Elder Care Client</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Call to Action Section ==== -->
+    <section class="cta-elder">
+      <div class="container">
+        <div class="text-center" data-aos="fade-up">
+          <h2 class="display-5 mb-4">Ready to Provide the Best Care for Your Loved One?</h2>
+          <p class="lead mb-5">Join thousands of families who trust Presibo Elder Care for compassionate, professional elderly care services.</p>
+          <div class="d-flex justify-content-center flex-wrap gap-3">
+            <a href="https://app.presibo.com/join" class="btn-elder-primary">Start Elder Care Today</a>
+            <a href="tel:+2347032810862" class="btn-elder-secondary">Call Us: +234 703 281 0862</a>
+          </div>
+          <div class="mt-4">
+            <p class="mb-0"><small>Free consultation available • No setup fees • Cancel anytime</small></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>Presibo Elder Care</span>
+          </a>
+          <p>Compassionate, professional elder care services designed to provide seniors with the dignity, respect, and quality care they deserve while giving families peace of mind.</p>
+          <div class="social-links d-flex mt-4">
+            <a href="https://twitter.com/presibolife" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="https://facebook.com/presibolife" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://instagram.com/presibolife" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#benefits">Health Monitoring</a></li>
+            <li><a href="#benefits">Medication Management</a></li>
+            <li><a href="#benefits">Caregiver Support</a></li>
+            <li><a href="#benefits">Emergency Response</a></li>
+            <li><a href="#benefits">Cognitive Care</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Care Plans</h4>
+          <ul>
+            <li><a href="https://app.presibo.com/subscribe/basic-elder">Basic Care</a></li>
+            <li><a href="https://app.presibo.com/subscribe/comprehensive-elder">Comprehensive Care</a></li>
+            <li><a href="https://app.presibo.com/subscribe/premium-elder">Premium Care</a></li>
+            <li><a href="https://app.presibo.com/elder-consultation">Free Consultation</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Elder Care</h4>
+          <p>
+            1b Racheal Nwangwu Close, <br>
+            Lekki Phase 1, Lagos<br>
+            Nigeria <br><br>
+            <strong>Phone:</strong> +234 7032 810 862<br>
+            <strong>Email:</strong> eldercare@presibo.com<br>
+            <strong>Emergency:</strong> +234 703 281 0862<br>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; 2024 Copyright <strong><span>Presibo Elder Care</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <a href="index.html">Back to Main Site</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader" class="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
+
+    <!-- ==== Statistics Section ==== -->
+    <section class="stats-elder">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item-elder" data-aos="fade-up">
+              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="5000" data-purecounter-duration="2">5000</span>
+              <p>Seniors Served</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item-elder" data-aos="fade-up" data-aos-delay="100">
+              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="98" data-purecounter-duration="2">98</span>
+              <p>% Family Satisfaction</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item-elder" data-aos="fade-up" data-aos-delay="200">
+              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="2">24</span>
+              <p>Hours Daily Support</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item-elder" data-aos="fade-up" data-aos-delay="300">
+              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="2">150</span>
+              <p>Certified Caregivers</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
