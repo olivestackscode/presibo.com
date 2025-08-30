@@ -1410,6 +1410,38 @@ if (actionbot = 'I need a doctor '){
     btn.setAttribute("data-query", PROMPTS[0].query);
 </script>
 
+  <!-- Scripts -->
+  <script>
+    // Fallback for missing vendor libraries
+    if (typeof PureCounter === 'undefined') {
+      // Simple counter implementation for stats
+      document.addEventListener('DOMContentLoaded', function() {
+        const counters = document.querySelectorAll('.purecounter');
+        counters.forEach(counter => {
+          const end = parseInt(counter.getAttribute('data-purecounter-end')) || 0;
+          const duration = parseInt(counter.getAttribute('data-purecounter-duration')) || 1000;
+          const start = parseInt(counter.getAttribute('data-purecounter-start')) || 0;
+          
+          // Simple animation
+          let startTimestamp = null;
+          const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            counter.textContent = value.toLocaleString();
+            
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+              counter.textContent = end.toLocaleString();
+            }
+          };
+          
+          window.requestAnimationFrame(step);
+        });
+      });
+    }
+  </script>
 
 </body>
 

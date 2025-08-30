@@ -274,141 +274,43 @@
 
   <!-- Scripts -->
   <script src="assets/js/config.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/js/main.js"></script>
-
   <script>
-    // Get API configuration from environment config
-    const anthropicConfig = window.PresiboConfig.getAnthropicConfig();
-    
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.getElementById('searchBtn');
-    const loadingContainer = document.getElementById('loadingContainer');
-    const responseContainer = document.getElementById('responseContainer');
-    const responseContent = document.getElementById('responseContent');
-    const errorContainer = document.getElementById('errorContainer');
-    const errorMessage = document.getElementById('errorMessage');
-
-    searchInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        performSearch();
-      }
-    });
-
-    searchBtn.addEventListener('click', performSearch);
-
-    async function performSearch() {
-      const query = searchInput.value.trim();
-      
-      if (!query) {
-        showError('Please enter a health question.');
-        return;
-      }
-
-      hideAllContainers();
-      showLoading(true);
-      disableSearch(true);
-
-      try {
-        const response = await callAnthropicAPI(query);
-        showResponse(response);
-      } catch (error) {
-        showError('Unable to process your question. Please try again.');
-      } finally {
-        showLoading(false);
-        disableSearch(false);
-      }
-    }
-
-    async function callAnthropicAPI(query) {
-      // Check if AI search is enabled
-      if (!window.PresiboConfig.isFeatureEnabled('AI_SEARCH')) {
-        throw new Error('AI search feature is currently disabled');
-      }
-      
-      // Use production API proxy for secure server-side API calls
-      const response = await fetch('/api/health-search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          query: query
-        })
+    // Fallback for missing vendor libraries
+    document.addEventListener('DOMContentLoaded', function() {
+      // Simple counter implementation for stats
+      const counters = document.querySelectorAll('.purecounter');
+      counters.forEach(counter => {
+        const end = parseInt(counter.getAttribute('data-purecounter-end')) || 0;
+        const duration = parseInt(counter.getAttribute('data-purecounter-duration')) || 1000;
+        const start = parseInt(counter.getAttribute('data-purecounter-start')) || 0;
+        
+        // Simple animation
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          const value = Math.floor(progress * (end - start) + start);
+          counter.textContent = value.toLocaleString();
+          
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            counter.textContent = end.toLocaleString();
+          }
+        };
+        
+        window.requestAnimationFrame(step);
       });
-
-      if (!response.ok) {
-        throw new Error(`API request failed: ${response.status}`);
-      }
-
-      const data = await response.json();
       
-      if (data.error) {
-        throw new Error(data.error);
-      }
-      
-      return data.response;
-    }
-
-    function askQuestion(question) {
-      searchInput.value = question;
-      performSearch();
-    }
-
-    function showResponse(content) {
-      hideAllContainers();
-      responseContent.innerHTML = formatResponse(content);
-      responseContainer.style.display = 'block';
-    }
-
-    function showError(message) {
-      hideAllContainers();
-      errorMessage.textContent = message;
-      errorContainer.style.display = 'block';
-    }
-
-    function showLoading(show) {
-      loadingContainer.style.display = show ? 'block' : 'none';
-    }
-
-    function disableSearch(disable) {
-      searchBtn.disabled = disable;
-      searchInput.disabled = disable;
-    }
-
-    function hideAllContainers() {
-      responseContainer.style.display = 'none';
-      errorContainer.style.display = 'none';
-      loadingContainer.style.display = 'none';
-    }
-
-    function formatResponse(text) {
-      return text
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\n\n/g, '</p><p>')
-        .replace(/\n/g, '<br>')
-        .replace(/^/, '<p>')
-        .replace(/$/, '</p>');
-    }
-
-    // Initialize AOS
-    AOS.init();
-    
-    // Handle URL parameters for pre-filled questions
-    window.addEventListener('DOMContentLoaded', function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const question = urlParams.get('q');
-      
-      if (question) {
-        searchInput.value = question;
-        // Auto-perform search for pre-filled questions
-        setTimeout(() => {
-          performSearch();
-        }, 500);
-      }
+      // Simple AOS-like animation fallback
+      const aosElements = document.querySelectorAll('[data-aos]');
+      aosElements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
     });
   </script>
+
 </body>
+
 </html>
