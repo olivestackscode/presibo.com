@@ -1352,7 +1352,7 @@ if (actionbot = 'I need a doctor '){
     // Navigate to health search with specific query
     function navigateToHealthSearch(query) {
       hideSuggestions();
-      window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+      window.location.href = `search?q=${encodeURIComponent(query)}`;
     }
     function filterSuggestions(query) {
       const lowerQuery = query.toLowerCase();
@@ -1446,3 +1446,4 @@ if (actionbot = 'I need a doctor '){
 </body>
 
 </html>
+
