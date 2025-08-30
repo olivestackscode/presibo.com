@@ -212,6 +212,56 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa’s
   font-style: italic;
 }
 
+/* Health suggestion styles */
+.suggestion-header {
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 0.85em;
+  border-radius: 8px 8px 0 0;
+  margin: -5px -5px 5px -5px;
+}
+
+.suggestion-footer {
+  border-top: 1px solid #e9ecef;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.health-suggestion {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f8ff 100%);
+  border-left: 3px solid #667eea;
+}
+
+.health-suggestion:hover {
+  background: linear-gradient(135deg, #eef2ff 0%, #e6f3ff 100%);
+  transform: translateX(3px);
+}
+
+.ask-ai {
+  background: linear-gradient(135deg, #fff8e1 0%, #f3e5ab 100%);
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.ask-ai:hover {
+  background: linear-gradient(135deg, #fff3c4 0%, #ffdd6b 100%);
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.ask-ai .suggestion-icon {
+  font-size: 1.2em;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
 /* Fade animation classes */
 .fade {
   transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out !important;
@@ -1029,7 +1079,7 @@ if (actionbot = 'I need a doctor '){
           url = 'pay.html';
           break;
         case 'search':
-          url = 'search.html';
+          url = 'search';
           break;
         default:
           // If userText contains specific keywords, route accordingly
@@ -1049,7 +1099,7 @@ if (actionbot = 'I need a doctor '){
                      text.includes('pain') || text.includes('fever') || text.includes('headache') ||
                      text.length > 20) {
             // Route health questions and detailed queries to search page
-            url = 'search.html?q=' + encodeURIComponent(userText);
+            url = 'search?q=' + encodeURIComponent(userText);
           } else {
             url = 'https://app.presibo.com';
           }
@@ -1122,36 +1172,188 @@ if (actionbot = 'I need a doctor '){
       currentSuggestions = filtered;
       highlightedIndex = -1;
       
+      // If no direct matches found, generate intelligent health suggestions
       if (filtered.length === 0) {
-        dropdown.innerHTML = '<div class="suggestion-item no-results">No matching services found</div>';
-        dropdown.style.display = 'block';
-        return;
-      }
-      
-      dropdown.innerHTML = filtered.map((suggestion, index) => `
-        <div class="suggestion-item" data-index="${index}" role="option">
-          <div class="suggestion-icon">${suggestion.icon}</div>
-          <div class="suggestion-text">
-            <div class="suggestion-title">${suggestion.text || suggestion.placeholder}</div>
-            <div class="suggestion-description">${suggestion.description}</div>
-            <div class="suggestion-category">${suggestion.category}</div>
+        const healthSuggestions = generateHealthSuggestions(query);
+        if (healthSuggestions.length > 0) {
+          currentSuggestions = healthSuggestions;
+          
+          dropdown.innerHTML = `
+            <div class="suggestion-header">Health Questions Related to "${query}":</div>
+            ${healthSuggestions.map((suggestion, index) => `
+              <div class="suggestion-item health-suggestion" data-index="${index}" role="option">
+                <div class="suggestion-icon">${suggestion.icon}</div>
+                <div class="suggestion-text">
+                  <div class="suggestion-title">${suggestion.text}</div>
+                  <div class="suggestion-description">${suggestion.description}</div>
+                  <div class="suggestion-category">${suggestion.category}</div>
+                </div>
+              </div>
+            `).join('')}
+            <div class="suggestion-footer">
+              <div class="suggestion-item ask-ai" data-custom-query="${query}" role="option">
+                <div class="suggestion-icon">🤖</div>
+                <div class="suggestion-text">
+                  <div class="suggestion-title">Ask AI: "${query}"</div>
+                  <div class="suggestion-description">Get personalized AI-powered health insights</div>
+                  <div class="suggestion-category">AI SEARCH</div>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          dropdown.innerHTML = `
+            <div class="suggestion-item ask-ai" data-custom-query="${query}" role="option">
+              <div class="suggestion-icon">🤖</div>
+              <div class="suggestion-text">
+                <div class="suggestion-title">Ask AI: "${query}"</div>
+                <div class="suggestion-description">Get AI-powered answers to your health question</div>
+                <div class="suggestion-category">AI SEARCH</div>
+              </div>
+            </div>
+          `;
+        }
+      } else {
+        dropdown.innerHTML = filtered.map((suggestion, index) => `
+          <div class="suggestion-item" data-index="${index}" role="option">
+            <div class="suggestion-icon">${suggestion.icon}</div>
+            <div class="suggestion-text">
+              <div class="suggestion-title">${suggestion.text || suggestion.placeholder}</div>
+              <div class="suggestion-description">${suggestion.description}</div>
+              <div class="suggestion-category">${suggestion.category}</div>
+            </div>
           </div>
-        </div>
-      `).join('');
+        `).join('');
+      }
       
       dropdown.style.display = 'block';
       input.setAttribute('aria-expanded', 'true');
       
-      // Add click listeners to suggestions
+      // Add click listeners to all suggestions including AI search
       dropdown.querySelectorAll('.suggestion-item[data-index]').forEach(item => {
         item.addEventListener('click', () => {
           const index = parseInt(item.dataset.index);
-          selectSuggestion(filtered[index]);
+          selectSuggestion(currentSuggestions[index]);
+        });
+      });
+      
+      // Add click listener for custom AI search
+      dropdown.querySelectorAll('.ask-ai[data-custom-query]').forEach(item => {
+        item.addEventListener('click', () => {
+          const customQuery = item.dataset.customQuery;
+          navigateToHealthSearch(customQuery);
         });
       });
     }
     
-    // Filter suggestions based on query
+    // Generate intelligent health suggestions based on user query
+    function generateHealthSuggestions(query) {
+      const lowerQuery = query.toLowerCase();
+      const suggestions = [];
+      
+      // Health condition patterns
+      const healthPatterns = {
+        'pain': [
+          { text: 'What causes chronic pain?', description: 'Learn about chronic pain management', icon: '🩹' },
+          { text: 'How to manage back pain?', description: 'Back pain relief and prevention', icon: '🦴' },
+          { text: 'When to see a doctor for pain?', description: 'Pain assessment and medical advice', icon: '👨‍⚕️' }
+        ],
+        'fever': [
+          { text: 'When is fever dangerous?', description: 'Understanding fever symptoms and treatment', icon: '🌡️' },
+          { text: 'How to reduce fever naturally?', description: 'Natural fever reduction methods', icon: '🌿' },
+          { text: 'Fever in children - what to do?', description: 'Pediatric fever management', icon: '👶' }
+        ],
+        'diabetes': [
+          { text: 'Early signs of diabetes', description: 'Recognize diabetes symptoms early', icon: '📊' },
+          { text: 'Diabetes diet and nutrition', description: 'Managing diabetes through diet', icon: '🥗' },
+          { text: 'Blood sugar monitoring tips', description: 'Effective glucose monitoring', icon: '🔬' }
+        ],
+        'blood pressure': [
+          { text: 'How to lower blood pressure naturally?', description: 'Natural hypertension management', icon: '💓' },
+          { text: 'Signs of high blood pressure', description: 'Recognizing hypertension symptoms', icon: '⚠️' },
+          { text: 'Blood pressure monitoring at home', description: 'Home BP measurement guide', icon: '🏠' }
+        ],
+        'headache': [
+          { text: 'Types of headaches and treatments', description: 'Understanding different headache types', icon: '🧠' },
+          { text: 'When headaches need medical attention', description: 'Serious headache warning signs', icon: '🚨' },
+          { text: 'Natural headache remedies', description: 'Drug-free headache relief', icon: '🌱' }
+        ],
+        'weight': [
+          { text: 'Healthy weight loss strategies', description: 'Safe and effective weight management', icon: '⚖️' },
+          { text: 'Understanding BMI and health', description: 'Body mass index and wellness', icon: '📏' },
+          { text: 'Weight loss diet plans', description: 'Nutritional approaches to weight loss', icon: '🍎' }
+        ],
+        'sleep': [
+          { text: 'How to improve sleep quality?', description: 'Better sleep habits and hygiene', icon: '😴' },
+          { text: 'Sleep disorders and treatments', description: 'Common sleep problems solutions', icon: '🌙' },
+          { text: 'Natural sleep remedies', description: 'Drug-free sleep improvement', icon: '🌿' }
+        ],
+        'stress': [
+          { text: 'Stress management techniques', description: 'Effective stress reduction methods', icon: '🧘' },
+          { text: 'Signs of chronic stress', description: 'Recognizing stress symptoms', icon: '⚡' },
+          { text: 'Stress and physical health', description: 'How stress affects your body', icon: '💪' }
+        ]
+      };
+      
+      // Check for matching patterns
+      for (const [keyword, patterns] of Object.entries(healthPatterns)) {
+        if (lowerQuery.includes(keyword)) {
+          patterns.forEach(pattern => {
+            suggestions.push({
+              text: pattern.text,
+              description: pattern.description,
+              icon: pattern.icon,
+              category: 'HEALTH QUESTION',
+              query: 'search',
+              searchQuery: pattern.text
+            });
+          });
+        }
+      }
+      
+      // General health questions if specific patterns don't match
+      if (suggestions.length === 0 && isHealthRelated(lowerQuery)) {
+        const generalSuggestions = [
+          { text: 'What are the symptoms of common diseases?', description: 'Learn about disease symptoms', icon: '🔍' },
+          { text: 'When should I see a doctor?', description: 'Know when to seek medical help', icon: '👨‍⚕️' },
+          { text: 'Preventive healthcare tips', description: 'Stay healthy with prevention', icon: '🛡️' },
+          { text: 'Understanding medical test results', description: 'Interpret your health reports', icon: '📋' }
+        ];
+        
+        generalSuggestions.forEach(suggestion => {
+          suggestions.push({
+            text: suggestion.text,
+            description: suggestion.description,
+            icon: suggestion.icon,
+            category: 'HEALTH QUESTION',
+            query: 'search',
+            searchQuery: suggestion.text
+          });
+        });
+      }
+      
+      return suggestions.slice(0, 4); // Limit to 4 suggestions
+    }
+    
+    // Check if query is health-related
+    function isHealthRelated(query) {
+      const healthKeywords = [
+        'health', 'medical', 'doctor', 'symptom', 'disease', 'condition',
+        'treatment', 'medicine', 'therapy', 'diagnosis', 'cure', 'illness',
+        'sick', 'hurt', 'ache', 'infection', 'virus', 'bacteria', 'wellness',
+        'fitness', 'nutrition', 'diet', 'exercise', 'mental health', 'anxiety',
+        'depression', 'medication', 'prescription', 'hospital', 'clinic'
+      ];
+      
+      return healthKeywords.some(keyword => query.includes(keyword)) || 
+             query.match(/what|how|why|when|should|can|is|are/) && query.length > 10;
+    }
+    
+    // Navigate to health search with specific query
+    function navigateToHealthSearch(query) {
+      hideSuggestions();
+      window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+    }
     function filterSuggestions(query) {
       const lowerQuery = query.toLowerCase();
       const allSuggestions = [...PROMPTS, ...ADDITIONAL_SUGGESTIONS];
@@ -1188,8 +1390,13 @@ if (actionbot = 'I need a doctor '){
       btn.setAttribute('data-query', suggestion.query);
       hideSuggestions();
       
-      // Navigate immediately
-      navigateToService(suggestion.query, input.value);
+      // Handle health questions differently
+      if (suggestion.category === 'HEALTH QUESTION' && suggestion.searchQuery) {
+        navigateToHealthSearch(suggestion.searchQuery);
+      } else {
+        // Navigate immediately for regular suggestions
+        navigateToService(suggestion.query, input.value);
+      }
     }
     
     // Hide suggestions when clicking outside

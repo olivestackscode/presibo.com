@@ -1,4 +1,5 @@
 // server/app.js - Express Server with Environment Injection
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const ProductionConfig = require('./config');
