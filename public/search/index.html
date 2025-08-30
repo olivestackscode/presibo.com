@@ -328,41 +328,28 @@
         throw new Error('AI search feature is currently disabled');
       }
       
-      const prompt = `You are Presibo AI, a medical AI assistant for Nigerian healthcare. 
-
-User Question: "${query}"
-
-Provide a helpful response with:
-1. Direct answer to the question
-2. Medical information based on current guidelines
-3. Practical recommendations
-4. When to seek professional care
-
-Keep responses clear and educational. Always recommend consulting healthcare professionals for diagnosis/treatment.`;
-
-      const response = await fetch(anthropicConfig.apiUrl, {
+      // Use production API proxy for secure server-side API calls
+      const response = await fetch('/api/health-search', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': anthropicConfig.apiKey,
-          'anthropic-version': '2023-06-01'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          model: anthropicConfig.model,
-          max_tokens: 1000,
-          messages: [{
-            role: 'user',
-            content: prompt
-          }]
+          query: query
         })
       });
 
       if (!response.ok) {
-        throw new Error('API request failed');
+        throw new Error(`API request failed: ${response.status}`);
       }
 
       const data = await response.json();
-      return data.content[0].text;
+      
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      
+      return data.response;
     }
 
     function askQuestion(question) {
