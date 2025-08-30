@@ -407,7 +407,7 @@ form.form-search {
         <div>
           <h4 class="title">Remote Monitoring & Telemedicine</h4>
           <p class="description">Monitor your health and consult doctors remotely anytime, anywhere.</p>
-          <a href="https://app.presibo.com.doctors" class="readmore stretched-link"><span>Consult</span><i class="bi bi-arrow-right"></i></a>
+          <a href="app.presibo.com.doctors" class="readmore stretched-link"><span>Consult</span><i class="bi bi-arrow-right"></i></a>
         </div>
       </div>
       <!-- End Service Item -->
@@ -473,7 +473,7 @@ form.form-search {
           <li data-aos="fade-up" data-aos-delay="500">
             <i class="fa-solid fa-user-doctor"></i>
             <div>
-              <h5><a href="https://app.presibo.com.doctors">Consult Doctor</a></h5>
+              <h5><a href="app.presibo.com.doctors">Consult Doctor</a></h5>
               <p>Connect with licensed healthcare professionals for remote consultations and care.</p>
             </div>
           </li>
@@ -561,7 +561,7 @@ form.form-search {
               <div class="card-img">
                 <img max-width="100%" height="auto" src="assets/img/team/cto.png" alt="" class="img-fluid">
               </div>
-              <h3><a href="https://app.presibo.com.doctors" class="stretched-link">Seun Ayela</a></h3>
+              <h3><a href="app.presibo.com.doctors" class="stretched-link">Seun Ayela</a></h3>
 <p>Chief Technology Officer of Presibo, Seun Ayela is an experienced software developer and cloud computing specialist driving tech innovation in healthcare.</p>
 
             </div>
@@ -815,23 +815,23 @@ form.form-search {
 <script>
 function direction(){
 
-window.open("https://app.presibo.com.doctors");
+window.open("app.presibo.com.doctors");
 
 //if (isset($_POST['direction'])){
    //$actionbot = ($_POST['searchquery']);
    const actionbot = document.getElementById('searchquery').value;
 
    if (actionbot = 'drugs'){
-      window.open("https://app.presibo.com.doctors");
+      window.open("app.presibo.com.doctors");
       }
 
       
    if (actionbot = 'doctor'){
-    window.open("https://app.presibo.com.doctors");
+    window.open("app.presibo.com.doctors");
          }
          
          if (actionbot = 'Doctor'){
-            window.open("https://app.presibo.com.doctors");
+            window.open("app.presibo.com.doctors");
          }
 
     
@@ -853,38 +853,38 @@ if (actionbot = 'Ambulance '){
             }         
          
    if (actionbot = 'store'){
-      window.open("https://app.presibo.com.doctors");
+      window.open("app.presibo.com.doctors");
             } 
             
             if (actionbot = 'drugs'){
-      window.open("https://app.presibo.com.doctors");
+      window.open("app.presibo.com.doctors");
             } 
             
             
             if (actionbot = 'Drugs'){
-      window.open("https://app.presibo.com.doctors");
+      window.open("app.presibo.com.doctors");
             } 
 
 
 if (actionbot = 'drugs '){
-      window.open("https://app.presibo.com.doctors");
+      window.open("app.presibo.com.doctors");
             } 
             
 if (actionbot = 'Drugs '){
-      window.open("https://app.presibo.com.doctors");
+      window.open("app.presibo.com.doctors");
             }   
 
 
 if (actionbot = 'I need a doctor'){
-      window.open("https://app.presibo.com.doctors");
+      window.open("app.presibo.com.doctors");
             }    
 
 if (actionbot = 'I need a doctor '){
-      window.open("https://app.presibo.com.doctors");
+      window.open("app.presibo.com.doctors");
             }        
             
             if (actionbot = 'emergency'){
-               window.open("https://app.presibo.com.doctors");
+               window.open("app.presibo.com.doctors");
                      } 
             }         
 	
@@ -927,7 +927,18 @@ if (actionbot = 'I need a doctor '){
       { text: "Caregiver services", category: "Elder Care", icon: "🤝", description: "Professional caregiver support", query: "elders" },
       { text: "Elder care plans", category: "Elder Care", icon: "📋", description: "Comprehensive elder care subscription plans", query: "elders" },
       { text: "Medication management for seniors", category: "Elder Care", icon: "💊", description: "Smart medication reminders for elderly", query: "elders" },
-      { text: "Emergency response for elderly", category: "Elder Care", icon: "🚨", description: "24/7 emergency response system", query: "elders" }
+      { text: "Emergency response for elderly", category: "Elder Care", icon: "🚨", description: "24/7 emergency response system", query: "elders" },
+      
+      // Health Questions for Search
+      { text: "What are the symptoms of diabetes?", category: "Health Questions", icon: "❓", description: "Learn about diabetes symptoms and signs", query: "search" },
+      { text: "How to lower blood pressure naturally?", category: "Health Questions", icon: "❓", description: "Natural ways to manage hypertension", query: "search" },
+      { text: "What foods are good for heart health?", category: "Health Questions", icon: "❓", description: "Heart-healthy nutrition advice", query: "search" },
+      { text: "How much exercise do I need daily?", category: "Health Questions", icon: "❓", description: "Daily exercise recommendations", query: "search" },
+      { text: "What causes headaches and how to treat them?", category: "Health Questions", icon: "❓", description: "Headache causes and treatments", query: "search" },
+      { text: "How to improve sleep quality?", category: "Health Questions", icon: "❓", description: "Tips for better sleep and rest", query: "search" },
+      { text: "What are the signs of anxiety?", category: "Health Questions", icon: "❓", description: "Mental health and anxiety symptoms", query: "search" },
+      { text: "How to boost immune system naturally?", category: "Health Questions", icon: "❓", description: "Natural immunity boosting methods", query: "search" },
+      { text: "Ask any health question", category: "AI Search", icon: "🤖", description: "Get AI-powered answers to health questions", query: "search" }
     ];
 
     const input = document.getElementById("smartInput");
@@ -1017,6 +1028,9 @@ if (actionbot = 'I need a doctor '){
         case 'pay':
           url = 'pay.html';
           break;
+        case 'search':
+          url = 'search';
+          break;
         default:
           // If userText contains specific keywords, route accordingly
           const text = userText.toLowerCase();
@@ -1028,6 +1042,14 @@ if (actionbot = 'I need a doctor '){
             url = 'market.html';
           } else if (text.includes('elder') || text.includes('senior')) {
             url = 'elders.html';
+          } else if (text.includes('question') || text.includes('symptoms') || text.includes('health') || 
+                     text.includes('what') || text.includes('how') || text.includes('why') || 
+                     text.includes('should') || text.includes('can') || text.includes('disease') ||
+                     text.includes('condition') || text.includes('treatment') || text.includes('medicine') ||
+                     text.includes('pain') || text.includes('fever') || text.includes('headache') ||
+                     text.length > 20) {
+            // Route health questions and detailed queries to search page
+            url = 'search?q=' + encodeURIComponent(userText);
           } else {
             url = 'https://app.presibo.com';
           }
