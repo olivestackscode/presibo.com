@@ -1,4 +1,4 @@
-// server/config.js - Production Environment Configuration
+// server/config.js - Presibo.com Production Environment Configuration
 const fs = require('fs');
 const path = require('path');
 
@@ -75,7 +75,7 @@ class ProductionConfig {
   generateClientEnvFile() {
     const clientConfig = this.getClientConfig();
     return `
-// Auto-generated environment configuration for production
+// Auto-generated environment configuration for Presibo.com production
 // DO NOT EDIT - Generated from server environment variables
 window.PRESIBO_ENV = ${JSON.stringify(clientConfig, null, 2)};
 console.log('Production environment configuration loaded');

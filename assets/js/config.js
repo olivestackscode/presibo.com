@@ -1,4 +1,4 @@
-// Environment Configuration for Presibo
+// Environment Configuration for Presibo.com
 // This file manages environment variables and API configurations
 
 class EnvironmentConfig {

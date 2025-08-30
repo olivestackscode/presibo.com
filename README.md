@@ -225,8 +225,8 @@ echo "ANTHROPIC_API_KEY=your_key_here" > .env.production
 npm run deploy:docker
 
 # Or manually with Docker
-docker build -t presibo-healthcare .
-docker run -p 3000:3000 --env-file .env.production presibo-healthcare
+docker build -t presibo.com .
+docker run -p 3000:3000 --env-file .env.production presibo.com
 ```
 
 ### Platform-Specific Setup
@@ -314,7 +314,7 @@ git add .
 git commit -m "Initial commit: Presibo AI-powered healthcare platform"
 
 # Add GitHub remote
-git remote add origin https://github.com/yourusername/presibo-healthcare.git
+git remote add origin https://github.com/olivestackscode/presibo.com.git
 
 # Push to GitHub
 git push -u origin main
@@ -331,8 +331,8 @@ git push -u origin main
 ### 👥 For Team Collaboration:
 1. **New team members should**:
    ```bash
-   git clone https://github.com/yourusername/presibo-healthcare.git
-   cd presibo-healthcare
+   git clone https://github.com/olivestackscode/presibo.com.git
+   cd presibo.com
    cp .env.example .env
    # Edit .env and add their API keys
    npm install

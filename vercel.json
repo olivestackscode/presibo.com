@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "name": "presibo-healthcare",
+  "name": "presibo.com",
+  "outputDirectory": "dist",
   "builds": [
     {
       "src": "api/**/*.js",

@@ -33,7 +33,8 @@ const htmlFiles = [
   'index.html',
   'search.html',
   'about',
-  'pay.html'
+  'pay.html',
+  'elders.html'
 ];
 
 // Create build directory

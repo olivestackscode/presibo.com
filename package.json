@@ -1,5 +1,5 @@
 {
-  "name": "presibo-healthcare-platform",
+  "name": "presibo.com",
   "version": "1.0.0",
   "description": "AI-powered healthcare platform for Nigerian healthcare access",
   "main": "server/app.js",
@@ -8,6 +8,7 @@
     "dev": "nodemon server/app.js",
     "build": "node scripts/build.js",
     "build:production": "NODE_ENV=production node scripts/build.js",
+    "vercel-build": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint server/ scripts/",
@@ -54,10 +55,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/presibo/healthcare-platform"
+    "url": "https://github.com/olivestackscode/presibo.com.git"
   },
   "bugs": {
-    "url": "https://github.com/presibo/healthcare-platform/issues"
+    "url": "https://github.com/olivestackscode/presibo.com/issues"
   },
   "homepage": "https://presibo.com"
 }
