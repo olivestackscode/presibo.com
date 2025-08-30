@@ -173,6 +173,21 @@
         .plan-card.special {
             border-color: #28a745;
             background: linear-gradient(135deg, #f8fff9 0%, #ffffff 100%);
+            position: relative;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #28a745;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
         }
         
         .plan-card h3 {
@@ -535,14 +550,15 @@
     <div class="container">
         <div class="header">
             <div class="logo">
-                <h1>Presibo Pay</h1>
+                <h1>Presibo</h1>
             </div>
-            <button class="back-btn" onclick="goToDashboard()">Go to My Profile</button>
+            <button class="back-btn" onclick="goToDashboard()">Back to Dashboard</button>
         </div>
         
         <div class="tab-container">
             <button class="tab-btn active" onclick="showTab('wallet')">Wallet Funding</button>
             <button class="tab-btn" onclick="showTab('subscriptions')">Subscriptions</button>
+            <button class="tab-btn" onclick="showTab('healthtips')">Health Tips Daily</button>
             <button class="tab-btn" onclick="showTab('eldercare')">Elder Care</button>
         </div>
         
@@ -682,6 +698,95 @@
             </div>
         </div>
         
+        <!-- Health Tips Daily Tab -->
+        <div id="healthtips-tab" class="tab-content">
+            <h2>Health Tips Daily Health Tips Subscription</h2>
+            <p class="subtitle">Get personalized health tips delivered daily to help you maintain optimal wellness with Nigerian-focused advice and expert guidance.</p>
+            <p class="subtitle">Complete your wellness journey by subscribing to our premium health tips service</p>
+            
+            <div class="plans-container">
+                <div class="plan-card special">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Monthly Plan</h3>
+                    <div class="price">₦450<span style="font-size: 18px; color: #666;">/month</span></div>
+                    <div class="features">
+                        <h4>What's included:</h4>
+                        <ul>
+                            <li>Daily personalized health tips</li>
+                            <li>Nigerian-focused wellness advice</li>
+                            <li>Blood pressure & diabetes management tips</li>
+                            <li>Nutrition recommendations</li>
+                            <li>Exercise and fitness guidance</li>
+                            <li>Heart health insights</li>
+                            <li>Mental health support</li>
+                            <li>Hygiene and prevention tips</li>
+                            <li>Priority customer support</li>
+                            <li>Exclusive wellness content</li>
+                            <li>Cancel anytime with no penalty</li>
+                        </ul>
+                    </div>
+                    <button class="btn plan-btn" onclick="subscribeToHealthTips('monthly', 450)">Subscribe Now</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+                
+                <div class="plan-card">
+                    <h3>Yearly Plan</h3>
+                    <div class="price">₦5,500<span style="font-size: 18px; color: #666;">/year</span></div>
+                    <div style="background: #e8f5e8; padding: 10px; border-radius: 5px; margin-bottom: 15px; color: #28a745; font-weight: bold; text-align: center;">
+                        Save ₦9,000 per year
+                    </div>
+                    <div class="features">
+                        <h4>What's included:</h4>
+                        <ul>
+                            <li>Daily personalized health tips</li>
+                            <li>Nigerian-focused wellness advice</li>
+                            <li>Blood pressure & diabetes management tips</li>
+                            <li>Nutrition recommendations</li>
+                            <li>Exercise and fitness guidance</li>
+                            <li>Heart health insights</li>
+                            <li>Mental health support</li>
+                            <li>Hygiene and prevention tips</li>
+                            <li>Priority customer support</li>
+                            <li>Exclusive wellness content</li>
+                        </ul>
+                    </div>
+                    <button class="btn plan-btn" onclick="subscribeToHealthTips('yearly', 5500)">Subscribe Now</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+            </div>
+            
+            <div class="benefits-section">
+                <h3>What You'll Get</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h4>Daily Tips</h4>
+                        <p>Receive personalized health tips every day tailored to your health profile and goals.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Nigerian Focus</h4>
+                        <p>Health advice specifically designed for Nigerian lifestyle, diet, and health challenges.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Expert Guidance</h4>
+                        <p>Tips from healthcare professionals covering nutrition, exercise, mental health, and more.</p>
+                    </div>
+                </div>
+                
+                <div class="help-section">
+                    <h4>Ready to Start Your Wellness Journey?</h4>
+                    <p>Secure payments • Cancel anytime • 24/7 support available</p>
+                    <div class="contact-buttons">
+                        <button class="btn contact-btn" onclick="callSupport()">Call +234 703 281 0862</button>
+                        <button class="btn contact-btn whatsapp" onclick="whatsappSupport()">WhatsApp Support</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Elder Care Tab -->
         <div id="eldercare-tab" class="tab-content">
             <h2>Elder Care Services</h2>
@@ -770,7 +875,14 @@
         
         <div id="status"></div>
         
-       
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="goToHome()">Home</button>
+            <button class="nav-btn" onclick="goToDoctors()">Doctors</button>
+            <button class="nav-btn" onclick="goToFitness()">Fitness</button>
+            <button class="nav-btn" onclick="goToPulse()">Pulse</button>
+            <button class="nav-btn" onclick="goToAIDoc()">AI Doc</button>
+            <button class="nav-btn" onclick="goToTrack()">Track</button>
+        </div>
     </div>
 
     <script>
@@ -797,7 +909,7 @@
         // Navigation functions
         function goToDashboard() {
             // Redirect to dashboard - replace with actual dashboard URL
-            window.location.href = 'https://app.presibo.com';
+            window.location.href = '/dashboard.html';
         }
         
         function goToHome() {
@@ -826,11 +938,11 @@
         
         // Contact functions
         function callSupport() {
-            window.open('tel:+2348000000000', '_self');
+            window.open('tel:+2347032810862', '_self');
         }
         
         function whatsappSupport() {
-            window.open('https://wa.me/2348000000000?text=Hello, I need help choosing an elder care plan', '_blank');
+            window.open('https://wa.me/2347032810862?text=Hello, I need help choosing a plan', '_blank');
         }
         
         function getQueryParam(param) {
@@ -942,6 +1054,27 @@
             }
         }
         
+        function subscribeToHealthTips(planType, amount) {
+            const email = document.getElementById('email')?.value || prompt('Please enter your email address:');
+            
+            if (!email || !email.includes('@')) {
+                showStatus("Please enter a valid email address.", 'error');
+                return;
+            }
+            
+            const planNames = {
+                'monthly': 'Health Tips Daily - Monthly Plan',
+                'yearly': 'Health Tips Daily - Yearly Plan'
+            };
+            
+            const planName = planNames[planType] || planType;
+            const period = planType === 'yearly' ? '/year' : '/month';
+            
+            if (confirm(`Subscribe to ${planName} for ₦${amount.toLocaleString()}${period}?`)) {
+                processPayment(email, amount, `healthtips-${planType}`);
+            }
+        }
+        
         function processPayment(userEmail, amountValue, paymentType, buttonElement = null) {
             // Convert to kobo (Paystack uses kobo - 1 Naira = 100 kobo)
             const amountInKobo = Math.round(amountValue * 100);
@@ -1003,6 +1136,9 @@
             } else if (paymentType.startsWith('eldercare-')) {
                 successMessage = `Elder Care subscription activated! Reference: ${response.reference}`;
                 // Here you would activate the elder care subscription in your backend
+            } else if (paymentType.startsWith('healthtips-')) {
+                successMessage = `Health Tips Daily subscription activated! Reference: ${response.reference}`;
+                // Here you would activate the health tips subscription in your backend
             } else if (paymentType === 'wallet-funding') {
                 successMessage = `Wallet funded successfully! Reference: ${response.reference}`;
                 updateWalletBalance(amountValue);
@@ -1027,6 +1163,9 @@
             if (paymentType.startsWith('eldercare-')) {
                 const planType = paymentType.split('-')[1];
                 return `Subscribe to ${planType.charAt(0).toUpperCase() + planType.slice(1)}`;
+            }
+            if (paymentType.startsWith('healthtips-')) {
+                return 'Subscribe Now';
             }
             return 'Pay Now';
         }
@@ -1173,6 +1312,7 @@
                 btn.textContent.toLowerCase().includes(tabName) || 
                 (tabName === 'wallet' && btn.textContent.includes('Wallet')) ||
                 (tabName === 'subscriptions' && btn.textContent.includes('Subscriptions')) ||
+                (tabName === 'healthtips' && btn.textContent.includes('Health Tips')) ||
                 (tabName === 'eldercare' && btn.textContent.includes('Elder'))
             );
             if (targetButton) {
