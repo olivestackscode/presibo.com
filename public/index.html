@@ -1029,7 +1029,7 @@ if (actionbot = 'I need a doctor '){
           url = 'pay.html';
           break;
         case 'search':
-          url = 'search';
+          url = 'search.html';
           break;
         default:
           // If userText contains specific keywords, route accordingly
@@ -1049,7 +1049,7 @@ if (actionbot = 'I need a doctor '){
                      text.includes('pain') || text.includes('fever') || text.includes('headache') ||
                      text.length > 20) {
             // Route health questions and detailed queries to search page
-            url = 'search?q=' + encodeURIComponent(userText);
+            url = 'search.html?q=' + encodeURIComponent(userText);
           } else {
             url = 'https://app.presibo.com';
           }
