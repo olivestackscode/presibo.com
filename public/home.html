@@ -407,7 +407,7 @@ form.form-search {
         <div>
           <h4 class="title">Remote Monitoring & Telemedicine</h4>
           <p class="description">Monitor your health and consult doctors remotely anytime, anywhere.</p>
-          <a href="app.presibo.com.doctors" class="readmore stretched-link"><span>Consult</span><i class="bi bi-arrow-right"></i></a>
+          <a href="https://app.presibo.com.doctors" class="readmore stretched-link"><span>Consult</span><i class="bi bi-arrow-right"></i></a>
         </div>
       </div>
       <!-- End Service Item -->
@@ -473,7 +473,7 @@ form.form-search {
           <li data-aos="fade-up" data-aos-delay="500">
             <i class="fa-solid fa-user-doctor"></i>
             <div>
-              <h5><a href="app.presibo.com.doctors">Consult Doctor</a></h5>
+              <h5><a href="https://app.presibo.com.doctors">Consult Doctor</a></h5>
               <p>Connect with licensed healthcare professionals for remote consultations and care.</p>
             </div>
           </li>
@@ -561,7 +561,7 @@ form.form-search {
               <div class="card-img">
                 <img max-width="100%" height="auto" src="assets/img/team/cto.png" alt="" class="img-fluid">
               </div>
-              <h3><a href="app.presibo.com.doctors" class="stretched-link">Seun Ayela</a></h3>
+              <h3><a href="https://app.presibo.com.doctors" class="stretched-link">Seun Ayela</a></h3>
 <p>Chief Technology Officer of Presibo, Seun Ayela is an experienced software developer and cloud computing specialist driving tech innovation in healthcare.</p>
 
             </div>
@@ -760,6 +760,7 @@ form.form-search {
           <li><a href="#">Hospital Management Technology</a></li>
             <li><a href="#">Continous Care Management Service</a></li>
             <li><a href="#">Emergency Ambulance Service</a></li>
+            <li><a href="elders.html">Elder Care Services</a></li>
             <li><a href="#">Medical Cloud Services</a></li>
           </ul>
         </div>
@@ -814,23 +815,23 @@ form.form-search {
 <script>
 function direction(){
 
-window.open("app.presibo.com.doctors");
+window.open("https://app.presibo.com.doctors");
 
 //if (isset($_POST['direction'])){
    //$actionbot = ($_POST['searchquery']);
    const actionbot = document.getElementById('searchquery').value;
 
    if (actionbot = 'drugs'){
-      window.open("app.presibo.com.doctors");
+      window.open("https://app.presibo.com.doctors");
       }
 
       
    if (actionbot = 'doctor'){
-    window.open("app.presibo.com.doctors");
+    window.open("https://app.presibo.com.doctors");
          }
          
          if (actionbot = 'Doctor'){
-            window.open("app.presibo.com.doctors");
+            window.open("https://app.presibo.com.doctors");
          }
 
     
@@ -852,38 +853,38 @@ if (actionbot = 'Ambulance '){
             }         
          
    if (actionbot = 'store'){
-      window.open("app.presibo.com.doctors");
+      window.open("https://app.presibo.com.doctors");
             } 
             
             if (actionbot = 'drugs'){
-      window.open("app.presibo.com.doctors");
+      window.open("https://app.presibo.com.doctors");
             } 
             
             
             if (actionbot = 'Drugs'){
-      window.open("app.presibo.com.doctors");
+      window.open("https://app.presibo.com.doctors");
             } 
 
 
 if (actionbot = 'drugs '){
-      window.open("app.presibo.com.doctors");
+      window.open("https://app.presibo.com.doctors");
             } 
             
 if (actionbot = 'Drugs '){
-      window.open("app.presibo.com.doctors");
+      window.open("https://app.presibo.com.doctors");
             }   
 
 
 if (actionbot = 'I need a doctor'){
-      window.open("app.presibo.com.doctors");
+      window.open("https://app.presibo.com.doctors");
             }    
 
 if (actionbot = 'I need a doctor '){
-      window.open("app.presibo.com.doctors");
+      window.open("https://app.presibo.com.doctors");
             }        
             
             if (actionbot = 'emergency'){
-               window.open("app.presibo.com.doctors");
+               window.open("https://app.presibo.com.doctors");
                      } 
             }         
 	
@@ -905,7 +906,7 @@ if (actionbot = 'I need a doctor '){
       { placeholder: "Monitor my diabetes", label: "Monitor", query: "auth", category: "Monitoring", icon: "📈", description: "Track diabetes and blood sugar levels" },
       { placeholder: "Connect with a fitness coach", label: "Connect", query: "auth", category: "Fitness", icon: "💪", description: "Get personalized fitness guidance" },
       { placeholder: "Show Presibo Pulse reels", label: "Watch", query: "pulse", category: "Content", icon: "📺", description: "Watch health education videos" },
-      { placeholder: "Elder care check for my parents", label: "Check", query: "auth", category: "Elder Care", icon: "👴", description: "Specialized care for elderly patients" },
+      { placeholder: "Elder care check for my parents", label: "Check", query: "elders", category: "Elder Care", icon: "👴", description: "Specialized care for elderly patients" },
       { placeholder: "Access my medical records", label: "Open", query: "auth", category: "Records", icon: "📋", description: "View and manage health records" },
       { placeholder: "Take a health risk assessment", label: "Start", query: "auth", category: "Assessment", icon: "📝", description: "Evaluate your health risks" }
     ];
@@ -921,7 +922,12 @@ if (actionbot = 'I need a doctor '){
       { text: "Pregnancy care", category: "Maternity", icon: "🤱", description: "Prenatal and postnatal care services", query: "auth" },
       { text: "Child health", category: "Pediatrics", icon: "👶", description: "Pediatric care and child health", query: "auth" },
       { text: "Dental care", category: "Dental", icon: "🦷", description: "Find dental services and care", query: "doctors" },
-      { text: "Eye care", category: "Vision", icon: "👁️", description: "Optical and eye care services", query: "doctors" }
+      { text: "Eye care", category: "Vision", icon: "👁️", description: "Optical and eye care services", query: "doctors" },
+      { text: "Senior health monitoring", category: "Elder Care", icon: "👵", description: "Health monitoring for seniors", query: "elders" },
+      { text: "Caregiver services", category: "Elder Care", icon: "🤝", description: "Professional caregiver support", query: "elders" },
+      { text: "Elder care plans", category: "Elder Care", icon: "📋", description: "Comprehensive elder care subscription plans", query: "elders" },
+      { text: "Medication management for seniors", category: "Elder Care", icon: "💊", description: "Smart medication reminders for elderly", query: "elders" },
+      { text: "Emergency response for elderly", category: "Elder Care", icon: "🚨", description: "24/7 emergency response system", query: "elders" }
     ];
 
     const input = document.getElementById("smartInput");
@@ -985,7 +991,7 @@ if (actionbot = 'I need a doctor '){
       // Determine the appropriate URL based on query type
       switch(query) {
         case 'doctors':
-          url = 'app.presibo.com.doctors';
+          url = 'doctors.html';
           break;
         case 'market':
           url = 'market.html';
@@ -1015,7 +1021,7 @@ if (actionbot = 'I need a doctor '){
           // If userText contains specific keywords, route accordingly
           const text = userText.toLowerCase();
           if (text.includes('doctor') || text.includes('consult')) {
-            url = 'app.presibo.com.doctors';
+            url = 'doctors.html';
           } else if (text.includes('ambulance') || text.includes('emergency')) {
             url = 'emergency.html';
           } else if (text.includes('market') || text.includes('device') || text.includes('equipment')) {
