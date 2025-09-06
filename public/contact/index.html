@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Contact Us - Presibo Healthcare</title>
+  <meta name="description" content="Get in touch with Presibo Healthcare. We're here to help with any questions about our AI-powered healthcare services, elder care, or mobile app.">
+  <meta name="keywords" content="Presibo Contact, Healthcare Contact, AI Healthcare, Elder Care, Telemedicine, Health App">
+
+  <!-- Favicons -->
+  <link href="assets/img/presibo-logo.jpg" rel="icon">
+  <link href="assets/img/presibo-logo.jpg" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .hero-contact {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 120px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-contact .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-info {
+      background: #f8f9ff;
+      padding: 80px 0;
+    }
+
+    .contact-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #e0e8ff;
+      height: 100%;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .contact-form-section {
+      padding: 80px 0;
+    }
+
+    .form-control {
+      padding: 12px 16px;
+      border: 1px solid #e0e8ff;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .form-control:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .btn-contact {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn-contact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+
+    .map-section {
+      padding: 80px 0;
+      background: #f8f9ff;
+    }
+
+    .map-container {
+      height: 400px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-section {
+      padding: 80px 0;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+    }
+
+    .faq-question {
+      background: #f8f9ff;
+      padding: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      background: white;
+      padding: 20px;
+      border-radius: 0 0 10px 10px;
+      border: 1px solid #e0e8ff;
+      border-top: none;
+      display: none;
+    }
+
+    .faq-question.active + .faq-answer {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .hero-contact {
+        padding: 100px 0 40px;
+      }
+      
+      .contact-form-section,
+      .contact-info,
+      .map-section,
+      .faq-section {
+        padding: 60px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==== header ==== -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1>Presibo</h1>
+      </a>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+          <li class="dropdown"><a href="#"><span>Health</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="doctors">Consult</a></li>
+              <li><a href="#">Donate Blood</a></li>
+              <li><a href="#">Find Ambulance</a></li>
+              <li><a href="doctors">Get Doctor</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Community</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="#">Support Groups</a></li>
+              <li><a href="#">Health Club</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="market"><span>Market</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="market">Medical Devices</a></li>
+            </ul>
+          </li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="download.html">Download App</a></li>
+          <li><a href="https://app.presibo.com">Login</a></li>
+          <li><a class="get-a-quote" href="https://app.presibo.com/join">Sign Up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==== Hero Section ==== -->
+  <section class="hero-contact">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-up">
+          <h1 class="display-4 mb-4">Get in Touch With Us</h1>
+          <p class="lead mb-4">Have questions about our AI-powered healthcare services? We're here to help. Reach out to us through any of the channels below or use our contact form.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="tel:+2347032810862" class="btn btn-light btn-lg px-4 py-2">
+              <i class="fas fa-phone me-2"></i>Call Us
+            </a>
+            <a href="mailto:info@presibo.com" class="btn btn-outline-light btn-lg px-4 py-2">
+              <i class="fas fa-envelope me-2"></i>Email Us
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <img src="https://placehold.co/600x400/667eea/ffffff?text=Contact+Us" alt="Contact Presibo" class="img-fluid rounded-3" style="box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- ==== Contact Info Section ==== -->
+    <section class="contact-info">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">Contact Information</h2>
+          <p class="lead text-muted">We're available through multiple channels to assist you</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <h4>Our Office</h4>
+              <p>1b Racheal Nwangwu Close,<br>
+              Lekki Phase 1, Lagos<br>
+              Nigeria</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <h4>Phone Numbers</h4>
+              <p><strong>General:</strong> +234 703 281 0862<br>
+              <strong>Elder Care:</strong> +234 703 281 0862<br>
+              <strong>Emergency:</strong> +234 703 281 0862</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h4>Email Addresses</h4>
+              <p><strong>General:</strong> info@presibo.com<br>
+              <strong>Support:</strong> support@presibo.com<br>
+              <strong>Elder Care:</strong> eldercare@presibo.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Contact Form Section ==== -->
+    <section class="contact-form-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-up">
+            <h2 class="display-5 mb-4">Send Us a Message</h2>
+            <p class="lead mb-4">Fill out the form below and our team will get back to you as soon as possible.</p>
+            
+            <div class="contact-form">
+              <form id="contactForm" method="post" role="form">
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone" required>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <textarea class="form-control" name="message" rows="6" id="message" placeholder="Your Message" required></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <button type="submit" class="btn-contact">Send Message</button>
+                  </div>
+                </div>
+                
+                <div class="sent-message mt-3" style="display: none;">
+                  <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>Your message has been sent. Thank you!
+                  </div>
+                </div>
+                
+                <div class="error-message mt-3" style="display: none;">
+                  <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-circle me-2"></i>There was an error sending your message. Please try again.
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="display-5 mb-4">Office Hours</h2>
+            <p class="lead mb-4">Our team is available to assist you during business hours.</p>
+            
+            <div class="office-hours">
+              <div class="d-flex justify-content-between border-bottom pb-3 mb-3">
+                <span class="fw-bold">Monday - Friday</span>
+                <span>8:00 AM - 8:00 PM</span>
+              </div>
+              <div class="d-flex justify-content-between border-bottom pb-3 mb-3">
+                <span class="fw-bold">Saturday</span>
+                <span>9:00 AM - 6:00 PM</span>
+              </div>
+              <div class="d-flex justify-content-between border-bottom pb-3 mb-3">
+                <span class="fw-bold">Sunday</span>
+                <span>10:00 AM - 4:00 PM</span>
+              </div>
+              <div class="d-flex justify-content-between pb-3 mb-3">
+                <span class="fw-bold">Emergency Support</span>
+                <span>24/7</span>
+              </div>
+            </div>
+            
+            <div class="mt-5">
+              <h4 class="mb-4">Why Contact Presibo?</h4>
+              <div class="d-flex align-items-start mb-3">
+                <i class="fas fa-check-circle text-success mt-1 me-3"></i>
+                <div>
+                  <h5 class="mb-1">AI-Powered Healthcare</h5>
+                  <p class="mb-0">Access cutting-edge medical technology and expertise.</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start mb-3">
+                <i class="fas fa-check-circle text-success mt-1 me-3"></i>
+                <div>
+                  <h5 class="mb-1">Expert Medical Team</h5>
+                  <p class="mb-0">Connect with qualified healthcare professionals.</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start">
+                <i class="fas fa-check-circle text-success mt-1 me-3"></i>
+                <div>
+                  <h5 class="mb-1">24/7 Emergency Support</h5>
+                  <p class="mb-0">Get help when you need it most with our emergency services.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Map Section ==== -->
+    <section class="map-section">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">Find Our Office</h2>
+          <p class="lead text-muted">Visit us at our headquarters in Lekki, Lagos</p>
+        </div>
+        
+        <div class="map-container" data-aos="fade-up">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.047042416462!2d3.452445314770485!3d6.51176499528244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf54c72a80b85%3A0x560955a6a017aab6!2sLekki%20Phase%201%2C%20Lagos!5e0!3m2!1sen!2sng!4v1650000000000!5m2!1sen!2sng" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== FAQ Section ==== -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">Frequently Asked Questions</h2>
+          <p class="lead text-muted">Find answers to common questions about our services</p>
+        </div>
+        
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+              <div class="faq-question">
+                How do I schedule a consultation with a doctor?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>You can schedule a consultation by logging into your Presibo account and selecting "Find Doctors" from the menu. From there, you can browse available doctors and select a time that works for you. Alternatively, you can call our support line at +234 703 281 0862 for assistance.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+              <div class="faq-question">
+                Is the Presibo app free to download?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Yes, the Presibo app is completely free to download from both the Google Play Store and Apple App Store. While the app itself is free, some premium features and services may require a subscription or one-time payment.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+              <div class="faq-question">
+                How does the AI diagnosis work?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Our AI diagnosis system uses advanced machine learning algorithms to analyze your symptoms, medical history, and other relevant factors. It provides preliminary insights and recommendations, but always recommends consulting with a human doctor for final diagnosis and treatment. The AI is designed to assist, not replace, professional medical advice.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+              <div class="faq-question">
+                What areas do you serve?
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>Presibo currently serves all of Nigeria with our digital services. Our elder care services are primarily available in Lagos, but we're expanding to other major cities. Our mobile app is available nationwide for anyone with a smartphone and internet connection.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    // FAQ accordion functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+          this.classList.toggle('active');
+          const icon = this.querySelector('i');
+          if (this.classList.contains('active')) {
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+          } else {
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+          }
+        });
+      });
+      
+      // Form submission handling
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form elements
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const phone = document.getElementById('phone').value;
+          const subject = document.getElementById('subject').value;
+          const message = document.getElementById('message').value;
+          
+          // In a real implementation, you would send this data to your server
+          // For now, we'll just show a success message
+          
+          // Show success message
+          document.querySelector('.sent-message').style.display = 'block';
+          document.querySelector('.error-message').style.display = 'none';
+          
+          // Reset form
+          contactForm.reset();
+          
+          // Hide message after 5 seconds
+          setTimeout(function() {
+            document.querySelector('.sent-message').style.display = 'none';
+          }, 5000);
+        });
+      }
+    });
+  </script>
+
+</body>
+
+</html>
