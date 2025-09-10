@@ -730,224 +730,203 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa's h
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
   <script>
-    // Initialize AOS
+    // Auto-completion functionality
     document.addEventListener('DOMContentLoaded', function() {
-      AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100
-      });
-
-      // Ensure main content is visible
-      const mainContent = document.querySelector('#main');
-      mainContent.style.display = 'block';
-      mainContent.style.opacity = '1';
-      mainContent.style.visibility = 'visible';
-
-      // Auto-completion functionality
       const input = document.getElementById('smartInput');
       const dropdown = document.getElementById('suggestionsDropdown');
       const btn = document.getElementById('actionBtn');
       
       // Sample prompts for auto-completion
       const PROMPTS = [
-        { placeholder: "I need a doctor", label: "Find Doctors", query: "doctors", category: "HEALTHCARE", description: "Find and connect with qualified doctors", icon: "👨‍⚕️", url: "doctors" },
-        { placeholder: "Find a hospital", label: "Find Hospitals", query: "hospitals", category: "HEALTHCARE", description: "Locate nearby hospitals and clinics", icon: "🏥", url: "https://presibo.com/ai" },
-        { placeholder: "Book an appointment", label: "Book Appointment", query: "booking", category: "HEALTHCARE", description: "Schedule consultations with doctors", icon: "📅", url: "booking.html" },
-        { placeholder: "Check symptoms", label: "Check Symptoms", query: "symptoms", category: "HEALTHCARE", description: "Analyze symptoms with AI", icon: "🔍", url: "https://presibo.com/ai" },
-        { placeholder: "Find ambulance", label: "Find Ambulance", query: "ambulance", category: "EMERGENCY", description: "Emergency medical services", icon: "🚑", url: "https://presibo.com/ai" },
-        { placeholder: "Donate blood", label: "Donate Blood", query: "blood", category: "COMMUNITY", description: "Blood donation services", icon: "💉", url: "https://presibo.com/ai" }
+        { placeholder: "I need a doctor", label: "Find Doctors", query: "doctors", category: "HEALTHCARE", description: "Find and connect with qualified doctors", icon: "👨‍⚕️" },
+        { placeholder: "Find a hospital", label: "Find Hospitals", query: "hospitals", category: "HEALTHCARE", description: "Locate nearby hospitals and clinics", icon: "🏥" },
+        { placeholder: "Book an appointment", label: "Book Appointment", query: "booking", category: "HEALTHCARE", description: "Schedule consultations with doctors", icon: "📅" },
+        { placeholder: "Check symptoms", label: "Check Symptoms", query: "symptoms", category: "HEALTHCARE", description: "Analyze symptoms with AI", icon: "🔍" },
+        { placeholder: "Find ambulance", label: "Find Ambulance", query: "ambulance", category: "EMERGENCY", description: "Emergency medical services", icon: "🚑" },
+        { placeholder: "Donate blood", label: "Donate Blood", query: "blood", category: "COMMUNITY", description: "Blood donation services", icon: "💉" }
       ];
-
+      
       let highlightedIndex = -1;
       let currentSuggestions = [];
-
+      
       // Event listeners
-      input.addEventListener('input', debounce(handleInput, 300));
+      input.addEventListener('input', handleInput);
       input.addEventListener('keydown', handleKeydown);
-      btn.addEventListener('click', handleButtonClick);
-      document.addEventListener('click', (e) => {
-        if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-          hideSuggestions();
-        }
-      });
-
-      // Debounce function to prevent excessive calls
-      function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-          const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-          };
-          clearTimeout(timeout);
-          timeout = setTimeout(later, wait);
-        };
-      }
-
+      document.addEventListener('click', hideSuggestions);
+      
       // Handle input
       function handleInput(e) {
-        const query = e.target.value.trim().toLowerCase();
+        const query = e.target.value.trim();
         
         if (query.length === 0) {
           hideSuggestions();
-          input.classList.remove('has-suggestions');
-          btn.textContent = 'Enter';
           return;
         }
-
+        
         // Filter suggestions
-        currentSuggestions = filterSuggestions(query);
-        input.classList.add('has-suggestions');
-        showSuggestions(currentSuggestions, query);
+        const filtered = filterSuggestions(query);
+        currentSuggestions = filtered;
+        showSuggestions(filtered, query);
       }
-
+      
       // Handle keyboard navigation
       function handleKeydown(e) {
-        if (dropdown.style.display !== 'block') return;
-
-        const suggestionItems = dropdown.querySelectorAll('.suggestion-item:not(.ask-ai)');
-
+        if (dropdown.style.display === 'none') return;
+        
         switch (e.key) {
           case 'ArrowDown':
             e.preventDefault();
             highlightedIndex = Math.min(highlightedIndex + 1, currentSuggestions.length - 1);
-            updateHighlight(suggestionItems);
+            updateHighlight();
             break;
           case 'ArrowUp':
             e.preventDefault();
             highlightedIndex = Math.max(highlightedIndex - 1, -1);
-            updateHighlight(suggestionItems);
+            updateHighlight();
             break;
           case 'Enter':
             e.preventDefault();
-            if (highlightedIndex >= 0 && suggestionItems[highlightedIndex]) {
+            if (highlightedIndex >= 0) {
               selectSuggestion(currentSuggestions[highlightedIndex]);
             } else {
-              const customQuery = input.value.trim();
-              if (customQuery) {
-                navigateToHealthSearch(customQuery);
+              // Navigate to the first suggestion or default action
+              if (currentSuggestions.length > 0) {
+                selectSuggestion(currentSuggestions[0]);
+              } else {
+                navigateToService('search', input.value);
               }
             }
             break;
           case 'Escape':
-            e.preventDefault();
             hideSuggestions();
             break;
         }
       }
-
-      // Handle button click
-      function handleButtonClick() {
-        const query = input.value.trim().toLowerCase();
-        if (query) {
-          const selectedSuggestion = currentSuggestions.find(s => s.query === btn.dataset.query);
-          if (selectedSuggestion) {
-            selectSuggestion(selectedSuggestion);
-          } else {
-            navigateToHealthSearch(query);
-          }
-        }
-      }
-
+      
       // Show suggestions
-      function showSuggestions(suggestions, query) {
-        dropdown.innerHTML = '';
-
-        if (suggestions.length > 0) {
-          suggestions.forEach((suggestion, index) => {
-            const div = document.createElement('div');
-            div.classList.add('suggestion-item');
-            div.dataset.index = index;
-            div.setAttribute('role', 'option');
-            div.innerHTML = `
+      function showSuggestions(filtered, query) {
+        if (filtered.length > 0) {
+          dropdown.innerHTML = filtered.map((suggestion, index) => `
+            <div class="suggestion-item" data-index="${index}" role="option">
               <div class="suggestion-icon">${suggestion.icon}</div>
               <div class="suggestion-text">
-                <div class="suggestion-title">${suggestion.placeholder}</div>
+                <div class="suggestion-title">${suggestion.text || suggestion.placeholder}</div>
                 <div class="suggestion-description">${suggestion.description}</div>
                 <div class="suggestion-category">${suggestion.category}</div>
               </div>
-            `;
-            div.addEventListener('click', () => selectSuggestion(suggestion));
-            dropdown.appendChild(div);
-          });
+            </div>
+          `).join('');
         } else {
-          const div = document.createElement('div');
-          div.classList.add('suggestion-item', 'ask-ai');
-          div.dataset.customQuery = query;
-          div.setAttribute('role', 'option');
-          div.innerHTML = `
-            <div class="suggestion-icon">🤖</div>
-            <div class="suggestion-text">
-              <div class="suggestion-title">Ask AI: "${query}"</div>
-              <div class="suggestion-description">Get AI-powered answers to your health question</div>
-              <div class="suggestion-category">AI SEARCH</div>
+          dropdown.innerHTML = `
+            <div class="suggestion-item ask-ai" data-custom-query="${query}" role="option">
+              <div class="suggestion-icon">🤖</div>
+              <div class="suggestion-text">
+                <div class="suggestion-title">Ask AI: "${query}"</div>
+                <div class="suggestion-description">Get AI-powered answers to your health question</div>
+                <div class="suggestion-category">AI SEARCH</div>
+              </div>
             </div>
           `;
-          div.addEventListener('click', () => navigateToHealthSearch(query));
-          dropdown.appendChild(div);
         }
-
+        
         dropdown.style.display = 'block';
         input.setAttribute('aria-expanded', 'true');
-        highlightedIndex = -1; // Reset highlight
+        
+        // Add click listeners
+        dropdown.querySelectorAll('.suggestion-item[data-index]').forEach(item => {
+          item.addEventListener('click', () => {
+            const index = parseInt(item.dataset.index);
+            selectSuggestion(currentSuggestions[index]);
+          });
+        });
+        
+        // Add click listener for custom AI search
+        dropdown.querySelectorAll('.ask-ai[data-custom-query]').forEach(item => {
+          item.addEventListener('click', () => {
+            const customQuery = item.dataset.customQuery;
+            navigateToHealthSearch(customQuery);
+          });
+        });
       }
-
+      
       // Filter suggestions
       function filterSuggestions(query) {
+        const lowerQuery = query.toLowerCase();
         return PROMPTS.filter(suggestion => {
-          const text = suggestion.placeholder.toLowerCase();
+          const text = (suggestion.placeholder || suggestion.text || '').toLowerCase();
           const category = suggestion.category.toLowerCase();
           const description = suggestion.description.toLowerCase();
-          return text.includes(query) || category.includes(query) || description.includes(query);
+          
+          return text.includes(lowerQuery) || 
+                 category.includes(lowerQuery) || 
+                 description.includes(lowerQuery);
         }).slice(0, 8);
       }
-
+      
       // Hide suggestions
       function hideSuggestions() {
         dropdown.style.display = 'none';
         input.setAttribute('aria-expanded', 'false');
-        input.classList.remove('has-suggestions');
         highlightedIndex = -1;
       }
-
+      
       // Update highlight
-      function updateHighlight(suggestionItems) {
-        suggestionItems.forEach((item, index) => {
+      function updateHighlight() {
+        dropdown.querySelectorAll('.suggestion-item[data-index]').forEach((item, index) => {
           item.classList.toggle('highlighted', index === highlightedIndex);
-          if (index === highlightedIndex) {
-            item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-          }
         });
       }
-
+      
       // Select suggestion
       function selectSuggestion(suggestion) {
-        input.value = suggestion.placeholder;
+        input.value = suggestion.placeholder || suggestion.text || '';
         btn.textContent = suggestion.label || 'Go';
-        btn.dataset.query = suggestion.query;
+        btn.setAttribute('data-query', suggestion.query);
         hideSuggestions();
-        navigateToService(suggestion);
+        
+        // Navigate immediately
+        navigateToService(suggestion.query, input.value);
       }
-
+      
       // Navigate to service
-      function navigateToService(suggestion) {
-        window.location.href = suggestion.url || 'https://presibo.com/ai';
+      function navigateToService(query, value) {
+        switch (query) {
+          case 'doctors':
+            window.location.href = 'doctors';
+            break;
+          case 'booking':
+            window.location.href = 'booking.html';
+            break;
+          case 'hospitals':
+            window.location.href = 'https://presibo.com/ai';
+            break;
+          case 'symptoms':
+            window.location.href = 'https://presibo.com/ai';
+            break;
+          case 'ambulance':
+            window.location.href = 'https://presibo.com/ai';
+            break;
+          case 'blood':
+            window.location.href = 'https://presibo.com/ai';
+            break;
+          default:
+            window.location.href = 'https://presibo.com/ai';
+        }
       }
-
+      
       // Navigate to health search
       function navigateToHealthSearch(query) {
         hideSuggestions();
-        window.location.href = `https://presibo.com/ai?query=${encodeURIComponent(query)}`;
+        window.location.href = `https://presibo.com/ai`;
       }
     });
   </script>
+
 </body>
 
 </html>
