@@ -32,13 +32,19 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa's h
 
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-  
   <style>
+    /* Ensure body and main content are visible */
+    body, #main {
+      visibility: visible !important;
+      opacity: 1 !important;
+      min-height: 100vh;
+    }
+
     /* Hero Section with Gradient Background */
     .hero-home {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      padding: 120px 0 60px;
+      padding: 180px 0 60px; /* Increased padding-top for fixed header */
       position: relative;
       overflow: hidden;
     }
@@ -52,11 +58,23 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa's h
       bottom: 0;
       background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
       opacity: 0.3;
+      z-index: 1;
     }
 
     .hero-home .container {
       position: relative;
       z-index: 2;
+    }
+
+    /* Fix header z-index */
+    .header.fixed-top {
+      z-index: 1000;
+    }
+
+    /* Fallback for AOS animations */
+    [data-aos] {
+      opacity: 1 !important;
+      transform: translate(0) !important;
     }
 
     /* Benefits Grid */
@@ -287,7 +305,7 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa's h
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       max-height: 300px;
       overflow-y: auto;
-      z-index: 1000;
+      z-index: 1001; /* Ensure dropdown is above other elements */
       display: none;
     }
 
@@ -468,6 +486,10 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa's h
         margin-left: 0;
         margin-top: 15px;
       }
+      
+      .hero-home {
+        padding-top: 120px;
+      }
     }
 
     /* Additional visibility fixes */
@@ -597,13 +619,10 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa's h
 </head>
 
 <body>
-
-  <!-- ==== header ==== -->
+  <!-- ==== Header ==== -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <!--  -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>Presibo</h1>
       </a>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -636,12 +655,11 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa's h
           <li><a href="team.html">Team</a></li>
           <li><a href="download.html">Download App</a></li>
           <li><a href="https://app.presibo.com">Login</a></li>
-
           <li><a class="get-a-quote" href="https://app.presibo.com/join">Sign Up</a></li>
         </ul>
-      </nav><!-- .navbar -->
+      </nav>
     </div>
-  </header><!-- End header -->
+  </header>
 
   <!-- ==== Hero Section ==== -->
   <section class="hero-home">
@@ -653,7 +671,7 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa's h
           
           <form class="form-search d-flex align-items-stretch mb-4" data-aos="fade-up" data-aos-delay="200">
             <input id="smartInput" type="text" class="form-control1" autocomplete="off" placeholder="I need a doctor" aria-expanded="false" aria-haspopup="listbox" role="combobox">
-            <button id="actionBtn" class="btn-blk">Enter</button>
+            <button id="actionBtn" class="btn-blk" type="button">Enter</button>
             <div id="suggestionsDropdown" class="suggestions-dropdown" role="listbox" aria-label="Search suggestions"></div>
           </form>
           
@@ -679,28 +697,25 @@ Presibo uses AI and machine learning technology to bridge the gaps in Africa's h
               <span data-purecounter-start="0" data-purecounter-end="589" data-purecounter-duration="1" class="purecounter"></span>
               <p>Doctors</p>
             </div>
-          </div><!-- End Stats Item -->
-
+          </div>
           <div class="col-lg-3 col-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="328" data-purecounter-duration="1" class="purecounter"></span>
               <p>Hospitals</p>
             </div>
-          </div><!-- End Stats Item -->
-
+          </div>
           <div class="col-lg-3 col-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="36" data-purecounter-duration="1" class="purecounter"></span>
               <p>Laboratories</p>
             </div>
-          </div><!-- End Stats Item -->
-
+          </div>
           <div class="col-lg-3 col-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="15637" data-purecounter-duration="1" class="purecounter"></span>
               <p>Users</p>
             </div>
-          </div><!-- End Stats Item -->
+          </div>
         </div>
       </div>
     </section>
