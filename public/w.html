@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="preload" href="/img/icons/presibo-logo.jpg" as="image" importance="high">
+  <meta property="og:image" content="/img/presibo-logo.jpg" />
+
+  <title>Presibo - Healthy Living Beyond Limits</title>
+  <meta name="description" content="Presibo is a digital medical service that is helping patients get affordable and quality medical care by leveraging on Artificial Intelligence.
+Presibo uses AI and machine learning technology to bridge the gaps in Africa's health sector. We are working to achieve this by integrating patient history and database of medical records to provide access to quality medical service, easy disease prevention, detection and diagnosis, prescription and dispensing of drugs, and delivering medical care to patients while eliminating human error." />
+  <meta name="title" content="Presibo - Healthy Living Beyond Limits" />
+  <meta name="keywords" content="Presibo, Doctor, Health, Artificial Intelligence, Medicine, Telemedicine, Hospital, Emergency Ambulance, Digital Health, Diagnosis,Healthy Living, Nurse, Health, Telemedicine, Artificial Intelligence, AI, Healthy Living" />
+
+  <!-- Favicons -->
+  <link href="assets/img/presibo-logo.jpg" rel="icon">
+  <link href="assets/img/presibo-logo.jpg" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  
+  <style>
+    /* Ensure body and main content are visible */
+    body, #main {
+      visibility: visible !important;
+      opacity: 1 !important;
+      min-height: 100vh;
+    }
+
+    /* Hero Section with Gradient Background */
+    .hero-home {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 180px 0 60px; /* Increased padding-top to account for fixed header */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-home::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+      z-index: 1; /* Lower z-index to prevent overlaying content */
+    }
+
+    .hero-home .container {
+      position: relative;
+      z-index: 2; /* Ensure content is above the overlay */
+    }
+
+    /* Fix header z-index */
+    .header.fixed-top {
+      z-index: 1000; /* Ensure header is above other elements */
+    }
+
+    /* Fallback for AOS animations */
+    [data-aos] {
+      opacity: 1 !important;
+      transform: translate(0) !important; /* Ensure content is visible if AOS fails */
+    }
+
+    /* Benefits Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+
+    .benefit-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #e0e8ff;
+      height: 100%;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .benefit-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    /* Stats Section */
+    .stats-home {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .stat-item-home {
+      margin-bottom: 30px;
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* Services Section */
+    .services-home {
+      background: #f8f9ff;
+      padding: 80px 0;
+    }
+
+    .service-card-home {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #e0e8ff;
+      height: 100%;
+    }
+
+    .service-card-home:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-icon-home {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    /* CTA Section */
+    .cta-home {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .btn-home-primary {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-home-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+
+    .btn-home-secondary {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 15px;
+    }
+
+    .btn-home-secondary:hover {
+      background: white;
+      color: #667eea;
+      transform: translateY(-2px);
+    }
+
+    /* Form Styles */
+    .form-search {
+      display: flex !important;
+      align-items: stretch;
+      margin: 1rem 0;
+      max-width: 600px;
+      position: relative;
+      z-index: 999;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    .form-control1 {
+      flex: 1;
+      padding: 12px 16px !important;
+      border: none;
+      border-radius: 8px 0 0 8px !important;
+      font-size: 16px !important;
+      outline: none !important;
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      font-weight: 500 !important;
+      box-shadow: none !important;
+      min-height: 48px;
+      line-height: 1.4;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial !important;
+    }
+
+    .form-control1::placeholder {
+      color: #555555 !important;
+      opacity: 0.8 !important;
+      font-weight: 400 !important;
+    }
+
+    .form-control1:focus {
+      border-color: #000000 !important;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1) !important;
+      outline: none !important;
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    .btn-blk {
+      padding: 12px 24px !important;
+      background-color: #0d6efd !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-left: none !important;
+      border-radius: 0 8px 8px 0 !important;
+      cursor: pointer !important;
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial !important;
+      transition: all 0.3s ease;
+      min-width: 100px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none !important;
+    }
+
+    .btn-blk:hover {
+      background-color: #0d6efd !important;
+      color: #ffffff !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-blk:active {
+      transform: translateY(0);
+      background-color: #0d6efd !important;
+    }
+
+    .btn-blk:focus {
+      outline: 2px solid #0d6efd;
+      outline-offset: 2px;
+    }
+
+    /* Auto-completion dropdown styles */
+    .suggestions-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+    }
+
+    .suggestion-item {
+      padding: 12px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid #f5f5f5;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .suggestion-item:hover,
+    .suggestion-item.highlighted {
+      background-color: #f8f9fa;
+    }
+
+    .suggestion-item:last-child {
+      border-bottom: none;
+    }
+
+    .suggestion-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e3f2fd;
+      border-radius: 4px;
+      color: #1976d2;
+      font-size: 12px;
+    }
+
+    .suggestion-text {
+      flex: 1;
+    }
+
+    .suggestion-title {
+      font-weight: 500;
+      color: #333;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .suggestion-description {
+      color: #666;
+      font-size: 12px;
+      margin: 2px 0 0 0;
+    }
+
+    .suggestion-category {
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Form container positioning for dropdown */
+    .form-search {
+      position: relative;
+    }
+
+    /* Input focus state for dropdown */
+    .form-control1:focus + .btn-blk + .suggestions-dropdown,
+    .form-control1.has-suggestions + .btn-blk + .suggestions-dropdown {
+      display: block;
+    }
+
+    /* Loading state */
+    .suggestion-item.loading {
+      justify-content: center;
+      color: #999;
+      font-style: italic;
+    }
+
+    /* No results state */
+    .suggestion-item.no-results {
+      color: #666;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* Health suggestion styles */
+    .suggestion-header {
+      padding: 10px 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 600;
+      font-size: 0.85em;
+      border-radius: 8px 8px 0 0;
+      margin: -5px -5px 5px -5px;
+    }
+
+    .suggestion-footer {
+      border-top: 1px solid #e9ecef;
+      margin-top: 5px;
+      padding-top: 5px;
+    }
+
+    .health-suggestion {
+      background: linear-gradient(135deg, #f8f9ff 0%, #f0f8ff 100%);
+      border-left: 3px solid #667eea;
+    }
+
+    .health-suggestion:hover {
+      background: linear-gradient(135deg, #eef2ff 0%, #e6f3ff 100%);
+      transform: translateX(3px);
+    }
+
+    .ask-ai {
+      background: linear-gradient(135deg, #fff8e1 0%, #f3e5ab 100%);
+      border: 2px solid #ffc107;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .ask-ai:hover {
+      background: linear-gradient(135deg, #fff3c4 0%, #ffdd6b 100%);
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+    }
+
+    .ask-ai .suggestion-icon {
+      font-size: 1.2em;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Fade animation classes */
+    .fade {
+      transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out !important;
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    .fade.out {
+      opacity: 0.3 !important;
+      transform: translateY(-2px) !important;
+    }
+
+    /* Ensure form is visible and not affected by other styles */
+    .form-search * {
+      visibility: visible !important;
+      opacity: inherit !important;
+    }
+
+    /* Override any preloader or conflicting styles */
+    .form-search:not(.preloader),
+    .form-search *:not(.preloader) {
+      opacity: 1 !important;
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      .form-search {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .form-control1 {
+        border-radius: 8px 8px 0 0 !important;
+        border-bottom: 1px solid #ccc !important;
+      }
+      
+      .btn-blk {
+        border-radius: 0 0 8px 8px !important;
+        border-top: none !important;
+        border-left: none !important;
+        min-height: 48px;
+      }
+      
+      .btn-home-secondary {
+        margin-left: 0;
+        margin-top: 15px;
+      }
+      
+      .hero-home {
+        padding-top: 120px; /* Adjust for smaller screens */
+      }
+    }
+
+    /* Additional visibility fixes */
+    form.form-search {
+      display: flex !important;
+      visibility: visible !important;
+    }
+
+    /* Ensure text is always visible */
+    .form-control1::-webkit-input-placeholder { color: #555555 !important; }
+    .form-control1::-moz-placeholder { color: #555555 !important; }
+    .form-control1:-ms-input-placeholder { color: #555555 !important; }
+    .form-control1:-moz-placeholder { color: #555555 !important; }
+    
+    /* Stats Item */
+    .stats-item {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .stats-item p {
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      margin: 0;
+    }
+    
+    /* Testimonials Section */
+    .testimonials-home {
+      background: white;
+      padding: 80px 0;
+    }
+    
+    .testimonial-card {
+      background: #f8f9ff;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      position: relative;
+      border: 1px solid #e0e8ff;
+    }
+    
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 60px;
+      color: #667eea;
+      opacity: 0.3;
+    }
+    
+    /* How It Works Section */
+    .how-it-works {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 80px 0;
+    }
+    
+    .step-card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+    
+    .step-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.25);
+    }
+    
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: white;
+      color: #f5576c;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    /* Features Section */
+    .features-section {
+      background: #f8f9ff;
+      padding: 80px 0;
+    }
+    
+    .feature-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #e0e8ff;
+      height: 100%;
+      text-align: center;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: white;
+      margin: 0 auto 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ==== Header ==== -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1>Presibo</h1>
+      </a>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about">About</a></li>
+          <li class="dropdown"><a href="#"><span>Health</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="doctors">Consult</a></li>
+              <li><a href="booking.html">Book Appointment</a></li>
+              <li><a href="#">Donate Blood</a></li>
+              <li><a href="#">Find Ambulance</a></li>
+              <li><a href="doctors">Get Doctor</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Community</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="#">Support Groups</a></li>
+              <li><a href="#">Health Club</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="market"><span>Market</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="market">Medical Devices</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="download.html">Download App</a></li>
+          <li><a href="https://app.presibo.com">Login</a></li>
+          <li><a class="get-a-quote" href="https://app.presibo.com/join">Sign Up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==== Hero Section ==== -->
+  <section class="hero-home">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-up">
+          <h1 class="display-4 mb-4">Healthy Living Beyond Limits</h1>
+          <p class="lead mb-4">Connecting everyone to healthcare powered by AI technology</p>
+          
+          <form class="form-search d-flex align-items-stretch mb-4" data-aos="fade-up" data-aos-delay="200">
+            <input id="smartInput" type="text" class="form-control1" autocomplete="off" placeholder="I need a doctor" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+            <button id="actionBtn" class="btn-blk">Enter</button>
+            <div id="suggestionsDropdown" class="suggestions-dropdown" role="listbox" aria-label="Search suggestions"></div>
+          </form>
+          
+          <div class="d-flex flex-wrap">
+            <a href="https://app.presibo.com/join" class="btn-home-primary">Get Started</a>
+            <a href="#services" class="btn-home-secondary">Learn More</a>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <img src="assets/img/hero-img.png" alt="Presibo Healthcare" class="img-fluid rounded-3" style="box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+    <!-- ==== Stats Section ==== -->
+    <section class="stats-home">
+      <div class="container">
+        <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
+          <div class="col-lg-3 col-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="589" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Doctors</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="328" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hospitals</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="36" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Laboratories</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="15637" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Users</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- ==== How It Works Section ==== -->
+    <section class="how-it-works">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">How Presibo Works</h2>
+          <p class="lead">Simple steps to transform your healthcare experience</p>
+        </div>
+        
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="step-number">1</div>
+              <h4>Describe Your Symptoms</h4>
+              <p>Tell us about your health concerns through our smart input system or speak to our AI assistant.</p>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="step-number">2</div>
+              <h4>Get AI Analysis</h4>
+              <p>Our AI technology analyzes your symptoms and medical history for accurate insights.</p>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+              <div class="step-number">3</div>
+              <h4>Connect With Experts</h4>
+              <p>Get connected with qualified doctors for consultation or further examination.</p>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="step-card" data-aos="fade-up" data-aos-delay="400">
+              <div class="step-number">4</div>
+              <h4>Receive Care</h4>
+              <p>Get your treatment plan, prescriptions, and ongoing health monitoring.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Benefits Section ==== -->
+    <section id="benefits" class="py-5">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">Why Choose Presibo?</h2>
+          <p class="lead text-muted">Comprehensive healthcare solutions powered by AI technology</p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="benefit-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h4>AI-Powered Diagnostics</h4>
+            <p>Get fast and accurate disease detection with our AI-driven diagnostic tools that analyze symptoms and medical history.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Symptom analysis</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Medical history integration</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Accurate diagnosis</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="benefit-icon">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <h4>Remote Monitoring & Telemedicine</h4>
+            <p>Monitor your health and consult doctors remotely anytime, anywhere with our advanced telemedicine platform.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Video consultations</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Health tracking</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>24/7 access</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="benefit-icon">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <h4>24/7 Health Monitoring</h4>
+            <p>Continuous monitoring of vital signs, medication adherence, and health metrics with instant alerts.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Vital signs tracking</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Medication reminders</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Instant alerts</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="benefit-icon">
+              <i class="fas fa-pills"></i>
+            </div>
+            <h4>Smart Medication Management</h4>
+            <p>Never miss a dose with our smart medication reminders and prescription tracking system.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Automated reminders</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Drug interaction alerts</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Prescription tracking</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="benefit-icon">
+              <i class="fas fa-file-medical"></i>
+            </div>
+            <h4>Digital Health Records</h4>
+            <p>Keep all your medical history, test results, and prescriptions in one secure place accessible anytime.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Secure storage</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Easy access</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Share with doctors</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="600">
+            <div class="benefit-icon">
+              <i class="fas fa-ambulance"></i>
+            </div>
+            <h4>Emergency Services</h4>
+            <p>Quick access to emergency services with one-touch calling and GPS location sharing for immediate assistance.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>One-touch emergency</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>GPS location sharing</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Instant response</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Features Section ==== -->
+    <section class="features-section">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">Our Core Features</h2>
+          <p class="lead text-muted">Advanced healthcare solutions designed for your wellness needs</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="feature-icon">
+                <i class="fas fa-stethoscope"></i>
+              </div>
+              <h4>AI-Powered Diagnosis</h4>
+              <p>Get instant health assessments using our advanced AI technology that analyzes your symptoms and provides accurate medical insights.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="feature-icon">
+                <i class="fas fa-video"></i>
+              </div>
+              <h4>Virtual Consultations</h4>
+              <p>Connect with qualified doctors through secure video calls from the comfort of your home for non-emergency medical needs.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+              <div class="feature-icon">
+                <i class="fas fa-pills"></i>
+              </div>
+              <h4>Medication Management</h4>
+              <p>Never miss a dose with smart reminders and prescription tracking that helps you manage your medications effectively.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+              <div class="feature-icon">
+                <i class="fas fa-heartbeat"></i>
+              </div>
+              <h4>Health Monitoring</h4>
+              <p>Track your vital signs, symptoms, and health metrics with our comprehensive monitoring tools that sync with health devices.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+              <div class="feature-icon">
+                <i class="fas fa-file-medical"></i>
+              </div>
+              <h4>Digital Health Records</h4>
+              <p>Keep all your medical history, test results, and prescriptions in one secure place accessible anytime, anywhere.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+              <div class="feature-icon">
+                <i class="fas fa-ambulance"></i>
+              </div>
+              <h4>Emergency Services</h4>
+              <p>Quick access to emergency services with one-touch calling and GPS location sharing for immediate assistance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Testimonials Section ==== -->
+    <section class="testimonials-home">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">What Our Users Say</h2>
+          <p class="lead text-muted">Real stories from people who trust Presibo for their healthcare needs</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-card" data-aos="fade-up">
+              <p class="mb-4">Presibo has transformed how I access healthcare. The AI-powered diagnosis helped me identify my condition early, and connecting with a doctor was seamless. The medication reminders ensure I never miss a dose.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-1.jpg" alt="User Testimonial" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Chinedu O.</h6>
+                  <small class="text-muted">Presibo User</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+              <p class="mb-4">As a busy professional, Presibo's telemedicine service saves me hours. I can consult with doctors from my office and get prescriptions delivered. The health monitoring feature gives me peace of mind about my family's wellbeing.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-2.jpg" alt="User Testimonial" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Adunni A.</h6>
+                  <small class="text-muted">Presibo User</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+              <p class="mb-4">The digital health records feature is incredible. All my medical history is in one place, and I can easily share it with any doctor. The emergency services gave me instant help when I needed it most.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-3.jpg" alt="User Testimonial" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Emeka T.</h6>
+                  <small class="text-muted">Presibo User</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+              <p class="mb-4">Presibo's medication management system is a game-changer for managing my chronic condition. The drug interaction alerts have prevented potential complications, and the prescription tracking keeps me organized.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-4.jpg" alt="User Testimonial" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Fatima S.</h6>
+                  <small class="text-muted">Presibo User</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== CTA Section ==== -->
+    <section class="cta-home">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8" data-aos="fade-up">
+            <h2 class="display-5 mb-4">Ready to Transform Your Healthcare Experience?</h2>
+            <p class="lead mb-4">Join thousands of users who trust Presibo for their health and wellness needs.</p>
+            <div class="d-flex flex-wrap justify-content-center">
+              <a href="https://app.presibo.com/join" class="btn-home-primary btn-lg px-4 py-3 me-3 mb-3">
+                Get Started Today
+              </a>
+              <a href="download.html" class="btn-home-secondary btn-lg px-4 py-3 mb-3">
+                Download Our App
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    // Initialize AOS
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+      });
+
+      // Ensure content is visible after page load
+      const mainContent = document.querySelector('#main');
+      mainContent.style.display = 'block';
+      mainContent.style.opacity = '1';
+      mainContent.style.visibility = 'visible';
+
+      // Auto-completion functionality
+      const input = document.getElementById('smartInput');
+      const dropdown = document.getElementById('suggestionsDropdown');
+      const btn = document.getElementById('actionBtn');
+      
+      // Sample prompts for auto-completion
+      const PROMPTS = [
+        { placeholder: "I need a doctor", label: "Find Doctors", query: "doctors", category: "HEALTHCARE", description: "Find and connect with qualified doctors", icon: "👨‍⚕️" },
+        { placeholder: "Find a hospital", label: "Find Hospitals", query: "hospitals", category: "HEALTHCARE", description: "Locate nearby hospitals and clinics", icon: "🏥" },
+        { placeholder: "Book an appointment", label: "Book Appointment", query: "booking", category: "HEALTHCARE", description: "Schedule consultations with doctors", icon: "📅" },
+        { placeholder: "Check symptoms", label: "Check Symptoms", query: "symptoms", category: "HEALTHCARE", description: "Analyze symptoms with AI", icon: "🔍" },
+        { placeholder: "Find ambulance", label: "Find Ambulance", query: "ambulance", category: "EMERGENCY", description: "Emergency medical services", icon: "🚑" },
+        { placeholder: "Donate blood", label: "Donate Blood", query: "blood", category: "COMMUNITY", description: "Blood donation services", icon: "💉" }
+      ];
+      
+      let highlightedIndex = -1;
+      let currentSuggestions = [];
+      
+      // Event listeners
+      input.addEventListener('input', handleInput);
+      input.addEventListener('keydown', handleKeydown);
+      document.addEventListener('click', hideSuggestions);
+      
+      // Handle input
+      function handleInput(e) {
+        const query = e.target.value.trim();
+        
+        if (query.length === 0) {
+          hideSuggestions();
+          return;
+        }
+        
+        // Filter suggestions
+        const filtered = filterSuggestions(query);
+        currentSuggestions = filtered;
+        showSuggestions(filtered, query);
+      }
+      
+      // Handle keyboard navigation
+      function handleKeydown(e) {
+        if (dropdown.style.display === 'none') return;
+        
+        switch (e.key) {
+          case 'ArrowDown':
+            e.preventDefault();
+            highlightedIndex = Math.min(highlightedIndex + 1, currentSuggestions.length - 1);
+            updateHighlight();
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            highlightedIndex = Math.max(highlightedIndex - 1, -1);
+            updateHighlight();
+            break;
+          case 'Enter':
+            e.preventDefault();
+            if (highlightedIndex >= 0) {
+              selectSuggestion(currentSuggestions[highlightedIndex]);
+            } else {
+              if (currentSuggestions.length > 0) {
+                selectSuggestion(currentSuggestions[0]);
+              } else {
+                navigateToService('search', input.value);
+              }
+            }
+            break;
+          case 'Escape':
+            hideSuggestions();
+            break;
+        }
+      }
+      
+      // Show suggestions
+      function showSuggestions(filtered, query) {
+        if (filtered.length > 0) {
+          dropdown.innerHTML = filtered.map((suggestion, index) => `
+            <div class="suggestion-item" data-index="${index}" role="option">
+              <div class="suggestion-icon">${suggestion.icon}</div>
+              <div class="suggestion-text">
+                <div class="suggestion-title">${suggestion.text || suggestion.placeholder}</div>
+                <div class="suggestion-description">${suggestion.description}</div>
+                <div class="suggestion-category">${suggestion.category}</div>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          dropdown.innerHTML = `
+            <div class="suggestion-item ask-ai" data-custom-query="${query}" role="option">
+              <div class="suggestion-icon">🤖</div>
+              <div class="suggestion-text">
+                <div class="suggestion-title">Ask AI: "${query}"</div>
+                <div class="suggestion-description">Get AI-powered answers to your health question</div>
+                <div class="suggestion-category">AI SEARCH</div>
+              </div>
+            </div>
+          `;
+        }
+        
+        dropdown.style.display = 'block';
+        input.setAttribute('aria-expanded', 'true');
+        
+        // Add click listeners
+        dropdown.querySelectorAll('.suggestion-item[data-index]').forEach(item => {
+          item.addEventListener('click', () => {
+            const index = parseInt(item.dataset.index);
+            selectSuggestion(currentSuggestions[index]);
+          });
+        });
+        
+        // Add click listener for custom AI search
+        dropdown.querySelectorAll('.ask-ai[data-custom-query]').forEach(item => {
+          item.addEventListener('click', () => {
+            const customQuery = item.dataset.customQuery;
+            navigateToHealthSearch(customQuery);
+          });
+        });
+      }
+      
+      // Filter suggestions
+      function filterSuggestions(query) {
+        const lowerQuery = query.toLowerCase();
+        return PROMPTS.filter(suggestion => {
+          const text = (suggestion.placeholder || suggestion.text || '').toLowerCase();
+          const category = suggestion.category.toLowerCase();
+          const description = suggestion.description.toLowerCase();
+          
+          return text.includes(lowerQuery) || 
+                 category.includes(lowerQuery) || 
+                 description.includes(lowerQuery);
+        }).slice(0, 8);
+      }
+      
+      // Hide suggestions
+      function hideSuggestions() {
+        dropdown.style.display = 'none';
+        input.setAttribute('aria-expanded', 'false');
+        highlightedIndex = -1;
+      }
+      
+      // Update highlight
+      function updateHighlight() {
+        dropdown.querySelectorAll('.suggestion-item[data-index]').forEach((item, index) => {
+          item.classList.toggle('highlighted', index === highlightedIndex);
+        });
+      }
+      
+      // Select suggestion
+      function selectSuggestion(suggestion) {
+        input.value = suggestion.placeholder || suggestion.text || '';
+        btn.textContent = suggestion.label || 'Go';
+        btn.setAttribute('data-query', suggestion.query);
+        hideSuggestions();
+        
+        // Navigate immediately
+        navigateToService(suggestion.query, input.value);
+      }
+      
+      // Navigate to service
+      function navigateToService(query, value) {
+        switch (query) {
+          case 'doctors':
+            window.location.href = 'doctors';
+            break;
+          case 'booking':
+            window.location.href = 'booking.html';
+            break;
+          case 'hospitals':
+            window.location.href = 'https://presibo.com/ai';
+            break;
+          case 'symptoms':
+            window.location.href = 'https://presibo.com/ai';
+            break;
+          case 'ambulance':
+            window.location.href = 'https://presibo.com/ai';
+            break;
+          case 'blood':
+            window.location.href = 'https://presibo.com/ai';
+            break;
+          default:
+            window.location.href = 'https://presibo.com/ai';
+        }
+      }
+      
+      // Navigate to health search
+      function navigateToHealthSearch(query) {
+        hideSuggestions();
+        window.location.href = `https://presibo.com/ai`;
+      }
+    });
+  </script>
+</body>
+
+</html>
