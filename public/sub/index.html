@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presibo - Payment & Subscriptions</title>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .logo h1 {
+            color: #0066cc;
+            margin: 0;
+            font-size: 32px;
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            color: #0066cc;
+            border-bottom-color: #0066cc;
+        }
+        
+        .tab-btn:hover {
+            color: #0066cc;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .wallet-info {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        input[type="email"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .btn {
+            background: #0066cc;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #0052a3;
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        /* Plan Cards */
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .plan-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-5px);
+            border-color: #0066cc;
+        }
+        
+        .plan-card.special {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #f8fff9 0%, #ffffff 100%);
+            position: relative;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #28a745;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .plan-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 20px;
+        }
+        
+        .features {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        
+        .features h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .features li {
+            padding: 5px 0;
+            color: #666;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .features li:before {
+            content: '✓';
+            color: #28a745;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .plan-btn {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .ai-btn {
+            background: #28a745;
+        }
+        
+        .ai-btn:hover {
+            background: #218838;
+        }
+        
+        .auto-renew {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .auto-renew input {
+            margin-right: 8px;
+        }
+        
+        /* Elder Care Styles */
+        .eldercare-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .eldercare-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .eldercare-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .eldercare-card.popular {
+            border-color: #ffc107;
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffc107;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .eldercare-card h3 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .eldercare-card .price {
+            font-size: 36px;
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+        
+        .eldercare-card .price span {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .plan-desc {
+            color: #666;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        .eldercare-features {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+            text-align: left;
+        }
+        
+        .eldercare-features li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .eldercare-features li:before {
+            content: '✓';
+            color: #28a745;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 16px;
+        }
+        
+        .eldercare-btn {
+            background: #17a2b8;
+            width: 100%;
+        }
+        
+        .eldercare-btn:hover {
+            background: #138496;
+        }
+        
+        /* Benefits Section */
+        .benefits-section, .eldercare-benefits {
+            margin-top: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .benefits-section h3, .eldercare-benefits h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .benefit-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-item h4 {
+            color: #0066cc;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .benefit-item p {
+            color: #666;
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .help-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #0066cc;
+        }
+        
+        .help-section h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .help-section p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contact-btn {
+            background: #28a745;
+            width: auto;
+            padding: 12px 25px;
+            margin: 0;
+        }
+        
+        .contact-btn:hover {
+            background: #218838;
+        }
+        
+        .contact-btn.whatsapp {
+            background: #25D366;
+        }
+        
+        .contact-btn.whatsapp:hover {
+            background: #128C7E;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #5a6268;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .url-params {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .tab-container {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .plans-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .eldercare-plans {
+                grid-template-columns: 1fr;
+            }
+            
+            .eldercare-card.popular {
+                transform: none;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <h1>Presibo Pay</h1>
+            </div>
+            <button class="back-btn" onclick="goToDashboard()">Go to My Profile</button>
+        </div>
+        
+        <div class="wallet-info" id="userWallet">Current Wallet Balance: ₦0</div>
+        
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="showTab('wallet')">Wallet Funding</button>
+            <button class="tab-btn" onclick="showTab('subscriptions')">Subscriptions</button>
+            <button class="tab-btn" onclick="showTab('healthtips')">Health Tips Daily</button>
+            <button class="tab-btn" onclick="showTab('eldercare')">Elder Care</button>
+        </div>
+        
+        <!-- Wallet Funding Tab -->
+        <div id="wallet-tab" class="tab-content active">
+            <h2>Wallet Funding</h2>
+            
+            <div class="url-params" id="urlParams" style="display: none;">
+                <strong>Subscriber Details:</strong>
+                <div id="paramDisplay"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" placeholder="Enter your email address" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="amount">Amount (₦):</label>
+                <input type="number" id="amount" placeholder="Enter amount in Naira" min="100" step="0.01" required>
+            </div>
+            
+            <button class="btn" onclick="subscribe()" id="payBtn">Pay</button>
+        </div>
+        
+        <!-- Subscriptions Tab -->
+        <div id="subscriptions-tab" class="tab-content">
+            <h2>Choose Your Plan</h2>
+            <p class="subtitle">Select a subscription plan that works best for you</p>
+            
+            <div class="plans-container">
+                <div class="plan-card">
+                    <h3>Monthly Plan</h3>
+                    <div class="price">₦10,000 / month</div>
+                    <div class="features">
+                        <h4>What's included:</h4>
+                        <ul>
+                            <li>Unlimited food analysis</li>
+                            <li>Comprehensive health tracking</li>
+                            <li>Doctor consultations</li>
+                            <li>Fitness goals tracking</li>
+                            <li>Priority support</li>
+                        </ul>
+                    </div>
+                    <button class="btn plan-btn" onclick="subscribeToPlan('monthly', 10000)">Pay Now</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+                
+                <div class="plan-card">
+                    <h3>Weekly Plan</h3>
+                    <div class="price">₦3,000 / week</div>
+                    <div class="features">
+                        <h4>What's included:</h4>
+                        <ul>
+                            <li>Limited food analysis</li>
+                            <li>Basic health tracking</li>
+                            <li>Doctor consultations</li>
+                            <li>Fitness tracking</li>
+                            <li>Standard support</li>
+                        </ul>
+                    </div>
+                    <button class="btn plan-btn" onclick="subscribeToPlan('weekly', 3000)">Pay Now</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+                
+                <div class="plan-card">
+                    <h3>Daily Plan</h3>
+                    <div class="price">₦500 / day</div>
+                    <div class="features">
+                        <h4>What's included:</h4>
+                        <ul>
+                            <li>Basic food analysis</li>
+                            <li>Daily health tips</li>
+                            <li>Doctor access</li>
+                            <li>Basic tracking</li>
+                            <li>Community support</li>
+                        </ul>
+                    </div>
+                    <button class="btn plan-btn" onclick="subscribeToPlan('daily', 500)">Pay Now</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+                
+                <div class="plan-card special">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>AI Doc Chat</h3>
+                    <div class="price">₦1,000 / week</div>
+                    <div class="features">
+                        <h4>What's included:</h4>
+                        <ul>
+                            <li>10 AI health consultations per week</li>
+                            <li>Personalized health advice</li>
+                            <li>Doctor recommendations based on symptoms</li>
+                            <li>Priority health alerts</li>
+                            <li>Chat history saved</li>
+                        </ul>
+                    </div>
+                    <button class="btn plan-btn ai-btn" onclick="subscribeToPlan('ai-chat', 1000)">Subscribe for AI Chat</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+            </div>
+            
+            <div class="benefits-section">
+                <h3>Subscription Benefits</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h4>AI Health Analysis</h4>
+                        <p>Advanced food analysis and health recommendations</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>AI Doc Consultations</h4>
+                        <p>10 weekly AI health consultations with personalized advice</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Doctor Consultations</h4>
+                        <p>Connect with verified Nigerian healthcare professionals</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Health Tracking</h4>
+                        <p>Monitor blood pressure, sugar levels, and fitness goals</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Doctor Recommendations</h4>
+                        <p>AI-powered doctor matching based on symptoms and location</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Personalized Tips</h4>
+                        <p>Daily health tips tailored to Nigerian lifestyle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Health Tips Daily Tab -->
+        <div id="healthtips-tab" class="tab-content">
+            <h2>Health Tips Daily Subscription</h2>
+            <p class="subtitle">Get personalized health tips delivered daily to help you maintain optimal wellness with Nigerian-focused advice and expert guidance.</p>
+            <p class="subtitle">Complete your wellness journey by subscribing to our premium health tips service</p>
+            
+            <div class="plans-container">
+                <div class="plan-card special">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Monthly Plan</h3>
+                    <div class="price">₦450<span style="font-size: 18px; color: #666;">/month</span></div>
+                    <div class="features">
+                        <h4>What's included:</h4>
+                        <ul>
+                            <li>Daily personalized health tips</li>
+                            <li>Nigerian-focused wellness advice</li>
+                            <li>Blood pressure & diabetes management tips</li>
+                            <li>Nutrition recommendations</li>
+                            <li>Exercise and fitness guidance</li>
+                            <li>Heart health insights</li>
+                            <li>Mental health support</li>
+                            <li>Hygiene and prevention tips</li>
+                            <li>Priority customer support</li>
+                            <li>Exclusive wellness content</li>
+                            <li>Cancel anytime with no penalty</li>
+                        </ul>
+                    </div>
+                    <button class="btn plan-btn" onclick="subscribeToHealthTips('monthly', 450)">Subscribe Now</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+                
+                <div class="plan-card">
+                    <h3>Yearly Plan</h3>
+                    <div class="price">₦5,500<span style="font-size: 18px; color: #666;">/year</span></div>
+                    <div style="background: #e8f5e8; padding: 10px; border-radius: 5px; margin-bottom: 15px; color: #28a745; font-weight: bold; text-align: center;">
+                        Save ₦9,000 per year
+                    </div>
+                    <div class="features">
+                        <h4>What's included:</h4>
+                        <ul>
+                            <li>Daily personalized health tips</li>
+                            <li>Nigerian-focused wellness advice</li>
+                            <li>Blood pressure & diabetes management tips</li>
+                            <li>Nutrition recommendations</li>
+                            <li>Exercise and fitness guidance</li>
+                            <li>Heart health insights</li>
+                            <li>Mental health support</li>
+                            <li>Hygiene and prevention tips</li>
+                            <li>Priority customer support</li>
+                            <li>Exclusive wellness content</li>
+                        </ul>
+                    </div>
+                    <button class="btn plan-btn" onclick="subscribeToHealthTips('yearly', 5500)">Subscribe Now</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+            </div>
+            
+            <div class="benefits-section">
+                <h3>What You'll Get</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h4>Daily Tips</h4>
+                        <p>Receive personalized health tips every day tailored to your health profile and goals.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Nigerian Focus</h4>
+                        <p>Health advice specifically designed for Nigerian lifestyle, diet, and health challenges.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Expert Guidance</h4>
+                        <p>Tips from healthcare professionals covering nutrition, exercise, mental health, and more.</p>
+                    </div>
+                </div>
+                
+                <div class="help-section">
+                    <h4>Ready to Start Your Wellness Journey?</h4>
+                    <p>Secure payments • Cancel anytime • 24/7 support available</p>
+                    <div class="contact-buttons">
+                        <button class="btn contact-btn" onclick="callSupport()">Call +234 703 281 0862</button>
+                        <button class="btn contact-btn whatsapp" onclick="whatsappSupport()">WhatsApp Support</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Elder Care Tab -->
+        <div id="eldercare-tab" class="tab-content">
+            <h2>Elder Care Services</h2>
+            <p class="subtitle">Comprehensive care and monitoring for your elderly loved ones. Choose the plan that best fits your family's needs.</p>
+            
+            <div class="eldercare-plans">
+                <div class="eldercare-card">
+                    <h3>Care</h3>
+                    <div class="price">₦15,000<span>/month</span></div>
+                    <p class="plan-desc">Essential elder care monitoring and support</p>
+                    <ul class="eldercare-features">
+                        <li>Digital medical records</li>
+                        <li>Medication reminders</li>
+                        <li>1 family profile</li>
+                        <li>Basic health monitoring</li>
+                        <li>Emergency contact system</li>
+                    </ul>
+                    <button class="btn eldercare-btn" onclick="subscribeToElderCare('care', 15000)">Subscribe to Care</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+                
+                <div class="eldercare-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Thrive</h3>
+                    <div class="price">₦30,000<span>/month</span></div>
+                    <p class="plan-desc">Comprehensive elder care with priority support</p>
+                    <ul class="eldercare-features">
+                        <li>All Care benefits</li>
+                        <li>Priority doctor booking</li>
+                        <li>Home monitoring kits</li>
+                        <li>Dedicated case manager</li>
+                        <li>2 family profiles</li>
+                        <li>1 weekly video consultation</li>
+                        <li>24/7 support hotline</li>
+                    </ul>
+                    <button class="btn eldercare-btn" onclick="subscribeToElderCare('thrive', 30000)">Subscribe to Thrive</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+                
+                <div class="eldercare-card">
+                    <h3>Vital</h3>
+                    <div class="price">₦50,000<span>/month</span></div>
+                    <p class="plan-desc">Premium elder care with home visit services</p>
+                    <ul class="eldercare-features">
+                        <li>All Thrive benefits</li>
+                        <li>3 family profiles</li>
+                        <li>Home visit option</li>
+                        <li>Advanced health monitoring</li>
+                        <li>Specialist consultations</li>
+                        <li>Personal care coordinator</li>
+                        <li>Monthly health reports</li>
+                    </ul>
+                    <button class="btn eldercare-btn" onclick="subscribeToElderCare('vital', 50000)">Subscribe to Vital</button>
+                    <label class="auto-renew">
+                        <input type="checkbox" checked> Auto renew
+                    </label>
+                </div>
+            </div>
+            
+            <div class="eldercare-benefits">
+                <h3>Why Choose Our Elder Care Services?</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h4>Trusted Care</h4>
+                        <p>Professional healthcare providers with years of experience in elder care</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>24/7 Monitoring</h4>
+                        <p>Round-the-clock health monitoring and emergency response</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Family Involvement</h4>
+                        <p>Keep family members informed and involved in care decisions</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>Home-Based Care</h4>
+                        <p>Comfort of home with professional medical support</p>
+                    </div>
+                </div>
+                
+                <div class="help-section">
+                    <h4>Need Help Choosing a Plan?</h4>
+                    <p>Our care coordinators are available to help you select the best plan for your family's needs.</p>
+                    <div class="contact-buttons">
+                        <button class="btn contact-btn" onclick="callSupport()">Call Us Now</button>
+                        <button class="btn contact-btn whatsapp" onclick="whatsappSupport()">WhatsApp Us</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="status"></div>
+        
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="goToHome()">Home</button>
+            <button class="nav-btn" onclick="goToDoctors()">Doctors</button>
+            <button class="nav-btn" onclick="goToFitness()">Fitness</button>
+            <button class="nav-btn" onclick="goToPulse()">Pulse</button>
+            <button class="nav-btn" onclick="goToAIDoc()">AI Doc</button>
+            <button class="nav-btn" onclick="goToTrack()">Track</button>
+            <button class="nav-btn" onclick="payBills()">Pay Bills</button>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUserData = null;
+        
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab content
+            const targetTab = document.getElementById(tabName + '-tab');
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+            
+            // Add active class to clicked tab button
+            const targetButton = Array.from(tabButtons).find(btn => 
+                btn.textContent.toLowerCase().includes(tabName) || 
+                (tabName === 'wallet' && btn.textContent.includes('Wallet')) ||
+                (tabName === 'subscriptions' && btn.textContent.includes('Subscriptions')) ||
+                (tabName === 'healthtips' && btn.textContent.includes('Health Tips')) ||
+                (tabName === 'eldercare' && btn.textContent.includes('Elder'))
+            );
+            if (targetButton) {
+                targetButton.classList.add('active');
+            }
+        }
+        
+        // Helper function to show tab by name without event
+        function showTabByName(tabName) {
+            // Normalize tab name for consistency
+            const normalizedTabName = tabName.toLowerCase().replace('-', '');
+            const validTabs = ['wallet', 'subscriptions', 'healthtips', 'eldercare'];
+            const targetTab = validTabs.includes(normalizedTabName) ? normalizedTabName : 'wallet';
+            
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab content
+            const targetTabElement = document.getElementById(targetTab + '-tab');
+            if (targetTabElement) {
+                targetTabElement.classList.add('active');
+            }
+            
+            // Add active class to corresponding tab button
+            const targetButton = Array.from(tabButtons).find(btn => 
+                btn.textContent.toLowerCase().includes(targetTab) || 
+                (targetTab === 'wallet' && btn.textContent.includes('Wallet')) ||
+                (targetTab === 'subscriptions' && btn.textContent.includes('Subscriptions')) ||
+                (targetTab === 'healthtips' && btn.textContent.includes('Health Tips')) ||
+                (targetTab === 'eldercare' && btn.textContent.includes('Elder'))
+            );
+            if (targetButton) {
+                targetButton.classList.add('active');
+            }
+        }
+        
+        // Navigation functions
+        function goToDashboard() {
+            window.location.href = 'https://app.presibo.com';
+        }
+        
+        function goToHome() {
+            window.location.href = '/index.html';
+        }
+        
+        function goToDoctors() {
+            window.location.href = '/doctors.html';
+        }
+        
+        function goToFitness() {
+            window.location.href = '/fitness.html';
+        }
+        
+        function goToPulse() {
+            window.location.href = '/pulse.html';
+        }
+        
+        function goToAIDoc() {
+            window.location.href = '/aidoc.html';
+        }
+        
+        function goToTrack() {
+            window.location.href = '/track.html';
+        }
+        
+        // Contact functions
+        function callSupport() {
+            window.open('tel:+2347032810862', '_self');
+        }
+        
+        function whatsappSupport() {
+            window.open('https://wa.me/2347032810862?text=Hello, I need help choosing a plan', '_blank');
+        }
+        
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
+        function displayUrlParams() {
+            const email = getQueryParam('email');
+            const amount = getQueryParam('amount');
+            const plan = getQueryParam('plan');
+            
+            if (email || amount || plan) {
+                const paramDisplay = document.getElementById('paramDisplay');
+                const urlParamsDiv = document.getElementById('urlParams');
+                
+                let paramText = '';
+                if (email) paramText += `Email: ${email}<br>`;
+                if (amount) paramText += `Amount: ₦${amount}<br>`;
+                if (plan) paramText += `Plan: ${plan}`;
+                
+                paramDisplay.innerHTML = paramText;
+                urlParamsDiv.style.display = 'block';
+                
+                // Pre-fill form fields
+                if (email) document.getElementById('email').value = email;
+                if (amount) document.getElementById('amount').value = amount;
+            }
+        }
+        
+        function showStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="${type}">${message}</div>`;
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 5000);
+        }
+        
+        function subscribe() {
+            const emailInput = document.getElementById('email');
+            const amountInput = document.getElementById('amount');
+            const payBtn = document.getElementById('payBtn');
+            
+            const userEmail = emailInput.value.trim();
+            const amountValue = parseFloat(amountInput.value);
+            
+            // Validation
+            if (!userEmail) {
+                showStatus("Please enter your email address.", 'error');
+                emailInput.focus();
+                return;
+            }
+            
+            if (!userEmail.includes('@')) {
+                showStatus("Please enter a valid email address.", 'error');
+                emailInput.focus();
+                return;
+            }
+            
+            if (!amountValue || amountValue < 100) {
+                showStatus("Please enter a valid amount (minimum ₦100).", 'error');
+                amountInput.focus();
+                return;
+            }
+            
+            processPayment(userEmail, amountValue, 'wallet-funding', payBtn);
+        }
+        
+        function subscribeToPlan(planType, amount) {
+            const email = document.getElementById('email')?.value || prompt('Please enter your email address:');
+            
+            if (!email || !email.includes('@')) {
+                showStatus("Please enter a valid email address.", 'error');
+                return;
+            }
+            
+            const planNames = {
+                'monthly': 'Monthly Plan',
+                'weekly': 'Weekly Plan', 
+                'daily': 'Daily Plan',
+                'ai-chat': 'AI Doc Chat'
+            };
+            
+            const planName = planNames[planType] || planType;
+            
+            if (confirm(`Subscribe to ${planName} for ₦${amount.toLocaleString()}?`)) {
+                processPayment(email, amount, `subscription-${planType}`);
+            }
+        }
+        
+        function subscribeToElderCare(planType, amount) {
+            const email = document.getElementById('email')?.value || prompt('Please enter your email address:');
+            
+            if (!email || !email.includes('@')) {
+                showStatus("Please enter a valid email address.", 'error');
+                return;
+            }
+            
+            const planNames = {
+                'care': 'Elder Care - Care Plan',
+                'thrive': 'Elder Care - Thrive Plan',
+                'vital': 'Elder Care - Vital Plan'
+            };
+            
+            const planName = planNames[planType] || planType;
+            
+            if (confirm(`Subscribe to ${planName} for ₦${amount.toLocaleString()}/month?`)) {
+                processPayment(email, amount, `eldercare-${planType}`);
+            }
+        }
+        
+        function subscribeToHealthTips(planType, amount) {
+            const email = document.getElementById('email')?.value || prompt('Please enter your email address:');
+            
+            if (!email || !email.includes('@')) {
+                showStatus("Please enter a valid email address.", 'error');
+                return;
+            }
+            
+            const planNames = {
+                'monthly': 'Health Tips Daily - Monthly Plan',
+                'yearly': 'Health Tips Daily - Yearly Plan'
+            };
+            
+            const planName = planNames[planType] || planType;
+            const period = planType === 'yearly' ? '/year' : '/month';
+            
+            if (confirm(`Subscribe to ${planName} for ₦${amount.toLocaleString()}${period}?`)) {
+                processPayment(email, amount, `healthtips-${planType}`);
+            }
+        }
+        
+        function processPayment(userEmail, amountValue, paymentType, buttonElement = null) {
+            // Convert to kobo (Paystack uses kobo - 1 Naira = 100 kobo)
+            const amountInKobo = Math.round(amountValue * 100);
+            
+            // Disable button during payment
+            if (buttonElement) {
+                buttonElement.disabled = true;
+                buttonElement.textContent = 'Processing...';
+            }
+            
+            try {
+                var handler = PaystackPop.setup({
+                    key: 'pk_live_e4512c48de3fef4f92b4b278715d5decfa436d5b', // Replace with your actual public key
+                    email: userEmail,
+                    amount: amountInKobo,
+                    currency: 'NGN',
+                    metadata: {
+                        payment_type: paymentType,
+                        custom_fields: [
+                            {
+                                display_name: "Payment Type",
+                                variable_name: "payment_type",
+                                value: paymentType
+                            }
+                        ]
+                    },
+                    callback: function(response) {
+                        console.log("Payment Successful", response);
+                        handleSuccessfulPayment(response, paymentType, amountValue);
+                        if (buttonElement) {
+                            buttonElement.disabled = false;
+                            buttonElement.textContent = getOriginalButtonText(paymentType);
+                        }
+                    },
+                    onClose: function() {
+                        console.log("Payment modal closed");
+                        showStatus("Payment was cancelled or closed.", 'error');
+                        if (buttonElement) {
+                            buttonElement.disabled = false;
+                            buttonElement.textContent = getOriginalButtonText(paymentType);
+                        }
+                    }
+                });
+                
+                handler.openIframe();
+                
+            } catch (error) {
+                console.error("Payment Error:", error);
+                showStatus("An error occurred while processing payment: " + error.message, 'error');
+                if (buttonElement) {
+                    buttonElement.disabled = false;
+                    buttonElement.textContent = getOriginalButtonText(paymentType);
+                }
+            }
+        }
+        
+        function handleSuccessfulPayment(response, paymentType, amountValue) {
+            let successMessage = `Payment Successful! Transaction Reference: ${response.reference}`;
+            
+            if (paymentType.startsWith('subscription-')) {
+                successMessage = `Subscription activated successfully! Reference: ${response.reference}`;
+            } else if (paymentType.startsWith('eldercare-')) {
+                successMessage = `Elder Care subscription activated! Reference: ${response.reference}`;
+            } else if (paymentType.startsWith('healthtips-')) {
+                successMessage = `Health Tips Daily subscription activated! Reference: ${response.reference}`;
+            } else if (paymentType === 'wallet-funding') {
+                successMessage = `Wallet funded successfully! Reference: ${response.reference}`;
+                updateWalletBalance(amountValue);
+                document.getElementById('email').value = '';
+                document.getElementById('amount').value = '';
+            }
+            
+            showStatus(successMessage, 'success');
+            verifyPaymentOnBackend(response.reference, paymentType);
+        }
+        
+        function getOriginalButtonText(paymentType) {
+            if (paymentType === 'wallet-funding') return 'Pay';
+            if (paymentType.startsWith('subscription-')) {
+                if (paymentType === 'subscription-ai-chat') return 'Subscribe for AI Chat';
+                return 'Pay Now';
+            }
+            if (paymentType.startsWith('eldercare-')) {
+                const planType = paymentType.split('-')[1];
+                return `Subscribe to ${planType.charAt(0).toUpperCase() + planType.slice(1)}`;
+            }
+            if (paymentType.startsWith('healthtips-')) {
+                return 'Subscribe Now';
+            }
+            return 'Pay Now';
+        }
+        
+        function verifyPaymentOnBackend(reference, paymentType) {
+            console.log(`Verifying payment ${reference} for ${paymentType}`);
+            // Placeholder for backend API call
+        }
+        
+        function updateWalletBalance(addedAmount) {
+            const currentBalance = getCurrentBalance();
+            const newBalance = currentBalance + addedAmount;
+            localStorage.setItem('walletBalance', newBalance.toString());
+            document.getElementById('userWallet').textContent = `Current Wallet Balance: ₦${newBalance.toLocaleString()}`;
+        }
+        
+        function getCurrentBalance() {
+            const balance = localStorage.getItem('walletBalance');
+            return balance ? parseFloat(balance) : 0;
+        }
+        
+        function fetchUserData() {
+            try {
+                const balance = getCurrentBalance();
+                document.getElementById('userWallet').textContent = `Current Wallet Balance: ₦${balance.toLocaleString()}`;
+                currentUserData = {
+                    balance: balance,
+                    email: getQueryParam('email') || ''
+                };
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+                document.getElementById('userWallet').textContent = 'Error loading wallet balance';
+            }
+        }
+        
+        function payBills() {
+            const currentBalance = getCurrentBalance();
+            if (currentBalance > 0) {
+                alert(`Redirecting to bills payment page. Your current balance: ₦${currentBalance.toLocaleString()}`);
+            } else {
+                showStatus("Please fund your wallet first before paying bills.", 'error');
+            }
+        }
+        
+        // Initialize on page load
+        window.onload = function() {
+            displayUrlParams();
+            fetchUserData();
+            
+            // Check URL hash and show corresponding tab
+            const hash = window.location.hash.toLowerCase().replace('#', '');
+            let targetTab = 'wallet'; // Default tab
+            if (hash === 'wallet') {
+                targetTab = 'wallet';
+            } else if (hash === 'health-tips') {
+                targetTab = 'healthtips';
+            } else if (hash === 'elderscare') {
+                targetTab = 'eldercare';
+            }
+            
+            showTabByName(targetTab);
+            
+            // Handle URL params for auto-subscription
+            const urlEmail = getQueryParam('email');
+            const urlAmount = getQueryParam('amount');
+            const urlPlan = getQueryParam('plan');
+            
+            if (urlEmail && urlAmount && urlPlan) {
+                setTimeout(() => {
+                    if (urlPlan === 'monthly') subscribeToPlan('monthly', 10000);
+                    else if (urlPlan === 'weekly') subscribeToPlan('weekly', 3000);
+                    else if (urlPlan === 'daily') subscribeToPlan('daily', 500);
+                    else if (urlPlan === 'ai-chat') subscribeToPlan('ai-chat', 1000);
+                    else if (urlPlan === 'elder-care') subscribeToElderCare('care', 15000);
+                    else if (urlPlan === 'elder-thrive') subscribeToElderCare('thrive', 30000);
+                    else if (urlPlan === 'elder-vital') subscribeToElderCare('vital', 50000);
+                    else if (urlPlan === 'healthtips-monthly') subscribeToHealthTips('monthly', 450);
+                    else if (urlPlan === 'healthtips-yearly') subscribeToHealthTips('yearly', 5500);
+                }, 500);
+            }
+        };
+        
+        // Handle form submission with Enter key
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const focusedElement = document.activeElement;
+                if (focusedElement.id === 'email' || focusedElement.id === 'amount') {
+                    subscribe();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
