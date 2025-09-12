@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="preload" href="/img/icons/presibo-logo.jpg" as="image" importance="high">
+  <meta property="og:image" content="/img/presibo-logo.jpg" />
+
+  <title>Fitness Programs - Presibo</title>
+  <meta name="description" content="Transform your health with Presibo's comprehensive fitness programs. Personalized workout plans, nutrition guidance, and expert coaching to help you achieve your fitness goals." />
+  <meta name="title" content="Fitness Programs - Presibo" />
+  <meta name="keywords" content="Fitness, Workout, Exercise, Health, Wellness, Personal Training, Nutrition, Presibo" />
+
+  <!-- Favicons -->
+  <link href="assets/img/presibo-logo.jpg" rel="icon">
+  <link href="assets/img/presibo-logo.jpg" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .hero-fitness {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 120px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-fitness::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-fitness .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+
+    .benefit-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #e0e8ff;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .benefit-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .stats-fitness {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .stat-item-fitness {
+      margin-bottom: 30px;
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .programs-fitness {
+      background: #f8f9ff;
+      padding: 80px 0;
+    }
+
+    .program-card-fitness {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      position: relative;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .program-card-fitness:hover {
+      border-color: #667eea;
+      transform: translateY(-3px);
+    }
+
+    .program-card-fitness.featured {
+      border-color: #f5576c;
+      background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+    }
+
+    .program-card-fitness.featured::before {
+      content: "Most Popular";
+      position: absolute;
+      top: -12px;
+      right: 30px;
+      background: #f5576c;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .program-price {
+      font-size: 36px;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .testimonial-fitness {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .testimonial-fitness::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 60px;
+      color: #667eea;
+      opacity: 0.3;
+    }
+
+    .cta-fitness {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .btn-fitness-primary {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-fitness-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+
+    .btn-fitness-secondary {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 15px;
+    }
+
+    .btn-fitness-secondary:hover {
+      background: white;
+      color: #667eea;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==== header ==== -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1>Presibo</h1>
+      </a>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about">About</a></li>
+          <li class="dropdown"><a href="#"><span>Health</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="doctors">Consult</a></li>
+              <li><a href="booking.html">Book Appointment</a></li>
+              <li><a href="#">Donate Blood</a></li>
+              <li><a href="#">Find Ambulance</a></li>
+              <li><a href="doctors">Get Doctor</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Community</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="#">Support Groups</a></li>
+              <li><a href="#">Health Club</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="market"><span>Market</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="market">Medical Devices</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="download.html">Download App</a></li>
+          <li><a href="https://app.presibo.com">Login</a></li>
+          <li><a class="get-a-quote" href="https://app.presibo.com/join">Sign Up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==== Hero Section ==== -->
+  <section class="hero-fitness">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-up">
+          <h1 class="display-4 mb-4">Transform Your Health with Presibo Fitness</h1>
+          <p class="lead mb-4">Personalized fitness programs designed to help you achieve your health and wellness goals with expert guidance and support.</p>
+          <div class="d-flex flex-wrap">
+            <a href="https://app.presibo.com/join" class="btn-fitness-primary">Get Started</a>
+            <a href="#benefits" class="btn-fitness-secondary">Learn More</a>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <img src="assets/img/fitness-hero.jpg" alt="Fitness Programs" class="img-fluid rounded-3" style="box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- ==== Benefits Section ==== -->
+    <section id="benefits" class="py-5">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">Why Choose Presibo Fitness?</h2>
+          <p class="lead text-muted">Comprehensive fitness solutions tailored to your unique needs</p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="benefit-icon">
+              <i class="fas fa-dumbbell"></i>
+            </div>
+            <h4>Personalized Workout Plans</h4>
+            <p>Customized exercise routines based on your fitness level, goals, and preferences, designed by certified fitness professionals.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Goal-specific training</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Progressive difficulty</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Video demonstrations</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="benefit-icon">
+              <i class="fas fa-apple-alt"></i>
+            </div>
+            <h4>Nutrition Guidance</h4>
+            <p>Evidence-based nutrition plans tailored to your dietary needs, preferences, and fitness objectives for optimal results.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Meal planning</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Macro tracking</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Recipe suggestions</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="benefit-icon">
+              <i class="fas fa-user-check"></i>
+            </div>
+            <h4>Expert Coaching</h4>
+            <p>Access to certified fitness trainers and nutritionists who provide ongoing support, motivation, and expert advice.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Certified trainers</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Personalized feedback</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Flexible scheduling</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="benefit-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h4>Progress Tracking</h4>
+            <p>Advanced tracking tools to monitor your fitness journey, measure results, and adjust your program for continuous improvement.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Workout logging</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Body metrics tracking</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Performance analytics</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="benefit-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h4>Holistic Wellness</h4>
+            <p>Programs that address not just physical fitness but also mental wellbeing, stress management, and overall health optimization.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Mindfulness exercises</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Stress reduction techniques</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Sleep optimization</li>
+            </ul>
+          </div>
+
+          <div class="benefit-card" data-aos="fade-up" data-aos-delay="600">
+            <div class="benefit-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h4>Mobile App Integration</h4>
+            <p>Access your fitness programs anytime, anywhere through our user-friendly mobile app with offline capabilities.</p>
+            <ul class="list-unstyled mt-3">
+              <li><i class="bi bi-check-circle text-success me-2"></i>On-demand workouts</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Progress sync</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Community features</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Statistics Section ==== -->
+    <section class="stats-fitness">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item-fitness" data-aos="fade-up">
+              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="15000" data-purecounter-duration="2">15000</span>
+              <p>Members Transformed</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item-fitness" data-aos="fade-up" data-aos-delay="100">
+              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="95" data-purecounter-duration="2">95</span>
+              <p>% Satisfaction Rate</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item-fitness" data-aos="fade-up" data-aos-delay="200">
+              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="50" data-purecounter-duration="2">50</span>
+              <p>Certified Trainers</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item-fitness" data-aos="fade-up" data-aos-delay="300">
+              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="200" data-purecounter-duration="2">200</span>
+              <p>Custom Programs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Fitness Programs Section ==== -->
+    <section class="programs-fitness">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">Fitness Programs</h2>
+          <p class="lead text-muted">Choose the perfect program for your fitness journey</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="program-card-fitness" data-aos="fade-up">
+              <h3 class="text-center mb-3">Beginner Fitness</h3>
+              <div class="program-price text-center">₦12,000<span class="fs-6 text-muted">/month</span></div>
+              <p class="text-center text-muted mb-4">Perfect for those starting their fitness journey</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle text-success me-2"></i>Foundational workouts</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Basic nutrition guidance</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Weekly check-ins</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Progress tracking</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Video tutorials</li>
+              </ul>
+              <div class="text-center mt-4">
+                <a href="https://app.presibo.com/subscribe/beginner-fitness" class="btn-fitness-primary">Choose Plan</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="program-card-fitness featured" data-aos="fade-up" data-aos-delay="100">
+              <h3 class="text-center mb-3">Advanced Performance</h3>
+              <div class="program-price text-center">₦28,000<span class="fs-6 text-muted">/month</span></div>
+              <p class="text-center text-muted mb-4">For serious fitness enthusiasts</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle text-success me-2"></i>All Beginner features</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Advanced workout plans</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Personalized nutrition</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Bi-weekly coaching sessions</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Supplement guidance</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Body composition analysis</li>
+              </ul>
+              <div class="text-center mt-4">
+                <a href="https://app.presibo.com/subscribe/advanced-fitness" class="btn-fitness-primary">Choose Plan</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="program-card-fitness" data-aos="fade-up" data-aos-delay="200">
+              <h3 class="text-center mb-3">Premium Transformation</h3>
+              <div class="program-price text-center">₦45,000<span class="fs-6 text-muted">/month</span></div>
+              <p class="text-center text-muted mb-4">Complete holistic wellness program</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle text-success me-2"></i>All Advanced features</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Daily coaching support</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Custom meal plans</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Mindfulness training</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Sleep optimization</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Monthly progress reviews</li>
+                <li><i class="bi bi-check-circle text-success me-2"></i>Priority support</li>
+              </ul>
+              <div class="text-center mt-4">
+                <a href="https://app.presibo.com/subscribe/premium-fitness" class="btn-fitness-primary">Choose Plan</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Testimonials Section ==== -->
+    <section class="py-5">
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 class="display-5 mb-3">Success Stories</h2>
+          <p class="lead text-muted">Real transformations from Presibo Fitness members</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-fitness" data-aos="fade-up">
+              <p class="mb-4">Presibo's fitness program completely transformed my approach to health. The personalized workouts and nutrition plan helped me lose 30 pounds in 4 months while building sustainable habits. The coaching support kept me motivated throughout my journey.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-1.jpg" alt="Fitness Success" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Aisha M.</h6>
+                  <small class="text-muted">Presibo Fitness Member</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-fitness" data-aos="fade-up" data-aos-delay="100">
+              <p class="mb-4">As a busy professional, I struggled to maintain a fitness routine. Presibo's flexible program allowed me to work out at home while still getting expert guidance. The app integration made it easy to track my progress and stay consistent.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-2.jpg" alt="Fitness Success" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Tunde O.</h6>
+                  <small class="text-muted">Presibo Fitness Member</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-fitness" data-aos="fade-up" data-aos-delay="200">
+              <p class="mb-4">The holistic approach of Presibo's fitness program addressed not just my physical health but also my mental wellbeing. The mindfulness exercises and stress management techniques were game-changers for my overall wellness journey.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-3.jpg" alt="Fitness Success" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Chiamaka N.</h6>
+                  <small class="text-muted">Presibo Fitness Member</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="testimonial-fitness" data-aos="fade-up" data-aos-delay="300">
+              <p class="mb-4">The advanced performance program challenged me to new levels of fitness. The progressive workout plans and personalized nutrition guidance helped me achieve my goal of running a marathon. The coaching support was invaluable throughout my training.</p>
+              <div class="d-flex align-items-center">
+                <img src="assets/img/testimonials/testimonial-4.jpg" alt="Fitness Success" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="mb-0">Emeka J.</h6>
+                  <small class="text-muted">Presibo Fitness Member</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== Call to Action Section ==== -->
+    <section class="cta-fitness">
+      <div class="container">
+        <div class="text-center" data-aos="fade-up">
+          <h2 class="display-5 mb-4">Ready to Transform Your Health?</h2>
+          <p class="lead mb-5">Join thousands of members who have achieved their fitness goals with Presibo's personalized programs.</p>
+          <div class="d-flex justify-content-center flex-wrap gap-3">
+            <a href="https://app.presibo.com/join" class="btn-fitness-primary">Start Your Fitness Journey</a>
+            <a href="tel:+2347032810862" class="btn-fitness-secondary">Call Us: +234 703 281 0862</a>
+          </div>
+          <div class="mt-4">
+            <p class="mb-0"><small>Free consultation available • No setup fees • Cancel anytime</small></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>Presibo Fitness</span>
+          </a>
+          <p>Transform your health with Presibo's comprehensive fitness programs. Personalized workout plans, nutrition guidance, and expert coaching to help you achieve your fitness goals.</p>
+          <div class="social-links d-flex mt-4">
+            <a href="https://twitter.com/presibolife" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="https://facebook.com/presibolife" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://instagram.com/presibolife" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Programs</h4>
+          <ul>
+            <li><a href="#benefits">Workout Plans</a></li>
+            <li><a href="#benefits">Nutrition Guidance</a></li>
+            <li><a href="#benefits">Expert Coaching</a></li>
+            <li><a href="#benefits">Progress Tracking</a></li>
+            <li><a href="#benefits">Wellness Support</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Membership</h4>
+          <ul>
+            <li><a href="https://app.presibo.com/subscribe/beginner-fitness">Beginner Fitness</a></li>
+            <li><a href="https://app.presibo.com/subscribe/advanced-fitness">Advanced Performance</a></li>
+            <li><a href="https://app.presibo.com/subscribe/premium-fitness">Premium Transformation</a></li>
+            <li><a href="https://app.presibo.com/fitness-consultation">Free Consultation</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Fitness</h4>
+          <p>
+            1b Racheal Nwangwu Close, <br>
+            Lekki Phase 1, Lagos<br>
+            Nigeria <br><br>
+            <strong>Phone:</strong> +234 7032 810 862<br>
+            <strong>Email:</strong> fitness@presibo.com<br>
+            <strong>Support:</strong> +234 703 281 0862<br>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; 2024 Copyright <strong><span>Presibo Fitness</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <a href="index.html">Back to Main Site</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader" class="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
