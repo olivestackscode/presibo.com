@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presibo - Renew Subscription</title>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .logo h1 {
+            color: #0066cc;
+            margin: 0;
+            font-size: 32px;
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .renew-info {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .renew-info h3 {
+            color: #28a745;
+            margin-top: 0;
+        }
+        
+        .plan-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .plan-card.special {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #f8fff9 0%, #ffffff 100%);
+        }
+        
+        .plan-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 20px;
+        }
+        
+        .features {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        
+        .features h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .features li {
+            padding: 5px 0;
+            color: #666;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .features li:before {
+            content: '✓';
+            color: #28a745;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .btn {
+            background: #0066cc;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #0052a3;
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .ai-btn {
+            background: #28a745;
+        }
+        
+        .ai-btn:hover {
+            background: #218838;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .url-params {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <h1>Presibo Renew</h1>
+            </div>
+            <button class="back-btn" onclick="goToDashboard()">Go to My Profile</button>
+        </div>
+        
+        <h2>Renew Your Subscription</h2>
+        <p class="subtitle">Renew your Presibo subscription with just one click</p>
+        
+        <div class="url-params" id="urlParams" style="display: none;">
+            <strong>Renewal Details:</strong>
+            <div id="paramDisplay"></div>
+        </div>
+        
+        <div class="renew-info">
+            <h3>Subscription Renewal</h3>
+            <p>Renew your Presibo subscription to continue enjoying our health and wellness services.</p>
+        </div>
+        
+        <div class="plan-card" id="planCard" style="display: none;">
+            <h3 id="planName">Subscription Plan</h3>
+            <div class="price" id="planPrice">₦0</div>
+            <div class="features">
+                <h4>What's included:</h4>
+                <ul id="planFeatures">
+                    <!-- Features will be populated by JavaScript -->
+                </ul>
+            </div>
+            <button class="btn" onclick="renewSubscription()" id="renewBtn">Renew Subscription</button>
+        </div>
+        
+        <div id="status"></div>
+    </div>
+
+    <script>
+        // Plan information
+        const plans = {
+            'monthly': {
+                name: 'Monthly Plan',
+                price: 10000,
+                features: [
+                    'Unlimited food analysis',
+                    'Comprehensive health tracking',
+                    'Doctor consultations',
+                    'Fitness goals tracking',
+                    'Priority support'
+                ]
+            },
+            'weekly': {
+                name: 'Weekly Plan',
+                price: 3000,
+                features: [
+                    'Limited food analysis',
+                    'Basic health tracking',
+                    'Doctor consultations',
+                    'Fitness tracking',
+                    'Standard support'
+                ]
+            },
+            'daily': {
+                name: 'Daily Plan',
+                price: 500,
+                features: [
+                    'Basic food analysis',
+                    'Daily health tips',
+                    'Doctor access',
+                    'Basic tracking',
+                    'Community support'
+                ]
+            },
+            'ai-chat': {
+                name: 'AI Doc Chat',
+                price: 1000,
+                features: [
+                    '10 AI health consultations per week',
+                    'Personalized health advice',
+                    'Doctor recommendations based on symptoms',
+                    'Priority health alerts',
+                    'Chat history saved'
+                ]
+            },
+            'healthtips-monthly': {
+                name: 'Health Tips Daily - Monthly Plan',
+                price: 450,
+                features: [
+                    'Daily personalized health tips',
+                    'Nigerian-focused wellness advice',
+                    'Blood pressure & diabetes management tips',
+                    'Nutrition recommendations',
+                    'Exercise and fitness guidance',
+                    'Heart health insights',
+                    'Mental health support',
+                    'Hygiene and prevention tips',
+                    'Priority customer support',
+                    'Exclusive wellness content',
+                    'Cancel anytime with no penalty'
+                ]
+            },
+            'healthtips-yearly': {
+                name: 'Health Tips Daily - Yearly Plan',
+                price: 5500,
+                features: [
+                    'Daily personalized health tips',
+                    'Nigerian-focused wellness advice',
+                    'Blood pressure & diabetes management tips',
+                    'Nutrition recommendations',
+                    'Exercise and fitness guidance',
+                    'Heart health insights',
+                    'Mental health support',
+                    'Hygiene and prevention tips',
+                    'Priority customer support',
+                    'Exclusive wellness content'
+                ]
+            },
+            'eldercare-care': {
+                name: 'Elder Care - Care Plan',
+                price: 15000,
+                features: [
+                    'Digital medical records',
+                    'Medication reminders',
+                    '1 family profile',
+                    'Basic health monitoring',
+                    'Emergency contact system'
+                ]
+            },
+            'eldercare-thrive': {
+                name: 'Elder Care - Thrive Plan',
+                price: 30000,
+                features: [
+                    'All Care benefits',
+                    'Priority doctor booking',
+                    'Home monitoring kits',
+                    'Dedicated case manager',
+                    '2 family profiles',
+                    '1 weekly video consultation',
+                    '24/7 support hotline'
+                ]
+            },
+            'eldercare-vital': {
+                name: 'Elder Care - Vital Plan',
+                price: 50000,
+                features: [
+                    'All Thrive benefits',
+                    '3 family profiles',
+                    'Home visit option',
+                    'Advanced health monitoring',
+                    'Specialist consultations',
+                    'Personal care coordinator',
+                    'Monthly health reports'
+                ]
+            }
+        };
+        
+        // Navigation functions
+        function goToDashboard() {
+            // Redirect to dashboard - replace with actual dashboard URL
+            window.location.href = 'https://app.presibo.com';
+        }
+        
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
+        function displayUrlParams() {
+            const email = getQueryParam('mail');
+            const plan = getQueryParam('plan');
+            
+            if (email || plan) {
+                const paramDisplay = document.getElementById('paramDisplay');
+                const urlParamsDiv = document.getElementById('urlParams');
+                
+                let paramText = '';
+                if (email) paramText += `Email: ${email}<br>`;
+                if (plan) paramText += `Plan: ${plan}`;
+                
+                paramDisplay.innerHTML = paramText;
+                urlParamsDiv.style.display = 'block';
+                
+                // Display plan information
+                if (plan && plans[plan]) {
+                    displayPlanInfo(plan);
+                } else if (plan) {
+                    showStatus("Invalid plan specified.", 'error');
+                }
+            } else {
+                showStatus("Missing renewal parameters. Please use a valid renewal link.", 'error');
+            }
+        }
+        
+        function displayPlanInfo(planKey) {
+            const plan = plans[planKey];
+            if (!plan) return;
+            
+            document.getElementById('planName').textContent = plan.name;
+            document.getElementById('planPrice').textContent = `₦${plan.price.toLocaleString()}`;
+            
+            const featuresList = document.getElementById('planFeatures');
+            featuresList.innerHTML = '';
+            
+            plan.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+            
+            document.getElementById('planCard').style.display = 'block';
+        }
+        
+        function showStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="${type}">${message}</div>`;
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 5000);
+        }
+        
+        function renewSubscription() {
+            const email = getQueryParam('mail');
+            const plan = getQueryParam('plan');
+            const planInfo = plans[plan];
+            const renewBtn = document.getElementById('renewBtn');
+            
+            if (!email || !plan || !planInfo) {
+                showStatus("Missing renewal information.", 'error');
+                return;
+            }
+            
+            if (confirm(`Renew ${planInfo.name} for ₦${planInfo.price.toLocaleString()}?`)) {
+                processPayment(email, planInfo.price, `renewal-${plan}`, renewBtn);
+            }
+        }
+        
+        function processPayment(userEmail, amountValue, paymentType, buttonElement = null) {
+            // Convert to kobo (Paystack uses kobo - 1 Naira = 100 kobo)
+            const amountInKobo = Math.round(amountValue * 100);
+            
+            // Disable button during payment
+            if (buttonElement) {
+                buttonElement.disabled = true;
+                buttonElement.textContent = 'Processing...';
+            }
+            
+            try {
+                var handler = PaystackPop.setup({
+                    key: 'pk_live_e4512c48de3fef4f92b4b278715d5decfa436d5b', // Replace with your actual public key
+                    email: userEmail,
+                    amount: amountInKobo,
+                    currency: 'NGN',
+                    metadata: {
+                        payment_type: paymentType,
+                        custom_fields: [
+                            {
+                                display_name: "Payment Type",
+                                variable_name: "payment_type",
+                                value: paymentType
+                            }
+                        ]
+                    },
+                    callback: function(response) {
+                        console.log("Payment Successful", response);
+                        handleSuccessfulPayment(response, paymentType, amountValue);
+                    },
+                    onClose: function() {
+                        console.log("Payment modal closed");
+                        showStatus("Payment was cancelled or closed.", 'error');
+                        if (buttonElement) {
+                            buttonElement.disabled = false;
+                            buttonElement.textContent = 'Renew Subscription';
+                        }
+                    }
+                });
+                
+                handler.openIframe();
+                
+            } catch (error) {
+                console.error("Payment Error:", error);
+                showStatus("An error occurred while processing payment: " + error.message, 'error');
+                if (buttonElement) {
+                    buttonElement.disabled = false;
+                    buttonElement.textContent = 'Renew Subscription';
+                }
+            }
+        }
+        
+        function handleSuccessfulPayment(response, paymentType, amountValue) {
+            let successMessage = `Payment Successful! Transaction Reference: ${response.reference}`;
+            
+            if (paymentType.startsWith('renewal-')) {
+                const planType = paymentType.replace('renewal-', '');
+                const planInfo = plans[planType];
+                if (planInfo) {
+                    successMessage = `${planInfo.name} renewed successfully! Reference: ${response.reference}`;
+                } else {
+                    successMessage = `Subscription renewed successfully! Reference: ${response.reference}`;
+                }
+            }
+            
+            showStatus(successMessage, 'success');
+            
+            // Here you would typically send the transaction reference to your backend
+            // for verification and service activation
+            verifyPaymentOnBackend(response.reference, paymentType);
+        }
+        
+        function verifyPaymentOnBackend(reference, paymentType) {
+            // This function would make an API call to your backend to verify the payment
+            // and activate the appropriate service
+            console.log(`Verifying payment ${reference} for ${paymentType}`);
+        }
+        
+        // Initialize on page load
+        window.onload = function() {
+            displayUrlParams();
+        };
+    </script>
+</body>
+</html>
