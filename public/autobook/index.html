@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presibo - Auto Booking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .logo h1 {
+            color: #0066cc;
+            margin: 0;
+            font-size: 32px;
+        }
+        
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .vital-monitor {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .vital-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .btn {
+            background: #0066cc;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #0052a3;
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 30px;
+            border: none;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        
+        .btn-yes {
+            background: #28a745;
+        }
+        
+        .btn-yes:hover {
+            background: #218838;
+        }
+        
+        .btn-no {
+            background: #dc3545;
+        }
+        
+        .btn-no:hover {
+            background: #c82333;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <h1>Presibo Auto Booking</h1>
+            </div>
+        </div>
+        
+        <h2>Health Monitoring & Auto Booking</h2>
+        <p class="subtitle">Automatically book appointments when vital signs cross thresholds</p>
+        
+        <div class="vital-monitor">
+            <h3>Current Vital Readings</h3>
+            <div class="vital-inputs">
+                <div class="form-group">
+                    <label for="userId">User ID:</label>
+                    <input type="text" id="userId" placeholder="Enter your user ID" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bp">Blood Pressure (mmHg):</label>
+                    <input type="number" id="bp" placeholder="e.g., 130" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="glucose">Glucose Level (mg/dL):</label>
+                    <input type="number" id="glucose" placeholder="e.g., 120" min="0">
+                </div>
+            </div>
+            
+            <button class="btn" onclick="checkVitals()">Check Vitals & Book if Needed</button>
+        </div>
+        
+        <div id="status"></div>
+    </div>
+    
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <h3>Book Appointment</h3>
+            <p>Book now for tomorrow at 9:00 AM?</p>
+            <div class="modal-buttons">
+                <button class="btn btn-yes" onclick="confirmBooking()">Yes</button>
+                <button class="btn btn-no" onclick="closeModal()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUserId = '';
+        let bookingData = {};
+        
+        // Check if today is the first Monday of the month
+        function isFirstMondayOfMonth() {
+            const today = new Date();
+            const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            const date = today.getDate(); // 1-31
+            
+            // First Monday is the Monday in the first week (1-7)
+            return (dayOfWeek === 1) && (date <= 7);
+        }
+        
+        // Silently book routine appointment on first Monday of month
+        function checkRoutineBooking() {
+            if (isFirstMondayOfMonth()) {
+                const userId = localStorage.getItem('presiboUserId') || '';
+                if (userId) {
+                    // Silently book routine appointment
+                    bookAppointment(userId, 'routine-monthly-day-one', true);
+                }
+            }
+        }
+        
+        // Check vitals and trigger booking if needed
+        function checkVitals() {
+            const userId = document.getElementById('userId').value.trim();
+            const bp = parseFloat(document.getElementById('bp').value);
+            const glucose = parseFloat(document.getElementById('glucose').value);
+            
+            if (!userId) {
+                showStatus("Please enter your user ID.", 'error');
+                return;
+            }
+            
+            // Save user ID for routine booking
+            localStorage.setItem('presiboUserId', userId);
+            
+            // Check if vitals cross thresholds
+            if ((bp && bp > 140) || (glucose && glucose > 180)) {
+                // Show booking modal
+                currentUserId = userId;
+                showModal();
+            } else {
+                showStatus("Vitals are within normal range. No booking needed.", 'info');
+            }
+        }
+        
+        // Show booking modal
+        function showModal() {
+            document.getElementById('bookingModal').style.display = 'block';
+        }
+        
+        // Close booking modal
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+        
+        // Confirm booking
+        function confirmBooking() {
+            closeModal();
+            bookAppointment(currentUserId, 'tomorrow-9am', false);
+        }
+        
+        // Book appointment
+        function bookAppointment(userId, slot, isSilent = false) {
+            if (!isSilent) {
+                showStatus("Processing booking...", 'info');
+            }
+            
+            // Prepare booking data
+            const bookingData = {
+                userId: userId,
+                slot: slot
+            };
+            
+            // Simulate POST request to /api/book
+            // In a real implementation, this would be:
+            /*
+            fetch('/api/book', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bookingData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showStatus(`Appointment booked successfully for ${slot === 'tomorrow-9am' ? 'tomorrow at 9:00 AM' : 'routine monthly checkup'}!`, 'success');
+                } else {
+                    showStatus("Failed to book appointment. Please try again.", 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Booking error:', error);
+                showStatus("Network error. Please try again.", 'error');
+            });
+            */
+            
+            // For demo purposes, we'll simulate a successful response
+            setTimeout(() => {
+                if (!isSilent) {
+                    const message = slot === 'tomorrow-9am' 
+                        ? "Appointment booked successfully for tomorrow at 9:00 AM!" 
+                        : "Routine monthly appointment booked successfully!";
+                    showStatus(message, 'success');
+                }
+                console.log("Booking request sent:", bookingData);
+            }, 1000);
+        }
+        
+        // Show status message
+        function showStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="${type}">${message}</div>`;
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 5000);
+        }
+        
+        // Initialize on page load
+        window.onload = function() {
+            // Pre-fill user ID if available
+            const savedUserId = localStorage.getItem('presiboUserId');
+            if (savedUserId) {
+                document.getElementById('userId').value = savedUserId;
+            }
+            
+            // Check for routine booking
+            checkRoutineBooking();
+            
+            // Close modal if user clicks outside of it
+            window.onclick = function(event) {
+                const modal = document.getElementById('bookingModal');
+                if (event.target === modal) {
+                    closeModal();
+                }
+            }
+        };
+    </script>
+</body>
+</html>
