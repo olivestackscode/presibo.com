@@ -72,6 +72,12 @@
                         <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Enter your email address">
                     </div>
 
+                    <!-- Receiver Information -->
+                    <div>
+                        <label for="receiver" class="block text-sm font-medium text-gray-700">Beneficiary Name, Email, or PRESIBO ID (Optional)</label>
+                        <input type="text" id="receiver" name="receiver" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Enter receiver's name, email, or ID">
+                    </div>
+
                     <!-- Contribution Type -->
                     <div>
                         <label for="contribution-type" class="block text-sm font-medium text-gray-700">Contribution Type</label>
@@ -186,12 +192,13 @@
         document.getElementById('paystack-button').addEventListener('click', function() {
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
+            const receiver = document.getElementById('receiver').value;
             const contributionType = document.getElementById('contribution-type').value;
             const cause = document.getElementById('cause').value;
             const amount = document.getElementById('amount').value;
             const paymentStatus = document.getElementById('payment-status');
 
-            // Validate form inputs
+            // Validate required form inputs
             if (!name || !email || !contributionType || !cause || !amount || amount < 1000) {
                 paymentStatus.classList.remove('hidden');
                 paymentStatus.classList.add('text-red-600');
@@ -213,6 +220,11 @@
                             value: name
                         },
                         {
+                            display_name: 'Receiver',
+                            variable_name: 'receiver',
+                            value: receiver || 'Not specified'
+                        },
+                        {
                             display_name: 'Contribution Type',
                             variable_name: 'contribution_type',
                             value: contributionType
@@ -228,7 +240,7 @@
                     paymentStatus.classList.remove('hidden', 'text-red-600');
                     paymentStatus.classList.add('text-green-600');
                     paymentStatus.textContent = `Payment successful! Transaction reference: ${response.reference}`;
-                    // Optionally, send data to your server for further processing
+                    // Send data to server for verification
                     fetch('/api/verify-payment', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -236,6 +248,7 @@
                             reference: response.reference,
                             name: name,
                             email: email,
+                            receiver: receiver || 'Not specified',
                             contributionType: contributionType,
                             cause: cause,
                             amount: amount
