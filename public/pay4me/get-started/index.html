@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started with PresiboPay4Me - Presibo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body class="font-sans bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-600">Presibo</a>
+            <div class="space-x-4">
+                <a href="index.html" class="text-gray-700 hover:text-blue-600">Home</a>
+                <a href="about.html" class="text-gray-700 hover:text-blue-600">About</a>
+                <div class="relative inline-block group">
+                    <a href="#" class="text-gray-700 hover:text-blue-600">Health</a>
+                    <div class="absolute hidden group-hover:block bg-white shadow-md mt-2">
+                        <a href="consult.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Consult</a>
+                        <a href="booking.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Book Appointment</a>
+                        <a href="donate-blood.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Donate Blood</a>
+                        <a href="find-ambulance.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Find Ambulance</a>
+                        <a href="get-doctor.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Get Doctor</a>
+                    </div>
+                </div>
+                <div class="relative inline-block group">
+                    <a href="#" class="text-gray-700 hover:text-blue-600">Community</a>
+                    <div class="absolute hidden group-hover:block bg-white shadow-md mt-2">
+                        <a href="support-groups.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Support Groups</a>
+                        <a href="health-club.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Health Club</a>
+                    </div>
+                </div>
+                <div class="relative inline-block group">
+                    <a href="#" class="text-gray-700 hover:text-blue-600">Market</a>
+                    <div class="absolute hidden group-hover:block bg-white shadow-md mt-2">
+                        <a href="medical-devices.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Medical Devices</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-600">Contact</a>
+                <a href="team.html" class="text-gray-700 hover:text-blue-600">Team</a>
+                <a href="download.html" class="text-gray-700 hover:text-blue-600">Download App</a>
+                <a href="login.html" class="text-gray-700 hover:text-blue-600">Login</a>
+                <a href="signup.html" class="text-gray-700 hover:text-blue-600">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-blue-600 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Get Started with PresiboPay4Me</h1>
+            <p class="text-lg md:text-xl mb-8">Contribute to healthcare access for those in need with our secure payment form.</p>
+        </div>
+    </section>
+
+    <!-- Contribution Form Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Start Your Contribution</h2>
+            <p class="text-lg text-gray-700 text-center max-w-3xl mx-auto mb-12">Support medical bills, consultations, surgeries, or health plans securely with Paystack.</p>
+            <div class="max-w-2xl mx-auto bg-gray-100 p-8 rounded-lg shadow-md">
+                <div class="space-y-6">
+                    <!-- User Information -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Enter your full name">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Enter your email address">
+                    </div>
+
+                    <!-- Contribution Type -->
+                    <div>
+                        <label for="contribution-type" class="block text-sm font-medium text-gray-700">Contribution Type</label>
+                        <select id="contribution-type" name="contribution-type" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                            <option value="" disabled selected>Choose contribution type</option>
+                            <option value="one-time">One-Time Donation</option>
+                            <option value="monthly">Monthly Sponsorship (Auto-renew)</option>
+                            <option value="group">Group Funding Campaign</option>
+                        </select>
+                    </div>
+
+                    <!-- Healthcare Cause -->
+                    <div>
+                        <label for="cause" class="block text-sm font-medium text-gray-700">Healthcare Cause</label>
+                        <select id="cause" name="cause" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                            <option value="" disabled selected>Select a cause</option>
+                            <option value="medical-bills">Medical Bills</option>
+                            <option value="consultations">Consultations</option>
+                            <option value="surgeries">Surgeries</option>
+                            <option value="subscriptions">Health Plan Subscriptions</option>
+                        </select>
+                    </div>
+
+                    <!-- Contribution Amount -->
+                    <div>
+                        <label for="amount" class="block text-sm font-medium text-gray-700">Contribution Amount (₦)</label>
+                        <input type="number" id="amount" name="amount" required min="1000" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Enter amount (min. ₦1,000)">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="button" id="paystack-button" class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700">Pay with Paystack</button>
+                    </div>
+
+                    <!-- Payment Status -->
+                    <div id="payment-status" class="text-center text-sm text-gray-600 hidden"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Contribute -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Why Your Contribution Matters</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <img src="https://via.placeholder.com/150" alt="Direct Impact" class="mx-auto mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Direct Impact</h3>
+                    <p class="text-gray-600">Your funds directly support healthcare for children, adults, and seniors in need.</p>
+                </div>
+                <div class="text-center">
+                    <img src="https://via.placeholder.com/150" alt="Transparency" class="mx-auto mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Transparency</h3>
+                    <p class="text-gray-600">Receive updates on how your contribution is making a difference.</p>
+                </div>
+                <div class="text-center">
+                    <img src="https://via.placeholder.com/150" alt="Community Good" class="mx-auto mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Community Good</h3>
+                    <p class="text-gray-600">Join a movement to make healthcare accessible for everyone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready to Transform Lives?</h2>
+            <p class="text-lg mb-8">Your contribution to PresiboPay4Me can provide critical healthcare access today.</p>
+            <div class="space-x-4">
+                <a href="#top" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-200">Back to Form</a>
+                <a href="pay4me.html" class="border-2 border-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">PresiboPay4Me</h3>
+                    <p>Support healthcare access for those in need with Presibo’s compassionate initiative.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-blue-400">Home</a></li>
+                        <li><a href="about.html" class="hover:text-blue-400">About</a></li>
+                        <li><a href="pay4me.html" class="hover:text-blue-400">PresiboPay4Me</a></li>
+                        <li><a href="contact.html" class="hover:text-blue-400">Contact</a></li>
+                        <li><a href="download.html" class="hover:text-blue-400">Download App</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+                    <p>1b Racheal Nwangwu Close, Lekki Phase 1, Lagos, Nigeria</p>
+                    <p>Phone: +234 7032 810 862</p>
+                    <p>Email: pay4me@presibo.com</p>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <p>&copy; 2024 Copyright PresiboPay4Me. All Rights Reserved</p>
+                <a href="index.html" class="text-blue-400 hover:underline">Back to Main Site</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Paystack payment handling
+        document.getElementById('paystack-button').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const contributionType = document.getElementById('contribution-type').value;
+            const cause = document.getElementById('cause').value;
+            const amount = document.getElementById('amount').value;
+            const paymentStatus = document.getElementById('payment-status');
+
+            // Validate form inputs
+            if (!name || !email || !contributionType || !cause || !amount || amount < 1000) {
+                paymentStatus.classList.remove('hidden');
+                paymentStatus.classList.add('text-red-600');
+                paymentStatus.textContent = 'Please fill out all required fields with a minimum amount of ₦1,000.';
+                return;
+            }
+
+            // Initialize Paystack payment
+            const handler = PaystackPop.setup({
+                key: 'pk_test_xxxxxxxxxx', // Replace with your Paystack public key
+                email: email,
+                amount: amount * 100, // Paystack expects amount in kobo (multiply by 100)
+                currency: 'NGN',
+                metadata: {
+                    custom_fields: [
+                        {
+                            display_name: 'Full Name',
+                            variable_name: 'full_name',
+                            value: name
+                        },
+                        {
+                            display_name: 'Contribution Type',
+                            variable_name: 'contribution_type',
+                            value: contributionType
+                        },
+                        {
+                            display_name: 'Healthcare Cause',
+                            variable_name: 'cause',
+                            value: cause
+                        }
+                    ]
+                },
+                callback: function(response) {
+                    paymentStatus.classList.remove('hidden', 'text-red-600');
+                    paymentStatus.classList.add('text-green-600');
+                    paymentStatus.textContent = `Payment successful! Transaction reference: ${response.reference}`;
+                    // Optionally, send data to your server for further processing
+                    fetch('/api/verify-payment', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            reference: response.reference,
+                            name: name,
+                            email: email,
+                            contributionType: contributionType,
+                            cause: cause,
+                            amount: amount
+                        })
+                    }).then(res => res.json()).then(data => {
+                        console.log('Payment verification:', data);
+                    }).catch(err => {
+                        console.error('Verification error:', err);
+                    });
+                },
+                onClose: function() {
+                    paymentStatus.classList.remove('hidden', 'text-green-600');
+                    paymentStatus.classList.add('text-red-600');
+                    paymentStatus.textContent = 'Payment cancelled. Please try again.';
+                }
+            });
+
+            handler.openIframe();
+        });
+    </script>
+</body>
+</html>
